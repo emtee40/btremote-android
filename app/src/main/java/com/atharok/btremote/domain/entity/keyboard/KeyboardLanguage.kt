@@ -9,5 +9,6 @@ enum class KeyboardLanguage(@StringRes val language: Int) {
     SPANISH(R.string.keyboard_es),
     FRENCH(R.string.keyboard_fr),
     GERMAN(R.string.keyboard_de),
+    RUSSIAN(R.string.keyboard_ru),
     CZECH(R.string.keyboard_cs)
 }

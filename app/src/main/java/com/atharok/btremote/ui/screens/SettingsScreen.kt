@@ -401,7 +401,7 @@ private fun KeyboardLanguageItem(
     SettingsListDialogItem(
         value = language,
         onValueChange = onLanguageChange,
-        items = KeyboardLanguage.entries,
+        items = KeyboardLanguage.entries.sortedBy { context.getString(it.language) },
         convertValueToString = { context.getString(it.language) },
         showDialog = isShowingDialog,
         onShowDialogChange = { isShowingDialog = it },
