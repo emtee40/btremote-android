@@ -12,6 +12,7 @@ import com.atharok.btremote.data.dataStore.SettingsDataStore
 import com.atharok.btremote.data.repositories.BluetoothHidProfileRepositoryImpl
 import com.atharok.btremote.data.repositories.BluetoothRepositoryImpl
 import com.atharok.btremote.data.repositories.SettingsDataStoreRepositoryImpl
+import com.atharok.btremote.domain.entity.keyboard.layout.CSKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
@@ -56,6 +57,7 @@ private val androidModule: Module = module {
     single { ESKeyboardLayout() }
     single { FRKeyboardLayout() }
     single { DEKeyboardLayout() }
+    single { CSKeyboardLayout() }
 }
 
 private val viewModelModule: Module = module {

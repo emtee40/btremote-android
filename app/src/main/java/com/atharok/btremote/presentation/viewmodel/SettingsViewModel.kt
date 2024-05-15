@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.atharok.btremote.domain.entity.ThemeEntity
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
+import com.atharok.btremote.domain.entity.keyboard.layout.CSKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
@@ -62,6 +63,7 @@ class SettingsViewModel(
             KeyboardLanguage.SPANISH -> getKoin().get<ESKeyboardLayout>()
             KeyboardLanguage.FRENCH -> getKoin().get<FRKeyboardLayout>()
             KeyboardLanguage.GERMAN -> getKoin().get<DEKeyboardLayout>()
+            KeyboardLanguage.CZECH -> getKoin().get<CSKeyboardLayout>()
         }
     }
 
