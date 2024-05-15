@@ -12,4 +12,4 @@
 - Никакой рекламы.
 - Свободный проект.
 
-Исходный код доступен здесь: https://gitlab.com/Atharok/BtRemote.
+Исходный код доступен здесь: https://gitlab.com/Atharok/BtRemote
