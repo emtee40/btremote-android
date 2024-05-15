@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+        Information for Translators
+        The "app_name" field corresponds to the name of the application as it appears in the Launcher.
+        You are free to translate it if it is relevant in your language.
+        However, this is optional, and you can retain the term "BT Remote".
+        If you choose to translate it, ensure that the name is 11 characters or fewer if possible.
+        If the text exceeds 11 characters, it's not a problem, but it may not display entirely in all launchers.
+    -->
+    <string name="app_name">BT Remote</string>
     <string name="close">Fermer</string>
     <string name="error">Error</string>
 
@@ -136,16 +145,13 @@
 
     <string name="help_paring_select_device_from_list">Sélectionnez l\'appareil que vous souhaitez appairer dans la liste des appareils disponibles.</string>
     <string name="help_pairing_missing_device_message_1">Si l\'appareil que vous souhaitez appairer ne s\'affiche pas dans la liste des appareils disponibles, suivez les instructions suivantes :</string>
-    <string name="help_pairing_missing_device_check_1">@string/help_device_failed_connection_check_2</string>
     <string name="help_pairing_missing_device_check_2">• Assurez-vous que la visibilité Bluetooth est activée sur l\'appareil distant.</string>
-    <string name="help_pairing_missing_device_check_3">@string/help_device_failed_connection_check_3</string>
     <string name="help_pairing_missing_device_check_location_for_android_11_or_less">• Assurez-vous que la localisation est activée sur votre appareil.</string>
     <string name="help_pairing_connection_initialization_error_message_1">Si vous avez réussi à associer les deux appareils mais que vous rencontrez les erreurs \"%1$s\" ou \"%2$s\" :</string>
     <string name="help_pairing_device_failed_connection_message_1">Si vous avez réussi à associer les deux appareils mais que vous ne parvenez pas à vous connecter à l\'appareil distant, veuillez vous assurer de suivre les instructions ci-dessous :</string>
 
     <string name="help_remote_control_buttons_are_not_working_title">Boutons de la télécommande</string>
     <string name="help_remote_control_buttons_are_not_working_message">Si le clavier, la souris ou certains boutons ne fonctionnent pas, suivez les instructions suivantes :</string>
-    <string name="help_remote_control_buttons_are_not_working_check_1">@string/help_device_failed_connection_check_1</string>
     <string name="help_remote_control_buttons_are_not_working_check_2">• Déconnectez-vous de l\'appareil distant.</string>
     <string name="help_remote_control_buttons_are_not_working_check_3">• Dissociez les deux appareils, à la fois sur cet appareil et sur l\'appareil distant.</string>
     <string name="help_remote_control_buttons_are_not_working_check_4">• Réassociez ensuite les deux appareils via cette application.</string>
