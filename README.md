@@ -45,7 +45,7 @@ If you like BT Remote, you can support me via [Liberapay](https://liberapay.com/
 
 ## Contribution
 
-If you want to translate the app, please submit a merge request on GitLab.
+If you want to translate the app, please use the [Weblate on Codeberg](https://translate.codeberg.org/projects/btremote/) or submit a merge request on GitLab.
 If you have any questions regarding contributions or translations, feel free to open an issue or contact me by [e-mail](mailto:atharok@duck.com).
 
 ## Licences
