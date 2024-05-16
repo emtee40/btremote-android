@@ -4,6 +4,11 @@
 
 <div align="center"><h4>An Android app that turns your smartphone into a Bluetooth remote for Android TV.</h4></div>
 
+<div align="center">
+    <a href="https://f-droid.org/packages/com.atharok.btremote/" target="_blank"><img src="assets/get-it-on-f-droid-badge.png" alt="Get it on F-Droid" height="90"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.atharok.btremote.gplay" target="_blank"><img src="assets/get-it-on-google-play-badge.png" alt="Get it on Google Play" height="90"></a>
+</div>
+
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Description
@@ -40,7 +45,7 @@ If you like BT Remote, you can support me via [Liberapay](https://liberapay.com/
 
 ## Contribution
 
-If you want to translate the app, please submit a merge request on GitLab.
+If you want to translate the app, please use the [Weblate on Codeberg](https://translate.codeberg.org/projects/btremote/) or submit a merge request on GitLab.
 If you have any questions regarding contributions or translations, feel free to open an issue or contact me by [e-mail](mailto:atharok@duck.com).
 
 ## Licences
