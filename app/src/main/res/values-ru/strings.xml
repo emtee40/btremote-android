@@ -27,7 +27,7 @@
     <string name="bluetooth_enabled_button">Включить Bluetooth</string>
     <string name="devices">Устройства</string>
     <!-- Bluetooth Pairing -->
-    <string name="paired_devices">Сопряженные устройства</string>
+    <string name="paired_devices">Сопряжённые устройства</string>
     <string name="pairing_a_device">Сопряжение устройства</string>
     <string name="available_devices">Доступные устройства</string>
     <string name="bluetooth_pairing_device_not_found">Ни одно устройство не обнаружено.</string>
@@ -111,9 +111,9 @@
     <string name="connected_on">Подключено на %1$s</string>
     <!-- Help messages -->
     <string name="help">Помощь</string>
-    <string name="help_select_device_from_list">Выберите устройство, к которому вы хотите подключиться, из списка сопряженных устройств.</string>
+    <string name="help_select_device_from_list">Выберите устройство, к которому вы хотите подключиться, из списка сопряжённых устройств.</string>
     <string name="help_missing_device_title">Отсутствует устройство</string>
-    <string name="help_missing_device_message">Если удалённое устройство не отображается в списке сопряженных устройств, необходимо выполнить его сопряжение, нажав на значок в верхней панели.</string>
+    <string name="help_missing_device_message">Если удалённое устройство не отображается в списке сопряжённых устройств, необходимо выполнить его сопряжение, нажав на значок в верхней панели.</string>
     <string name="help_connection_initialization_error_title">Ошибка инициализации</string>
     <string name="help_connection_initialization_error_message_1">Если вы столкнулись с ошибками «%1$s» или «%2$s»:</string>
     <string name="help_connection_initialization_error_check_1">• Убедитесь, что никакая другая служба Bluetooth не работает в фоновом режиме.</string>
