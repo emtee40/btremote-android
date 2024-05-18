@@ -45,8 +45,8 @@ import com.atharok.btremote.ui.components.TextTitleTertiary
 fun DevicesSelectionScreen(
     devices: List<DeviceEntity>,
     findBondedDevices: () -> Unit,
-    startService: (DeviceEntity) -> Unit,
-    stopService: () -> Unit,
+    connectDevice: (DeviceEntity) -> Unit,
+    disconnectDevice: () -> Unit,
     openBluetoothPairingNewDeviceScreen: () -> Unit,
     openSettings: () -> Unit,
     modifier: Modifier = Modifier
@@ -55,8 +55,8 @@ fun DevicesSelectionScreen(
     StatelessDevicesSelectionScreen(
         devices = devices,
         findBondedDevices = findBondedDevices,
-        startService = startService,
-        stopService = stopService,
+        connectDevice = connectDevice,
+        disconnectDevice = disconnectDevice,
         openBluetoothPairingNewDeviceScreen = openBluetoothPairingNewDeviceScreen,
         openSettings = openSettings,
         showHelpBottomSheet = showHelpBottomSheet,
@@ -69,8 +69,8 @@ fun DevicesSelectionScreen(
 private fun StatelessDevicesSelectionScreen(
     devices: List<DeviceEntity>,
     findBondedDevices: () -> Unit,
-    startService: (DeviceEntity) -> Unit,
-    stopService: () -> Unit,
+    connectDevice: (DeviceEntity) -> Unit,
+    disconnectDevice: () -> Unit,
     openBluetoothPairingNewDeviceScreen: () -> Unit,
     openSettings: () -> Unit,
     showHelpBottomSheet: Boolean,
@@ -78,7 +78,7 @@ private fun StatelessDevicesSelectionScreen(
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(Unit) {
-        stopService()
+        disconnectDevice()
         findBondedDevices()
     }
 
@@ -96,7 +96,7 @@ private fun StatelessDevicesSelectionScreen(
 
         DevicesListView(
             devices = devices,
-            onItemClick = startService,
+            onItemClick = connectDevice,
             modifier = Modifier,
             contentPadding = innerPadding,
             topContent = {

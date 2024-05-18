@@ -11,7 +11,6 @@ import androidx.annotation.RequiresPermission
 import com.atharok.btremote.common.utils.KEYBOARD_REPORT_ID
 import com.atharok.btremote.common.utils.checkBluetoothConnectPermission
 import com.atharok.btremote.domain.entity.DeviceConnectionState
-import com.atharok.btremote.domain.entity.HidConnectionResult
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +22,14 @@ class BluetoothHidProfile(
 ): BluetoothHidDevice.Callback(), ServiceListener {
 
     private var bluetoothHidDevice: BluetoothHidDevice? = null
-    private var deviceAddress: String? = null
-    private var connectionResult: (HidConnectionResult) -> Unit = {}
+
+    private val _registerAppFailedState: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val registerAppFailedState: StateFlow<Boolean> = _registerAppFailedState
 
     // ---- HID Profile ----
 
-    fun startBluetoothHidProfile(deviceAddress: String, connectionResult: (HidConnectionResult) -> Unit) {
-        this.deviceAddress = deviceAddress
-        this.connectionResult = connectionResult
+    fun startBluetoothHidProfile() {
+        _registerAppFailedState.value = false
         adapter?.getProfileProxy(context, this, BluetoothProfile.HID_DEVICE)
     }
 
@@ -42,7 +41,6 @@ class BluetoothHidProfile(
             }
             adapter?.closeProfileProxy(BluetoothProfile.HID_DEVICE, hidDevice)
         }
-        deviceAddress = null
         bluetoothHidDevice = null
         _deviceConnectionState.value = DeviceConnectionState()
     }
@@ -54,19 +52,8 @@ class BluetoothHidProfile(
             bluetoothHidDevice = bluetoothProfile as? BluetoothHidDevice?
             bluetoothHidDevice?.let { hidDevice ->
                 if (checkBluetoothConnectPermission(context)) {
-                    val isRegistered = hidDevice.registerApp(hidSettings, null, null, Runnable::run, this)
-                    if(isRegistered) {
-                        deviceAddress?.let {
-                            val isConnected = connectDevice(hidDevice, it)
-                            if(isConnected) {
-                                connectionResult(HidConnectionResult.SUCCESS)
-                            } else {
-                                connectionResult(HidConnectionResult.FAILED_TO_CONNECT_TO_DEVICE)
-                            }
-                        }
-                    } else {
-                        connectionResult(HidConnectionResult.FAILED_TO_REGISTER_APP)
-                    }
+                    val success = hidDevice.registerApp(hidSettings, null, null, Runnable::run, this)
+                    _registerAppFailedState.value = !success
                 }
             }
         }
@@ -95,6 +82,25 @@ class BluetoothHidProfile(
         return if (checkBluetoothConnectPermission(context)) {
             bluetoothDevice?.name
         } else null
+    }
+
+
+    fun connectDevice(deviceAddress: String): Boolean {
+        if (checkBluetoothConnectPermission(context)) {
+            bluetoothHidDevice?.let {
+                return connectDevice(it, deviceAddress)
+            }
+        }
+        return false
+    }
+
+    fun disconnectDevice(): Boolean {
+        if (checkBluetoothConnectPermission(context)) {
+            bluetoothHidDevice?.let {
+                return disconnectDevice(it)
+            }
+        }
+        return false
     }
 
     @RequiresPermission(value = "android.permission.BLUETOOTH_CONNECT")

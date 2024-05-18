@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -79,15 +78,9 @@ private fun StatefulBluetoothScanningScreen(
 
     val devices = remember { mutableStateListOf<DeviceEntity>() }
 
-    DisposableEffect(Unit) {
-        startDiscovery()
-        onDispose {
-            cancelDiscovery()
-        }
-    }
-
     OnLifecycleEvent { _, event ->
         when(event) {
+            Lifecycle.Event.ON_RESUME -> startDiscovery()
             Lifecycle.Event.ON_PAUSE -> cancelDiscovery()
             else -> {}
         }

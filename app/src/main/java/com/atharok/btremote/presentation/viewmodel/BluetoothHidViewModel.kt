@@ -3,8 +3,6 @@ package com.atharok.btremote.presentation.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.atharok.btremote.common.utils.DEVICE_ADDRESS_KEY
-import com.atharok.btremote.common.utils.DEVICE_NAME_KEY
 import com.atharok.btremote.common.utils.KEYBOARD_REPORT_ID
 import com.atharok.btremote.common.utils.MOUSE_REPORT_ID
 import com.atharok.btremote.common.utils.REMOTE_REPORT_ID
@@ -21,11 +19,8 @@ class BluetoothHidViewModel(
     private val useCase: BluetoothHidUseCase
 ): ViewModel() {
 
-    fun startService(context: Context, device: DeviceEntity) {
-        val serviceIntent = Intent(context, BluetoothHidService::class.java).apply {
-            putExtra(DEVICE_NAME_KEY, device.name)
-            putExtra(DEVICE_ADDRESS_KEY, device.macAddress)
-        }
+    fun startService(context: Context) {
+        val serviceIntent = Intent(context, BluetoothHidService::class.java)
         context.startForegroundService(serviceIntent)
     }
 
@@ -33,6 +28,12 @@ class BluetoothHidViewModel(
         val serviceIntent = Intent(context, BluetoothHidService::class.java)
         context.stopService(serviceIntent)
     }
+
+    fun isRegisterAppFailedState(): StateFlow<Boolean> = useCase.isRegisterAppFailedState()
+
+    fun connectDevice(device: DeviceEntity): Boolean = useCase.connectDevice(device.macAddress)
+
+    fun disconnectDevice(): Boolean = useCase.disconnectDevice()
 
     fun getBluetoothDeviceName(): String? = useCase.getBluetoothDeviceName()
 

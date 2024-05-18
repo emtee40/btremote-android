@@ -3,9 +3,6 @@ package com.atharok.btremote.common.utils
 const val REQUEST_ENABLE_BT = 1
 const val NOTIFICATION_CHANNEL_ID = "notificationChannelId"
 
-const val DEVICE_NAME_KEY = "deviceNameKey"
-const val DEVICE_ADDRESS_KEY = "deviceAddressKey"
-
 const val DATA_STORE_PREFERENCES_SETTINGS_NAME = "dataStoreSettings"
 
 const val MOUSE_SPEED_DEFAULT_VALUE = 1.5f

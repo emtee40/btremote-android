@@ -1,10 +1,12 @@
 package com.atharok.btremote.ui.screens
 
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothHidDevice
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.DeviceConnectionState
@@ -22,6 +25,8 @@ import com.atharok.btremote.domain.entity.DeviceEntity
 import com.atharok.btremote.presentation.viewmodel.BluetoothHidViewModel
 import com.atharok.btremote.presentation.viewmodel.BluetoothViewModel
 import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
+import com.atharok.btremote.ui.components.OnLifecycleEvent
+import com.atharok.btremote.ui.components.SimpleDialog
 import com.atharok.btremote.ui.components.SystemBroadcastReceiver
 import com.atharok.btremote.ui.navigation.MainDestination
 import com.atharok.btremote.ui.navigation.MainScreenNavigation
@@ -40,6 +45,7 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+
     val destination: MutableState<MainDestination> = rememberSaveable {
         mutableStateOf(
             if(bluetoothViewModel.isBluetoothEnable()) {
@@ -49,11 +55,46 @@ fun MainScreen(
                     MainDestination.DevicesSelectionDestination.apply { args = null }
                 }
             } else {
-                bluetoothHidViewModel.stopService(context)
                 MainDestination.BluetoothActivationDestination.apply { args = null }
             }
         )
     }
+
+    val isRegisterAppFailed by bluetoothHidViewModel.isRegisterAppFailedState()
+        .collectAsStateWithLifecycle(initialValue = false)
+
+    ServiceRegisterAppFailedManager(
+        isRegisterAppFailed = isRegisterAppFailed,
+        startService = {
+            bluetoothHidViewModel.startService(context)
+        },
+        stopService = {
+            bluetoothHidViewModel.stopService(context)
+        },
+        closeApp = {
+            (context as? Activity)?.finish()
+        }
+    )
+
+    // ---- Lifecycle ----
+
+    OnLifecycleEvent { _, event ->
+        when(event) {
+            Lifecycle.Event.ON_START -> {
+                if(destination.value == MainDestination.DevicesSelectionDestination || destination.value == MainDestination.BluetoothScanningDestination) {
+                    bluetoothHidViewModel.startService(context)
+                }
+            }
+
+            Lifecycle.Event.ON_STOP -> {
+                if(destination.value == MainDestination.DevicesSelectionDestination || destination.value == MainDestination.BluetoothScanningDestination) {
+                    bluetoothHidViewModel.stopService(context)
+                }
+            }
+            else -> {}
+        }
+    }
+
 
     // ---- Navigation ----
 
@@ -70,8 +111,8 @@ fun MainScreen(
                 DevicesSelectionScreen(
                     devices = devices,
                     findBondedDevices = { bluetoothViewModel.findBondedDevices() },
-                    startService = { device -> bluetoothHidViewModel.startService(context, device) },
-                    stopService = { bluetoothHidViewModel.stopService(context) },
+                    connectDevice = { device -> bluetoothHidViewModel.connectDevice(device) },
+                    disconnectDevice = { bluetoothHidViewModel.disconnectDevice() },
                     openBluetoothPairingNewDeviceScreen = {
                         destination.value =
                             MainDestination.BluetoothScanningDestination.apply { args = null }
@@ -91,14 +132,17 @@ fun MainScreen(
                     isDiscovering = isDiscovering,
                     startDiscovery = { bluetoothViewModel.startDiscovery() },
                     cancelDiscovery = { bluetoothViewModel.cancelDiscovery() },
-                    connectToDevice = { device -> bluetoothHidViewModel.startService(context, device) },
+                    connectToDevice = { device ->
+                        bluetoothViewModel.cancelDiscovery()
+                        bluetoothHidViewModel.connectDevice(device)
+                    },
                     modifier = modifier
                 )
             }
             MainDestination.ConnectingLoadingDestination -> {
                 ConnectingScreen(
                     deviceName = destination.value.args as? String ?: "null",
-                    cancelConnection = { bluetoothHidViewModel.stopService(context) },
+                    cancelConnection = { bluetoothHidViewModel.disconnectDevice() },
                     modifier = Modifier.fillMaxSize()
                 )
             }
@@ -176,5 +220,29 @@ private fun CheckBluetoothActivation(
             val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
             update(state == BluetoothAdapter.STATE_ON)
         }
+    }
+}
+
+@Composable
+private fun ServiceRegisterAppFailedManager(
+    isRegisterAppFailed: Boolean,
+    startService: () -> Unit,
+    stopService: () -> Unit,
+    closeApp: () -> Unit
+) {
+    if(isRegisterAppFailed) {
+
+        LaunchedEffect(Unit) {
+            stopService()
+        }
+
+        SimpleDialog(
+            confirmButtonText = stringResource(id = R.string.retry),
+            dismissButtonText = stringResource(id = R.string.close),
+            onConfirmation = startService,
+            onDismissRequest = closeApp,
+            dialogTitle = stringResource(id = R.string.bluetooth_failed_to_register_app_message),
+            dialogText = stringResource(id = R.string.help_connection_initialization_error_check_1)
+        )
     }
 }

@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
@@ -71,8 +70,6 @@ fun RemoteScreen(
     settingsViewModel: SettingsViewModel,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-
     var navigationView by rememberSaveable {
         mutableStateOf(NavigationView.DIRECTION)
     }
@@ -87,8 +84,8 @@ fun RemoteScreen(
     StatelessRemoteScreen(
         deviceName = deviceName,
         openSettings = openSettings,
-        disconnectBluetoothHidService = {
-            hidViewModel.stopService(context)
+        disconnectDevice = {
+            hidViewModel.disconnectDevice()
         },
         navigationView = navigationView,
         onNavigationViewChanged = { navigationView = it },
@@ -112,7 +109,7 @@ fun RemoteScreen(
 private fun StatelessRemoteScreen(
     deviceName: String,
     openSettings: () -> Unit,
-    disconnectBluetoothHidService: () -> Unit,
+    disconnectDevice: () -> Unit,
     navigationView: NavigationView,
     onNavigationViewChanged: (NavigationView) -> Unit,
     showHelpBottomSheet: Boolean,
@@ -183,7 +180,7 @@ private fun StatelessRemoteScreen(
                 DisconnectDropdownMenuItem(
                     disconnect = {
                         closeDropdownMenu()
-                        disconnectBluetoothHidService()
+                        disconnectDevice()
                     }
                 )
             }

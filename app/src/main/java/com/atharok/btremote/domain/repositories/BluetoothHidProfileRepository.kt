@@ -1,15 +1,20 @@
 package com.atharok.btremote.domain.repositories
 
 import com.atharok.btremote.domain.entity.DeviceConnectionState
-import com.atharok.btremote.domain.entity.HidConnectionResult
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import kotlinx.coroutines.flow.StateFlow
 
 interface BluetoothHidProfileRepository {
 
-    fun startHidProfile(deviceAddress: String, connectionResult: (HidConnectionResult) -> Unit)
+    fun startHidProfile()
 
     fun stopHidProfile()
+
+    fun isRegisterAppFailedState(): StateFlow<Boolean>
+
+    fun connectDevice(deviceAddress: String): Boolean
+
+    fun disconnectDevice(): Boolean
 
     fun getBluetoothDeviceName(): String?
 

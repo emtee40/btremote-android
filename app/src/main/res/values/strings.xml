@@ -11,6 +11,7 @@
     <string name="app_name">BT Remote</string>
     <string name="close">Close</string>
     <string name="error">Error</string>
+    <string name="retry">Retry</string>
 
     <!-- Bluetooth Support -->
     <string name="bluetooth_not_supported_message">Your device does not support Bluetooth.</string>
