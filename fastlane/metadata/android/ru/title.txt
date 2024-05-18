@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 Пульт ДУ по Bluetooth
-=======
-BT пульт ДУ
->>>>>>> weblate/main
