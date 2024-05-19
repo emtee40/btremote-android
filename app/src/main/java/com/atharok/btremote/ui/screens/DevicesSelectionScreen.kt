@@ -97,8 +97,8 @@ fun DevicesSelectionScreen(
                 dismissButtonText = stringResource(id = R.string.close),
                 onConfirmation = { startHidService() },
                 onDismissRequest = closeApp,
-                dialogTitle = stringResource(id = R.string.bluetooth_failed_to_register_app_message),
-                dialogText = stringResource(id = R.string.help_connection_initialization_error_check_1)
+                dialogTitle = stringResource(id = R.string.error),
+                dialogText = stringResource(id = R.string.bluetooth_failed_to_register_app_message)
             )
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        Information for Translators
+        Information for Translators.
         The "app_name" field corresponds to the name of the application as it appears in the Launcher.
         You are free to translate it if it is relevant in your language.
         However, this is optional, and you can retain the term "BT Remote".
@@ -10,7 +10,7 @@
     -->
     <string name="app_name">BT Remote</string>
     <string name="close">Fermer</string>
-    <string name="error">Error</string>
+    <string name="error">Erreur</string>
     <string name="retry">Réessayer</string>
 
     <!-- Bluetooth Support -->
@@ -32,6 +32,7 @@
     <!-- Bluetooth Bonded Devices -->
     <string name="devices">Appareils</string>
     <string name="paired_devices">Appareils enregistrés</string>
+    <string name="unpair_device">Dissocier l\'appareil</string>
 
     <!-- Bluetooth Pairing -->
     <string name="pairing_a_device">Associer un appareil</string>
@@ -43,7 +44,7 @@
     <string name="connection">Connexion</string>
     <string name="bluetooth_device_connecting_message">Tentative de connexion au périphérique \"%1$s\"…</string>
     <string name="bluetooth_device_disconnecting_message">Déconnexion de \"%1$s\"…</string>
-    <string name="bluetooth_failed_to_register_app_message">Échec lors de l\'enregistrement de l\'application.</string>
+    <string name="bluetooth_failed_to_register_app_message">Échec lors de l\'enregistrement de l\'application. Veuillez vérifier qu\'aucun autre service Bluetooth ne fonctionne en arrière-plan. Si l\'erreur persiste, il est possible que le processus Bluetooth ait été interrompu de manière inattendue. Pour corriger ce problème, veuillez désactiver le Bluetooth de votre appareil, puis réactivez-le.</string>
     <string name="bluetooth_failed_to_connect_to_device">La tentative de connexion à l\'appareil distant a échoué.</string>
     <string name="bluetooth_failed_try_again">Veuillez réessayer.</string>
 
@@ -129,11 +130,11 @@
     <string name="help_select_device_from_list">Sélectionnez l\'appareil auquel vous souhaitez vous connecter dans la liste des appareils enregistrés.</string>
     <string name="help_missing_device_title">Appareil manquant</string>
     <string name="help_missing_device_message">Si l\'appareil distant ne s\'affiche pas dans la liste des appareils enregistrés, vous devez l\'associer en appuyant sur l\'icône présente dans la barre supérieure.</string>
-    <string name="help_connection_initialization_error_title">Erreur d\'initialisation</string>
+    <!--<string name="help_connection_initialization_error_title">Erreur d\'initialisation</string>
     <string name="help_connection_initialization_error_message_1">Si vous rencontrez les erreurs \"%1$s\" ou \"%2$s\":</string>
     <string name="help_connection_initialization_error_check_1">• Veuillez vérifier qu\'aucun autre service Bluetooth ne fonctionne en arrière-plan.</string>
     <string name="help_connection_initialization_error_check_2">• Essayez de vous reconnecter plusieurs fois.</string>
-    <string name="help_connection_initialization_error_message_2">Si l\'erreur persiste, il est possible que le processus Bluetooth ait été interrompu de manière inattendue. Pour corriger ce problème, veuillez désactiver le Bluetooth de votre appareil, puis réactivez-le.</string>
+    <string name="help_connection_initialization_error_message_2">Si l\'erreur persiste, il est possible que le processus Bluetooth ait été interrompu de manière inattendue. Pour corriger ce problème, veuillez désactiver le Bluetooth de votre appareil, puis réactivez-le.</string>-->
     <string name="help_device_failed_connection_title">Échec de la connexion</string>
     <string name="help_device_failed_connection_message_1">Si vous ne parvenez pas à vous connecter à l\'appareil distant, veuillez vous assurer de suivre les instructions ci-dessous :</string>
     <string name="help_device_failed_connection_check_1">• Vérifiez que l\'appareil distant fonctionne sous Android ou Android TV.</string>

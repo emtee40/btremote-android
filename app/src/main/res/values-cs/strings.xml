@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        Information for Translators
+        Information for Translators.
         The "app_name" field corresponds to the name of the application as it appears in the Launcher.
         You are free to translate it if it is relevant in your language.
         However, this is optional, and you can retain the term "BT Remote".
@@ -42,7 +42,7 @@
     <string name="connection">Připojení</string>
     <string name="bluetooth_device_connecting_message">Pokus o připojení k  \"%1$s\" …</string>
     <string name="bluetooth_device_disconnecting_message">Odpojování od \"%1$s\"…</string>
-    <string name="bluetooth_failed_to_register_app_message">Nepodařilo se registrovat aplikaci.</string>
+    <string name="bluetooth_failed_to_register_app_message">Nepodařilo se registrovat aplikaci. Ujistěte se, že na pozadí neběží jiné služby Bluetooth. Pokud problém přetrvává, je možné že byl Bluetooth proces přerušen. Zkuste vypnout a zapnout Bluetooth.</string>
     <string name="bluetooth_failed_to_connect_to_device">Připojení k zařízení selhalo.</string>
     <string name="bluetooth_failed_try_again">Prosím, zkuste to znovu.</string>
 
@@ -128,11 +128,6 @@
     <string name="help_select_device_from_list">Vyberte zařízení, které si přejete ovládat ze seznamu spárovaných zařízení.</string>
     <string name="help_missing_device_title">Zařízení nevidím</string>
     <string name="help_missing_device_message">Jestliže se zařízení nenachází v seznamu spárovaných zařízení, je třeba jej spárovat stiknutím ikony Bluetooth v horní liště.</string>
-    <string name="help_connection_initialization_error_title">Problém s inicializací</string>
-    <string name="help_connection_initialization_error_message_1">Pokud se projeví problém \"%1$s\" nebo \"%2$s\":</string>
-    <string name="help_connection_initialization_error_check_1">• Ujistěte se, že na pozadí neběží jiné služby Bluetooth.</string>
-    <string name="help_connection_initialization_error_check_2">• Zkuste se připojit vícekrát.</string>
-    <string name="help_connection_initialization_error_message_2">Pokud problém přetrvává, je možné že byl Bluetooth proces přerušen. Zkuste vypnout a zapnout Bluetooth.</string>
     <string name="help_device_failed_connection_title">Připojení selhalo</string>
     <string name="help_device_failed_connection_message_1">Pokud se nejste schopni připojit k zařízení, řiďtě se prosím následujícími pokyny:</string>
     <string name="help_device_failed_connection_check_1">• Ujistěte se, že na vzdáleném zařízení běží Android nebo Android TV.</string>

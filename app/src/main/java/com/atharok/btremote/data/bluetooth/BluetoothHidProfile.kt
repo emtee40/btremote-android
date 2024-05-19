@@ -19,7 +19,7 @@ class BluetoothHidProfile(
     private val context: Context,
     private val adapter: BluetoothAdapter?,
     private val hidSettings: BluetoothHidDeviceAppSdpSettings
-): BluetoothHidDevice.Callback(), ServiceListener {
+) {
 
     private var bluetoothHidDevice: BluetoothHidDevice? = null
 
@@ -33,7 +33,7 @@ class BluetoothHidProfile(
 
     fun startBluetoothHidProfile() {
         _hasBluetoothHidProfileConnectionFailed.value = false
-        adapter?.getProfileProxy(context, this, BluetoothProfile.HID_DEVICE)
+        adapter?.getProfileProxy(context, serviceListener, BluetoothProfile.HID_DEVICE)
     }
 
     fun stopBluetoothHidProfile() {
@@ -51,31 +51,32 @@ class BluetoothHidProfile(
 
     // ---- BluetoothProfile.ServiceListener implementation ----
 
-    override fun onServiceConnected(i: Int, bluetoothProfile: BluetoothProfile?) {
-        if(i == BluetoothProfile.HID_DEVICE) {
-            bluetoothHidDevice = bluetoothProfile as? BluetoothHidDevice?
-            bluetoothHidDevice?.let { hidDevice ->
-                if (checkBluetoothConnectPermission(context)) {
-                    val success = hidDevice.registerApp(hidSettings, null, null, Runnable::run, this)
-                    _hasBluetoothHidProfileConnectionFailed.value = !success
+    private val serviceListener = object : ServiceListener {
+        override fun onServiceConnected(i: Int, bluetoothProfile: BluetoothProfile?) {
+            if(i == BluetoothProfile.HID_DEVICE) {
+                bluetoothHidDevice = bluetoothProfile as? BluetoothHidDevice?
+                bluetoothHidDevice?.let { hidDevice ->
+                    if (checkBluetoothConnectPermission(context)) {
+                        val success = hidDevice.registerApp(hidSettings, null, null, Runnable::run, callback)
+                        _hasBluetoothHidProfileConnectionFailed.value = !success
+                    }
                 }
             }
+            _isBluetoothHidProfileConnected.value = true
         }
-        _isBluetoothHidProfileConnected.value = true
+
+        override fun onServiceDisconnected(i: Int) {}
     }
 
-    override fun onServiceDisconnected(i: Int) {}
 
     // ---- BluetoothHidDevice.Callback implementation ----
 
-    override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
-        super.onAppStatusChanged(pluggedDevice, registered)
-    }
-
-    override fun onConnectionStateChanged(device: BluetoothDevice?, state: Int) {
-        super.onConnectionStateChanged(device, state)
-        if (checkBluetoothConnectPermission(context)) {
-            _deviceHidConnectionState.value = DeviceHidConnectionState(state, device?.name ?: "")
+    private val callback = object : BluetoothHidDevice.Callback() {
+        override fun onConnectionStateChanged(device: BluetoothDevice?, state: Int) {
+            super.onConnectionStateChanged(device, state)
+            if (checkBluetoothConnectPermission(context)) {
+                _deviceHidConnectionState.value = DeviceHidConnectionState(state, device?.name ?: "")
+            }
         }
     }
 
@@ -88,7 +89,6 @@ class BluetoothHidProfile(
             bluetoothDevice?.name
         } else null
     }
-
 
     fun connectDevice(deviceAddress: String): Boolean {
         if (checkBluetoothConnectPermission(context)) {
@@ -122,6 +122,11 @@ class BluetoothHidProfile(
     private fun disconnectDevice(hidDevice: BluetoothHidDevice): Boolean {
         var isDisconnected = false
         bluetoothDevice?.let {
+            // disconnect() is called twice because, during my tests on a Pixel 3a, the state
+            // changes to DISCONNECTING but never to DISCONNECTED if the call is made only once.
+            // This error occurs only on this device and not on the others I tested. It seems to
+            // be due to a bug in the library or the device.
+            hidDevice.disconnect(it)
             isDisconnected = hidDevice.disconnect(it)
         }
         bluetoothDevice = null

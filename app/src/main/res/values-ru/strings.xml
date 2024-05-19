@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        Information for Translators
+        Information for Translators.
         The "app_name" field corresponds to the name of the application as it appears in the Launcher.
         You are free to translate it if it is relevant in your language.
         However, this is optional, and you can retain the term "BT Remote".
@@ -36,7 +36,7 @@
     <string name="connection">Соединение</string>
     <string name="bluetooth_device_connecting_message">Попытка подключения к устройству «%1$s»…</string>
     <string name="bluetooth_device_disconnecting_message">Отключение «%1$s»…</string>
-    <string name="bluetooth_failed_to_register_app_message">Невозможность зарегистрировать приложение.</string>
+    <string name="bluetooth_failed_to_register_app_message">Невозможность зарегистрировать приложение. Убедитесь, что никакая другая служба Bluetooth не работает в фоновом режиме. Если ошибка не устранена, возможно, процесс Bluetooth был неожиданно прерван. Чтобы решить эту проблему, отключите Bluetooth на своем устройстве, а затем снова включите его.</string>
     <string name="bluetooth_failed_to_connect_to_device">Попытка подключения к удаленному устройству не удалась.</string>
     <string name="bluetooth_failed_try_again">Попробуйте ещё раз</string>
     <!-- Remote Screen -->
@@ -114,11 +114,6 @@
     <string name="help_select_device_from_list">Выберите устройство, к которому вы хотите подключиться, из списка сопряжённых устройств.</string>
     <string name="help_missing_device_title">Отсутствует устройство</string>
     <string name="help_missing_device_message">Если удалённое устройство не отображается в списке сопряжённых устройств, необходимо выполнить его сопряжение, нажав на значок в верхней панели.</string>
-    <string name="help_connection_initialization_error_title">Ошибка инициализации</string>
-    <string name="help_connection_initialization_error_message_1">Если вы столкнулись с ошибками «%1$s» или «%2$s»:</string>
-    <string name="help_connection_initialization_error_check_1">• Убедитесь, что никакая другая служба Bluetooth не работает в фоновом режиме.</string>
-    <string name="help_connection_initialization_error_check_2">• Попробуйте подключиться несколько раз.</string>
-    <string name="help_connection_initialization_error_message_2">Если ошибка не устранена, возможно, процесс Bluetooth был неожиданно прерван. Чтобы решить эту проблему, отключите Bluetooth на своем устройстве, а затем снова включите его.</string>
     <string name="help_device_failed_connection_title">Сбой подключения</string>
     <string name="help_device_failed_connection_message_1">Если вы не можете подключиться к удалённому устройству, следуйте приведенным ниже инструкциям:</string>
     <string name="help_device_failed_connection_check_1">• Убедитесь, что удалённое устройство работает на Android или Android TV.</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        Information for Translators
+        Information for Translators.
         The "app_name" field corresponds to the name of the application as it appears in the Launcher.
         You are free to translate it if it is relevant in your language.
         However, this is optional, and you can retain the term "BT Remote".
@@ -29,7 +29,7 @@
     <string name="bluetooth_pairing_device_not_found">未检测到任何设备。</string>
     <string name="mouse">鼠标</string>
     <string name="mouse_wheel_up">向上滑动</string>
-    <string name="bluetooth_failed_to_register_app_message">未能注册应用程序。</string>
+    <string name="bluetooth_failed_to_register_app_message">未能注册应用程序。请确保后台没有其他蓝牙服务正在运行。如果错误仍然存在，则可能是蓝牙进程意外中断。要解决此问题，请禁用设备上的蓝牙，然后重新启用它。</string>
     <string name="bluetooth_failed_try_again">请重试。</string>
     <string name="remote">遥控</string>
     <string name="more">更多</string>
@@ -85,11 +85,6 @@
     <string name="connected_on">已于%1$s连接</string>
     <string name="help">帮助</string>
     <string name="help_missing_device_title">缺少设备</string>
-    <string name="help_connection_initialization_error_title">初始化错误</string>
-    <string name="help_connection_initialization_error_message_1">如果您遇到错误“%1$s”或“%2$s：</string>
-    <string name="help_connection_initialization_error_check_1">• 请确保后台没有其他蓝牙服务正在运行。</string>
-    <string name="help_connection_initialization_error_check_2">• 尝试多连接几次。</string>
-    <string name="help_connection_initialization_error_message_2">如果错误仍然存在，则可能是蓝牙进程意外中断。要解决此问题，请禁用设备上的蓝牙，然后重新启用它。</string>
     <string name="help_device_failed_connection_title">连接失败</string>
     <string name="help_device_failed_connection_check_1">• 确保远程设备运行的是安卓系统。</string>
     <string name="help_device_failed_connection_check_2">• 确保已启用远程设备上的蓝牙。</string>

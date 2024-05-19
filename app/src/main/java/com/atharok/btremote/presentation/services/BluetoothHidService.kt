@@ -58,7 +58,7 @@ class BluetoothHidService : Service() {
         return NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.notification_icon)
             .setContentTitle(getString(R.string.app_name))
-            .setContentText(getString(R.string.connected_on, "tmp"/*"$deviceName ($deviceAddress)"*/))
+            .setContentText(getString(R.string.notification_channel_name))
             .setOngoing(true)
             .setContentIntent(openApplication())
             .build()

@@ -91,7 +91,7 @@ fun DevicesSelectionScreenHelpModalBottomSheet(
         )
 
         // Initialization error
-        Section(
+        /*Section(
             title = stringResource(id = R.string.help_connection_initialization_error_title),
             message = buildString {
                 append(
@@ -108,7 +108,7 @@ fun DevicesSelectionScreenHelpModalBottomSheet(
                 append("\n\n")
                 append(stringResource(id = R.string.help_connection_initialization_error_message_2))
             }
-        )
+        )*/
 
         // Connection failure
         Section(
@@ -169,7 +169,7 @@ fun BluetoothScanningScreenHelpModalBottomSheet(
         )
 
         // Initialization error
-        Section(
+        /*Section(
             title = stringResource(id = R.string.help_connection_initialization_error_title),
             message = buildString {
                 append(
@@ -186,7 +186,7 @@ fun BluetoothScanningScreenHelpModalBottomSheet(
                 append("\n\n")
                 append(stringResource(id = R.string.help_connection_initialization_error_message_2))
             }
-        )
+        )*/
 
         // Connection failure
         Section(

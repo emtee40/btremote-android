@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
-        Information for Translators
+        Information for Translators.
         The "app_name" field corresponds to the name of the application as it appears in the Launcher.
         You are free to translate it if it is relevant in your language.
         However, this is optional, and you can retain the term "BT Remote".
@@ -32,7 +32,8 @@
     <!-- Bluetooth Bonded Devices -->
     <string name="devices">Devices</string>
     <string name="paired_devices">Paired devices</string>
-    
+    <string name="unpair_device">Unpair device</string>
+
     <!-- Bluetooth Pairing -->
     <string name="pairing_a_device">Pairing a device</string>
     <string name="available_devices">Available devices</string>
@@ -43,7 +44,7 @@
     <string name="connection">Connection</string>
     <string name="bluetooth_device_connecting_message">Attempt to connect to \"%1$s\" device…</string>
     <string name="bluetooth_device_disconnecting_message">Disconnecting \"%1$s\"…</string>
-    <string name="bluetooth_failed_to_register_app_message">Failure to register the application.</string>
+    <string name="bluetooth_failed_to_register_app_message">Failure to register the application. Please ensure that no other Bluetooth service is running in the background. If the error persists, it\'s possible that the Bluetooth process was unexpectedly interrupted. To fix this issue, please disable the Bluetooth on your device, then re-enable it.</string>
     <string name="bluetooth_failed_to_connect_to_device">The attempt to connect to the remote device failed.</string>
     <string name="bluetooth_failed_try_again">Please try again.</string>
 
@@ -129,11 +130,6 @@
     <string name="help_select_device_from_list">Select the device you wish to connect with from the list of paired devices.</string>
     <string name="help_missing_device_title">Missing device</string>
     <string name="help_missing_device_message">If the remote device does not appear in the list of paired devices, you need to pair it by pressing the icon in the top bar.</string>
-    <string name="help_connection_initialization_error_title">Initialization error</string>
-    <string name="help_connection_initialization_error_message_1">If you encounter the errors \"%1$s\" or \"%2$s\":</string>
-    <string name="help_connection_initialization_error_check_1">• Please ensure that no other Bluetooth service is running in the background.</string>
-    <string name="help_connection_initialization_error_check_2">• Try connecting several times.</string>
-    <string name="help_connection_initialization_error_message_2">If the error persists, it\'s possible that the Bluetooth process was unexpectedly interrupted. To fix this issue, please disable the Bluetooth on your device, then re-enable it.</string>
     <string name="help_device_failed_connection_title">Connection failure</string>
     <string name="help_device_failed_connection_message_1">If you\'re unable to connect to the remote device, please make sure to follow the instructions below:</string>
     <string name="help_device_failed_connection_check_1">• Ensure that the remote device operates on Android or Android TV.</string>
