@@ -1,6 +1,7 @@
-package com.atharok.btremote.ui.screens.mainScreens
+package com.atharok.btremote.ui.screens
 
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothHidDevice
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -23,10 +25,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.atharok.btremote.R
 import com.atharok.btremote.common.extensions.parcelable
 import com.atharok.btremote.common.utils.checkBluetoothConnectPermission
 import com.atharok.btremote.domain.entity.DeviceEntity
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.BluetoothScanningScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.HelpAction
@@ -36,22 +40,33 @@ import com.atharok.btremote.ui.components.RefreshAction
 import com.atharok.btremote.ui.components.SettingsAction
 import com.atharok.btremote.ui.components.SystemBroadcastReceiver
 import com.atharok.btremote.ui.components.TextTitleTertiary
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun BluetoothScanningScreen(
+    isBluetoothEnabled: Boolean,
+    isBluetoothHidProfileConnected: Boolean,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
-    openSettings: () -> Unit,
-    isDiscovering: Boolean,
+    isDiscoveringFlow: StateFlow<Boolean>,
     startDiscovery: () -> Unit,
     cancelDiscovery: () -> Unit,
     connectToDevice: (DeviceEntity) -> Unit,
+    openConnectingScreen: (deviceName: String) -> Unit,
+    openSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     StatefulBluetoothScanningScreen(
+        isBluetoothEnabled = isBluetoothEnabled,
+        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+        bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
+        isDiscoveringFlow = isDiscoveringFlow,
         navigateUp = navigateUp,
         startDiscovery = startDiscovery,
-        cancelDiscovery = cancelDiscovery
-    ) { devices: List<DeviceEntity> ->
+        cancelDiscovery = cancelDiscovery,
+        openConnectingScreen = openConnectingScreen
+    ) { isDiscovering: Boolean, devices: List<DeviceEntity> ->
+
         var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
         StatelessBluetoothScanningScreen(
             isDiscovering = isDiscovering,
@@ -69,19 +84,47 @@ fun BluetoothScanningScreen(
 
 @Composable
 private fun StatefulBluetoothScanningScreen(
+    isBluetoothEnabled: Boolean,
+    isBluetoothHidProfileConnected: Boolean,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    isDiscoveringFlow: StateFlow<Boolean>,
     navigateUp: () -> Unit,
     startDiscovery: () -> Unit,
     cancelDiscovery: () -> Unit,
-    contents: @Composable (devices: List<DeviceEntity>) -> Unit
+    openConnectingScreen: (deviceName: String) -> Unit,
+    contents: @Composable (isDiscovering: Boolean, devices: List<DeviceEntity>) -> Unit
 ) {
+
+    DisposableEffect(isBluetoothEnabled) {
+        if(!isBluetoothEnabled) {
+            navigateUp()
+        }
+        onDispose {}
+    }
+
+    DisposableEffect(isBluetoothHidProfileConnected) {
+        if(!isBluetoothHidProfileConnected) {
+            navigateUp()
+        }
+        onDispose {}
+    }
+
+    DisposableEffect(bluetoothDeviceHidConnectionState.state) {
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING || bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
+            openConnectingScreen(bluetoothDeviceHidConnectionState.deviceName)
+        }
+        onDispose {}
+    }
+
     BackHandler(enabled = true, onBack = navigateUp)
 
     val devices = remember { mutableStateListOf<DeviceEntity>() }
 
+
     OnLifecycleEvent { _, event ->
         when(event) {
-            Lifecycle.Event.ON_RESUME -> startDiscovery()
-            Lifecycle.Event.ON_PAUSE -> cancelDiscovery()
+            Lifecycle.Event.ON_START -> startDiscovery()
+            Lifecycle.Event.ON_STOP -> cancelDiscovery()
             else -> {}
         }
     }
@@ -106,7 +149,9 @@ private fun StatefulBluetoothScanningScreen(
         }
     }
 
-    contents(devices.toList())
+    val isDiscovering: Boolean by isDiscoveringFlow.collectAsStateWithLifecycle()
+
+    contents(isDiscovering, devices.toList())
 }
 
 @Composable

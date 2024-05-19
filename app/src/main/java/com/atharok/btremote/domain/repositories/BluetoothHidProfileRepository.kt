@@ -1,6 +1,6 @@
 package com.atharok.btremote.domain.repositories
 
-import com.atharok.btremote.domain.entity.DeviceConnectionState
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import kotlinx.coroutines.flow.StateFlow
 
@@ -10,7 +10,9 @@ interface BluetoothHidProfileRepository {
 
     fun stopHidProfile()
 
-    fun isRegisterAppFailedState(): StateFlow<Boolean>
+    fun isBluetoothHidProfileConnected(): StateFlow<Boolean>
+
+    fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean>
 
     fun connectDevice(deviceAddress: String): Boolean
 
@@ -18,7 +20,7 @@ interface BluetoothHidProfileRepository {
 
     fun getBluetoothDeviceName(): String?
 
-    fun getDeviceConnectionState(): StateFlow<DeviceConnectionState>
+    fun getDeviceHidConnectionState(): StateFlow<DeviceHidConnectionState>
 
     fun sendReport(id: Int, bytes: ByteArray): Boolean
 

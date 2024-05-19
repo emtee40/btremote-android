@@ -1,6 +1,5 @@
 package com.atharok.btremote.common.utils
 
-const val REQUEST_ENABLE_BT = 1
 const val NOTIFICATION_CHANNEL_ID = "notificationChannelId"
 
 const val DATA_STORE_PREFERENCES_SETTINGS_NAME = "dataStoreSettings"

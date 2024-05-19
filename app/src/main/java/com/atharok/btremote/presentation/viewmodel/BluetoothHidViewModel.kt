@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.atharok.btremote.common.utils.KEYBOARD_REPORT_ID
 import com.atharok.btremote.common.utils.MOUSE_REPORT_ID
 import com.atharok.btremote.common.utils.REMOTE_REPORT_ID
-import com.atharok.btremote.domain.entity.DeviceConnectionState
 import com.atharok.btremote.domain.entity.DeviceEntity
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.domain.entity.MouseInput
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import com.atharok.btremote.domain.usecases.BluetoothHidUseCase
@@ -29,7 +29,13 @@ class BluetoothHidViewModel(
         context.stopService(serviceIntent)
     }
 
-    fun isRegisterAppFailedState(): StateFlow<Boolean> = useCase.isRegisterAppFailedState()
+    fun isBluetoothHidProfileConnected(): StateFlow<Boolean> {
+        return useCase.isBluetoothHidProfileConnected()
+    }
+
+    fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean> {
+        return useCase.hasBluetoothHidProfileConnectionFailed()
+    }
 
     fun connectDevice(device: DeviceEntity): Boolean = useCase.connectDevice(device.macAddress)
 
@@ -37,8 +43,8 @@ class BluetoothHidViewModel(
 
     fun getBluetoothDeviceName(): String? = useCase.getBluetoothDeviceName()
 
-    fun getDeviceConnectionState(): StateFlow<DeviceConnectionState> =
-        useCase.getDeviceConnectionState()
+    fun getDeviceHidConnectionState(): StateFlow<DeviceHidConnectionState> =
+        useCase.getDeviceHidConnectionState()
 
     // ---- Send ----
 

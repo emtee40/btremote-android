@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.ui.components.CheckMultiplePermissions
-import com.atharok.btremote.ui.screens.mainScreens.ActivationScreen
 
 @Composable
 fun BluetoothPermissionsScreen(

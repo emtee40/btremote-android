@@ -1,5 +1,7 @@
-package com.atharok.btremote.ui.screens.mainScreens
+package com.atharok.btremote.ui.screens
 
+import android.bluetooth.BluetoothHidDevice
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,39 +33,125 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.DeviceEntity
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.CustomCard
 import com.atharok.btremote.ui.components.DevicesSelectionScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.HelpAction
 import com.atharok.btremote.ui.components.PairingNewDeviceAction
 import com.atharok.btremote.ui.components.SettingsAction
+import com.atharok.btremote.ui.components.SimpleDialog
 import com.atharok.btremote.ui.components.TextTitleSecondary
 import com.atharok.btremote.ui.components.TextTitleTertiary
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun DevicesSelectionScreen(
-    devices: List<DeviceEntity>,
+    isBluetoothEnabled: Boolean,
+    isBluetoothHidProfileConnected: Boolean,
+    hasBluetoothHidProfileConnectionFailed: Boolean,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    closeApp: () -> Unit,
+    navigateUp: () -> Unit,
+    startHidService: () -> Unit,
+    stopHidService: () -> Unit,
+    devicesFlow: StateFlow<List<DeviceEntity>>,
     findBondedDevices: () -> Unit,
     connectDevice: (DeviceEntity) -> Unit,
-    disconnectDevice: () -> Unit,
-    openBluetoothPairingNewDeviceScreen: () -> Unit,
+    openConnectingScreen: (deviceName: String) -> Unit,
+    openBluetoothScanningDeviceScreen: () -> Unit,
     openSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
-    StatelessDevicesSelectionScreen(
-        devices = devices,
-        findBondedDevices = findBondedDevices,
-        connectDevice = connectDevice,
-        disconnectDevice = disconnectDevice,
-        openBluetoothPairingNewDeviceScreen = openBluetoothPairingNewDeviceScreen,
-        openSettings = openSettings,
-        showHelpBottomSheet = showHelpBottomSheet,
-        onShowHelpBottomSheetChanged = { showHelpBottomSheet = it },
-        modifier = modifier
-    )
+    StatefulDevicesSelectionScreen(
+        devicesFlow = devicesFlow,
+        isBluetoothEnabled = isBluetoothEnabled,
+        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+        hasBluetoothHidProfileConnectionFailed = hasBluetoothHidProfileConnectionFailed,
+        bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
+        closeApp = closeApp,
+        navigateUp = navigateUp,
+        startHidService = startHidService,
+        stopHidService = stopHidService,
+        openConnectingScreen = openConnectingScreen,
+    ) { devices ->
+
+        var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
+        StatelessDevicesSelectionScreen(
+            devices = devices,
+            findBondedDevices = findBondedDevices,
+            connectDevice = connectDevice,
+            openBluetoothScanningDeviceScreen = openBluetoothScanningDeviceScreen,
+            openSettings = openSettings,
+            showHelpBottomSheet = showHelpBottomSheet,
+            onShowHelpBottomSheetChanged = { showHelpBottomSheet = it },
+            modifier = modifier
+        )
+
+        if(hasBluetoothHidProfileConnectionFailed) {
+            SimpleDialog(
+                confirmButtonText = stringResource(id = R.string.retry),
+                dismissButtonText = stringResource(id = R.string.close),
+                onConfirmation = { startHidService() },
+                onDismissRequest = closeApp,
+                dialogTitle = stringResource(id = R.string.bluetooth_failed_to_register_app_message),
+                dialogText = stringResource(id = R.string.help_connection_initialization_error_check_1)
+            )
+        }
+    }
+}
+
+@Composable
+private fun StatefulDevicesSelectionScreen(
+    devicesFlow: StateFlow<List<DeviceEntity>>,
+    isBluetoothEnabled: Boolean,
+    isBluetoothHidProfileConnected: Boolean,
+    hasBluetoothHidProfileConnectionFailed: Boolean,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    closeApp: () -> Unit,
+    navigateUp: () -> Unit,
+    startHidService: () -> Unit,
+    stopHidService: () -> Unit,
+    openConnectingScreen: (deviceName: String) -> Unit,
+    content: @Composable (devices: List<DeviceEntity>) -> Unit
+) {
+    DisposableEffect(isBluetoothEnabled) {
+        if(!isBluetoothEnabled) {
+            stopHidService()
+            navigateUp()
+        }
+        onDispose {}
+    }
+
+    DisposableEffect(isBluetoothHidProfileConnected) {
+        if(!isBluetoothHidProfileConnected && isBluetoothEnabled && !hasBluetoothHidProfileConnectionFailed) {
+            startHidService()
+        }
+        onDispose {}
+    }
+
+    DisposableEffect(hasBluetoothHidProfileConnectionFailed) {
+        if(hasBluetoothHidProfileConnectionFailed) {
+            stopHidService()
+        }
+        onDispose {}
+    }
+
+    DisposableEffect(bluetoothDeviceHidConnectionState.state) {
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING || bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
+            openConnectingScreen(bluetoothDeviceHidConnectionState.deviceName)
+        }
+        onDispose {}
+    }
+
+    BackHandler(enabled = true, onBack = closeApp)
+
+    val devices by devicesFlow.collectAsStateWithLifecycle()
+
+    content(devices)
 }
 
 @Composable
@@ -70,15 +159,13 @@ private fun StatelessDevicesSelectionScreen(
     devices: List<DeviceEntity>,
     findBondedDevices: () -> Unit,
     connectDevice: (DeviceEntity) -> Unit,
-    disconnectDevice: () -> Unit,
-    openBluetoothPairingNewDeviceScreen: () -> Unit,
+    openBluetoothScanningDeviceScreen: () -> Unit,
     openSettings: () -> Unit,
     showHelpBottomSheet: Boolean,
     onShowHelpBottomSheetChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(Unit) {
-        disconnectDevice()
         findBondedDevices()
     }
 
@@ -86,7 +173,7 @@ private fun StatelessDevicesSelectionScreen(
         title = stringResource(id = R.string.devices),
         modifier = modifier,
         topBarActions = {
-            PairingNewDeviceAction(openBluetoothPairingNewDeviceScreen)
+            PairingNewDeviceAction(openBluetoothScanningDeviceScreen)
             HelpAction(
                 showHelp = { onShowHelpBottomSheetChanged(!showHelpBottomSheet) }
             )

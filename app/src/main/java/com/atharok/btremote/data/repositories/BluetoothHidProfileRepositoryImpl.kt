@@ -1,7 +1,7 @@
 package com.atharok.btremote.data.repositories
 
 import com.atharok.btremote.data.bluetooth.BluetoothHidProfile
-import com.atharok.btremote.domain.entity.DeviceConnectionState
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,13 @@ class BluetoothHidProfileRepositoryImpl(private val hidProfile: BluetoothHidProf
         hidProfile.stopBluetoothHidProfile()
     }
 
-    override fun isRegisterAppFailedState(): StateFlow<Boolean> = hidProfile.registerAppFailedState
+    override fun isBluetoothHidProfileConnected(): StateFlow<Boolean> {
+        return hidProfile.isBluetoothHidProfileConnected
+    }
+
+    override fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean> {
+        return hidProfile.hasBluetoothHidProfileConnectionFailed
+    }
 
     override fun connectDevice(deviceAddress: String): Boolean {
         return hidProfile.connectDevice(deviceAddress)
@@ -28,8 +34,8 @@ class BluetoothHidProfileRepositoryImpl(private val hidProfile: BluetoothHidProf
 
     override fun getBluetoothDeviceName(): String? = hidProfile.getBluetoothDeviceName()
 
-    override fun getDeviceConnectionState(): StateFlow<DeviceConnectionState> {
-        return hidProfile.deviceConnectionState
+    override fun getDeviceHidConnectionState(): StateFlow<DeviceHidConnectionState> {
+        return hidProfile.deviceHidConnectionState
     }
 
     override fun sendReport(id: Int, bytes: ByteArray): Boolean {

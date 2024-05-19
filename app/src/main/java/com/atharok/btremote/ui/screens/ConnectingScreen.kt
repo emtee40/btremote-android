@@ -1,5 +1,7 @@
-package com.atharok.btremote.ui.screens.mainScreens
+package com.atharok.btremote.ui.screens
 
+import android.bluetooth.BluetoothHidDevice
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,18 +12,62 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Cancel
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.buttons.MaterialButton
-import com.atharok.btremote.ui.screens.LoadingScreen
 
+@Composable
+fun ConnectingScreen(
+    deviceName: String,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    navigateUp: () -> Unit,
+    openRemoteScreen: () -> Unit,
+    cancelConnection: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    StatefulConnectingScreen(
+        bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
+        navigateUp = navigateUp,
+        openRemoteScreen = openRemoteScreen,
+        cancelConnection = cancelConnection
+    ) {
+        StatelessConnectingScreen(
+            deviceName = deviceName,
+            cancelConnection = cancelConnection,
+            modifier = modifier
+        )
+    }
+}
+
+@Composable
+private fun StatefulConnectingScreen(
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    navigateUp: () -> Unit,
+    openRemoteScreen: () -> Unit,
+    cancelConnection: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    DisposableEffect(bluetoothDeviceHidConnectionState.state) {
+        when(bluetoothDeviceHidConnectionState.state) {
+            BluetoothHidDevice.STATE_CONNECTED -> openRemoteScreen()
+            BluetoothHidDevice.STATE_DISCONNECTED -> navigateUp()
+        }
+        onDispose {}
+    }
+
+    BackHandler(enabled = true, onBack = cancelConnection)
+
+    content()
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConnectingScreen(
+private fun StatelessConnectingScreen(
     deviceName: String,
     cancelConnection: () -> Unit,
     modifier: Modifier = Modifier

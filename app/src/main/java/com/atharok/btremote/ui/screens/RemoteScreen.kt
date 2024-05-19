@@ -1,6 +1,8 @@
-package com.atharok.btremote.ui.screens.mainScreens
+package com.atharok.btremote.ui.screens
 
+import android.bluetooth.BluetoothHidDevice
 import android.content.res.Configuration
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,11 +34,10 @@ import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.MOUSE_SPEED_DEFAULT_VALUE
+import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.domain.entity.MouseInput
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
-import com.atharok.btremote.presentation.viewmodel.BluetoothHidViewModel
-import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.DialPadLayout
 import com.atharok.btremote.ui.components.DirectionButtonsAction
@@ -65,42 +67,104 @@ private enum class NavigationView {
 @Composable
 fun RemoteScreen(
     deviceName: String,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    navigateUp: () -> Unit,
+    closeApp: () -> Unit,
     openSettings: () -> Unit,
-    hidViewModel: BluetoothHidViewModel,
-    settingsViewModel: SettingsViewModel,
+    disconnectDevice: () -> Unit,
+    sendRemoteKeyReport: (ByteArray) -> Unit,
+    sendMouseKeyReport: (MouseInput, Float, Float, Float) -> Unit,
+    sendKeyboardKeyReport: (ByteArray) -> Unit,
+    sendTextReport: (String, KeyboardLayout) -> Unit,
+    keyboardLanguageFlow: Flow<KeyboardLanguage>,
+    getKeyboardLayout: (KeyboardLanguage) -> KeyboardLayout,
+    mustClearInputFieldFlow: Flow<Boolean>,
+    mouseSpeedFlow: Flow<Float>,
+    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
     modifier: Modifier = Modifier
 ) {
-    var navigationView by rememberSaveable {
-        mutableStateOf(NavigationView.DIRECTION)
+    StatefulRemoteScreen(
+        bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
+        navigateUp = navigateUp,
+        closeApp = closeApp,
+        keyboardLanguageFlow = keyboardLanguageFlow,
+        getKeyboardLayout = getKeyboardLayout,
+        mustClearInputFieldFlow = mustClearInputFieldFlow,
+        mouseSpeedFlow = mouseSpeedFlow,
+        shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow
+    ) { keyboardLayout: KeyboardLayout, mustClearInputField: Boolean, mouseSpeed: Float, shouldInvertMouseScrollingDirection: Boolean ->
+
+        var navigationView by rememberSaveable {
+            mutableStateOf(NavigationView.DIRECTION)
+        }
+
+        var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
+
+        StatelessRemoteScreen(
+            deviceName = deviceName,
+            openSettings = openSettings,
+            disconnectDevice = disconnectDevice,
+            navigationView = navigationView,
+            onNavigationViewChanged = { navigationView = it },
+            showHelpBottomSheet = showHelpBottomSheet,
+            onShowHelpBottomSheetChanged = { showHelpBottomSheet = it },
+            sendRemoteKeyReport = { bytes -> sendRemoteKeyReport(bytes) },
+            sendMouseKeyReport = { input: MouseInput, x: Float, y: Float, wheel: Float -> sendMouseKeyReport(input, x, y, wheel) },
+            sendKeyboardKeyReport = { bytes -> sendKeyboardKeyReport(bytes) },
+            sendTextReport = { text -> sendTextReport(text, keyboardLayout) },
+            keyboardLayout = keyboardLayout,
+            mustClearInputField = mustClearInputField,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
+            modifier = modifier
+        )
+    }
+}
+
+@Composable
+private fun StatefulRemoteScreen(
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    navigateUp: () -> Unit,
+    closeApp: () -> Unit,
+    keyboardLanguageFlow: Flow<KeyboardLanguage>,
+    getKeyboardLayout: (KeyboardLanguage) -> KeyboardLayout,
+    mustClearInputFieldFlow: Flow<Boolean>,
+    mouseSpeedFlow: Flow<Float>,
+    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    content: @Composable (
+        keyboardLayout: KeyboardLayout,
+        mustClearInputField: Boolean,
+        mouseSpeed: Float,
+        shouldInvertMouseScrollingDirection: Boolean
+    ) -> Unit
+) {
+
+    BackHandler(enabled = true, onBack = closeApp)
+
+    DisposableEffect(bluetoothDeviceHidConnectionState.state) {
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_DISCONNECTED) {
+            navigateUp()
+        }
+        onDispose {}
     }
 
-    var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
+    val keyboardLanguage: KeyboardLanguage by keyboardLanguageFlow
+        .collectAsStateWithLifecycle(initialValue = KeyboardLanguage.ENGLISH_US)
 
-    val keyboardLanguage: KeyboardLanguage by settingsViewModel
-        .keyboardLanguage.collectAsStateWithLifecycle(initialValue = KeyboardLanguage.ENGLISH_US)
+    val mustClearInputField: Boolean by mustClearInputFieldFlow
+        .collectAsStateWithLifecycle(initialValue = false)
 
-    val keyboardLayout: KeyboardLayout = settingsViewModel.getKeyboardLayout(keyboardLanguage)
+    val mouseSpeed: Float by mouseSpeedFlow
+        .collectAsStateWithLifecycle(initialValue = MOUSE_SPEED_DEFAULT_VALUE)
 
-    StatelessRemoteScreen(
-        deviceName = deviceName,
-        openSettings = openSettings,
-        disconnectDevice = {
-            hidViewModel.disconnectDevice()
-        },
-        navigationView = navigationView,
-        onNavigationViewChanged = { navigationView = it },
-        showHelpBottomSheet = showHelpBottomSheet,
-        onShowHelpBottomSheetChanged = { showHelpBottomSheet = it },
-        sendRemoteKeyReport = { bytes -> hidViewModel.sendRemoteKeyReport(bytes) },
-        sendMouseKeyReport = { input: MouseInput, x: Float, y: Float, wheel: Float -> hidViewModel.sendMouseKeyReport(input, x, y, wheel) },
-        sendNumberKeyReport = { bytes -> hidViewModel.sendKeyboardKeyReport(bytes) },
-        sendKeyboardKeyReport = { bytes -> hidViewModel.sendKeyboardKeyReport(bytes) },
-        sendTextReport = { text -> hidViewModel.sendTextReport(text, keyboardLayout) },
-        keyboardLayout = keyboardLayout,
-        mustClearInputFieldFlow = settingsViewModel.mustClearInputField(),
-        mouseSpeedFlow = settingsViewModel.getMouseSpeed(),
-        shouldInvertMouseScrollingDirectionFlow = settingsViewModel.shouldInvertMouseScrollingDirection(),
-        modifier = modifier
+    val shouldInvertMouseScrollingDirection: Boolean by shouldInvertMouseScrollingDirectionFlow
+        .collectAsStateWithLifecycle(initialValue = false)
+
+    content(
+        getKeyboardLayout(keyboardLanguage),
+        mustClearInputField,
+        mouseSpeed,
+        shouldInvertMouseScrollingDirection
     )
 }
 
@@ -116,13 +180,12 @@ private fun StatelessRemoteScreen(
     onShowHelpBottomSheetChanged: (Boolean) -> Unit,
     sendRemoteKeyReport: (ByteArray) -> Unit,
     sendMouseKeyReport: (MouseInput, Float, Float, Float) -> Unit,
-    sendNumberKeyReport: (ByteArray) -> Unit,
     sendKeyboardKeyReport: (ByteArray) -> Unit,
     sendTextReport: (String) -> Unit,
     keyboardLayout: KeyboardLayout,
-    mustClearInputFieldFlow: Flow<Boolean>,
-    mouseSpeedFlow: Flow<Float>,
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    mustClearInputField: Boolean,
+    mouseSpeed: Float,
+    shouldInvertMouseScrollingDirection: Boolean,
     modifier: Modifier = Modifier
 ) {
 
@@ -153,9 +216,6 @@ private fun StatelessRemoteScreen(
             }
 
             KeyboardOverflowMenu {
-                val mustClearInputField: Boolean by mustClearInputFieldFlow
-                    .collectAsStateWithLifecycle(initialValue = false)
-
                 KeyboardView(
                     mustClearInputField = mustClearInputField,
                     sendKeyboardKeyReport = sendKeyboardKeyReport,
@@ -189,11 +249,11 @@ private fun StatelessRemoteScreen(
         RemoteView(
             sendRemoteKeyReport = sendRemoteKeyReport,
             sendMouseKeyReport = sendMouseKeyReport,
-            sendNumberKeyReport = sendNumberKeyReport,
+            sendNumberKeyReport = sendKeyboardKeyReport,
             keyboardLayout = keyboardLayout,
             navigationView = navigationView,
-            mouseSpeedFlow = mouseSpeedFlow,
-            shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             innerPadding = innerPadding
         )
 
@@ -202,7 +262,6 @@ private fun StatelessRemoteScreen(
             onShowHelpBottomSheetChanged = onShowHelpBottomSheetChanged
         )
     }
-
 }
 
 @Composable
@@ -212,8 +271,8 @@ private fun RemoteView(
     sendNumberKeyReport: (bytes: ByteArray) -> Unit,
     keyboardLayout: KeyboardLayout,
     navigationView: NavigationView,
-    mouseSpeedFlow: Flow<Float>,
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    mouseSpeed: Float,
+    shouldInvertMouseScrollingDirection: Boolean,
     innerPadding: PaddingValues
 ) {
     val configuration = LocalConfiguration.current
@@ -226,8 +285,8 @@ private fun RemoteView(
             sendNumberKeyReport = sendNumberKeyReport,
             keyboardLayout = keyboardLayout,
             navigationView = navigationView,
-            mouseSpeedFlow = mouseSpeedFlow,
-            shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -239,8 +298,8 @@ private fun RemoteView(
             sendNumberKeyReport = sendNumberKeyReport,
             keyboardLayout = keyboardLayout,
             navigationView = navigationView,
-            mouseSpeedFlow = mouseSpeedFlow,
-            shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -255,8 +314,8 @@ private fun RemoteLandscapeView(
     sendNumberKeyReport: (bytes: ByteArray) -> Unit,
     keyboardLayout: KeyboardLayout,
     navigationView: NavigationView,
-    mouseSpeedFlow: Flow<Float>,
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    mouseSpeed: Float,
+    shouldInvertMouseScrollingDirection: Boolean,
     modifier: Modifier = Modifier
 ) {
     var rowSize by remember { mutableStateOf(Size.Zero) }
@@ -271,8 +330,8 @@ private fun RemoteLandscapeView(
             sendRemoteKeyReport = sendRemoteKeyReport,
             sendMouseKeyReport = sendMouseKeyReport,
             navigationView = navigationView,
-            mouseSpeedFlow = mouseSpeedFlow,
-            shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             modifier = Modifier
                 .widthIn(max = with(LocalDensity.current) { (0.5f * rowSize.width).toDp() })
                 .align(Alignment.CenterVertically),
@@ -294,8 +353,8 @@ private fun RemotePortraitView(
     sendNumberKeyReport: (bytes: ByteArray) -> Unit,
     keyboardLayout: KeyboardLayout,
     navigationView: NavigationView,
-    mouseSpeedFlow: Flow<Float>,
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    mouseSpeed: Float,
+    shouldInvertMouseScrollingDirection: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -322,8 +381,8 @@ private fun RemotePortraitView(
             sendRemoteKeyReport = sendRemoteKeyReport,
             sendMouseKeyReport = sendMouseKeyReport,
             navigationView = navigationView,
-            mouseSpeedFlow = mouseSpeedFlow,
-            shouldInvertMouseScrollingDirectionFlow = shouldInvertMouseScrollingDirectionFlow,
+            mouseSpeed = mouseSpeed,
+            shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             modifier = Modifier.align(Alignment.CenterHorizontally),
         )
     }
@@ -412,8 +471,8 @@ private fun NavigationBox(
     sendRemoteKeyReport: (bytes: ByteArray) -> Unit,
     sendMouseKeyReport: (input: MouseInput, x: Float, y: Float, wheel: Float) -> Unit,
     navigationView: NavigationView,
-    mouseSpeedFlow: Flow<Float>,
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
+    mouseSpeed: Float,
+    shouldInvertMouseScrollingDirection: Boolean,
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center
 ) {
@@ -433,12 +492,6 @@ private fun NavigationBox(
                 }
 
                 NavigationView.MOUSE -> {
-                    val mouseSpeed: Float by mouseSpeedFlow
-                        .collectAsStateWithLifecycle(initialValue = MOUSE_SPEED_DEFAULT_VALUE)
-
-                    val shouldInvertMouseScrollingDirection: Boolean by shouldInvertMouseScrollingDirectionFlow
-                        .collectAsStateWithLifecycle(initialValue = false)
-
                     MousePadLayout(
                         mouseSpeed = mouseSpeed,
                         shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
