@@ -110,21 +110,27 @@ private fun StatefulBluetoothScanningScreen(
         if(!isBluetoothEnabled) {
             navigateUp()
         }
-        onDispose {}
+        onDispose {
+            cancelDiscovery()
+        }
     }
 
     DisposableEffect(isBluetoothHidProfileConnected) {
         if(!isBluetoothHidProfileConnected) {
             navigateUp()
         }
-        onDispose {}
+        onDispose {
+            cancelDiscovery()
+        }
     }
 
     DisposableEffect(bluetoothDeviceHidConnectionState.state) {
         if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
             openRemoteScreen(bluetoothDeviceHidConnectionState.deviceName)
         }
-        onDispose {}
+        onDispose {
+            cancelDiscovery()
+        }
     }
 
     BackHandler(enabled = true, onBack = navigateUp)

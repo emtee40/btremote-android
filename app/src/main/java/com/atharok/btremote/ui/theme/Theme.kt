@@ -269,71 +269,79 @@ fun BtRemoteTheme(
     settingsViewModel: SettingsViewModel,
     content: @Composable () -> Unit
 ) {
-    val theme: ThemeEntity by settingsViewModel.theme.collectAsStateWithLifecycle(
-        initialValue = ThemeEntity.SYSTEM
-    )
+    StatefulBtRemoteTheme(
+        settingsViewModel = settingsViewModel
+    ) { useDarkTheme: Boolean, useDynamicColors: Boolean, useBlackColorForDarkTheme: Boolean ->
 
-    val darkTheme = when(theme) {
+        val colorScheme = when {
+            useDynamicColors && isDynamicColorsAvailable() -> {
+                val context = LocalContext.current
+                if (useDarkTheme) {
+                    if(useBlackColorForDarkTheme) {
+                        dynamicDarkColorScheme(context).copy(
+                            background = Color.Black,
+                            surface = Color.Black
+                        )
+                    } else {
+                        dynamicDarkColorScheme(context)
+                    }
+                } else dynamicLightColorScheme(context)
+            }
+            useDarkTheme -> {
+                if(useBlackColorForDarkTheme) {
+                    darkScheme.copy(
+                        background = Color.Black,
+                        surface = Color.Black
+                    )
+                } else {
+                    darkScheme
+                }
+            }
+            else -> lightScheme
+        }
+
+        val view = LocalView.current
+        if (!view.isInEditMode) {
+            SideEffect {
+                val window = (view.context as Activity).window
+                WindowCompat.setDecorFitsSystemWindows(window, false)
+                window.statusBarColor = Color.Transparent.toArgb()
+                window.navigationBarColor = Color.Transparent.toArgb()
+                WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = !useDarkTheme
+                WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightNavigationBars = !useDarkTheme
+            }
+        }
+
+        MaterialTheme(
+            colorScheme = colorScheme,
+            shapes = MaterialTheme.shapes.copy(
+                extraSmall = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius))
+            ),
+            typography = Typography,
+            content = content
+        )
+    }
+}
+
+@Composable
+private fun StatefulBtRemoteTheme(
+    settingsViewModel: SettingsViewModel,
+    content: @Composable (Boolean, Boolean, Boolean) -> Unit
+) {
+    val theme: ThemeEntity by settingsViewModel.theme
+        .collectAsStateWithLifecycle(initialValue = ThemeEntity.SYSTEM)
+
+    val useDynamicColors: Boolean by settingsViewModel.useDynamicColors
+        .collectAsStateWithLifecycle(initialValue = isDynamicColorsAvailable())
+
+    val useBlackColorForDarkTheme: Boolean by settingsViewModel.useBlackColorForDarkTheme
+        .collectAsStateWithLifecycle(initialValue = false)
+
+    val useDarkTheme = when(theme) {
         ThemeEntity.SYSTEM -> isSystemInDarkTheme()
         ThemeEntity.LIGHT -> false
         ThemeEntity.DARK -> true
     }
 
-    val useDynamicColors: Boolean by settingsViewModel.useDynamicColors.collectAsStateWithLifecycle(
-        initialValue = isDynamicColorsAvailable()
-    )
-
-    val useBlackColorForDarkTheme: Boolean by settingsViewModel.useBlackColorForDarkTheme.collectAsStateWithLifecycle(
-        initialValue = false
-    )
-
-    val colorScheme = when {
-        useDynamicColors && isDynamicColorsAvailable() -> {
-            val context = LocalContext.current
-            if (darkTheme) {
-                if(useBlackColorForDarkTheme) {
-                    dynamicDarkColorScheme(context).copy(
-                        background = Color.Black,
-                        surface = Color.Black
-                    )
-                } else {
-                    dynamicDarkColorScheme(context)
-                }
-            } else dynamicLightColorScheme(context)
-        }
-        darkTheme -> {
-            if(useBlackColorForDarkTheme) {
-                darkScheme.copy(
-                    background = Color.Black,
-                    surface = Color.Black
-                )
-            } else {
-                darkScheme
-            }
-        }
-        else -> lightScheme
-    }
-
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-            window.statusBarColor = Color.Transparent.toArgb()
-            window.navigationBarColor = Color.Transparent.toArgb()
-            /*window.statusBarColor = colorScheme.background.toArgb()
-            window.navigationBarColor = colorScheme.background.toArgb()*/
-            WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = !darkTheme
-            WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightNavigationBars = !darkTheme
-        }
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        shapes = MaterialTheme.shapes.copy(
-            extraSmall = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius))
-        ),
-        typography = Typography,
-        content = content
-    )
+    content(useDarkTheme, useDynamicColors, useBlackColorForDarkTheme)
 }
