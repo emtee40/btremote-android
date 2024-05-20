@@ -1,0 +1,12 @@
+1.1.0
+
+- Ajout des traductions suivantes :
+	- Tchèque (merci à tenJirka).
+	- Russe (merci à Yurt Page).
+	- Chinois (Simplifié) (merci à yzqzss).
+	- Polonais (merci à Eryk Michalak).
+- Ajout des dispositions de clavier tchèque, russe et polonais.
+- Amélioration de la stabilité de l'application.
+- Correction des erreurs d'initialisation.
+- La connexion et les commandes fonctionnent maintenant sur Linux.
+- Mise à jour des dépendances.

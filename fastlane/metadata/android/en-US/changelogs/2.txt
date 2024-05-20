@@ -1,0 +1,12 @@
+1.1.0
+
+- Added the following translations:
+	- Czech (thanks to tenJirka).
+	- Russian (thanks to Yurt Page).
+	- Simplified Chinese (thanks to yzqzss).
+	- Polish (thanks to Eryk Michalak).
+- Added Czech, Russian, and Polish keyboard layouts.
+- Improved application stability.
+- Fixed initialization errors.
+- Connection and commands now work on Linux.
+- Updated dependencies.
