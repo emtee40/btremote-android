@@ -23,7 +23,6 @@ import com.atharok.btremote.ui.screens.BluetoothActivationScreen
 import com.atharok.btremote.ui.screens.BluetoothNotSupportScreen
 import com.atharok.btremote.ui.screens.BluetoothPermissionsScreen
 import com.atharok.btremote.ui.screens.BluetoothScanningScreen
-import com.atharok.btremote.ui.screens.ConnectingScreen
 import com.atharok.btremote.ui.screens.DevicesSelectionScreen
 import com.atharok.btremote.ui.screens.RemoteScreen
 import com.atharok.btremote.ui.screens.SettingsScreen
@@ -118,8 +117,9 @@ fun MainActivityRootView(
                                 devicesFlow = bluetoothViewModel.devicesEntityObserver,
                                 findBondedDevices = { bluetoothViewModel.findBondedDevices() },
                                 connectDevice = { device -> hidViewModel.connectDevice(device) },
-                                openConnectingScreen = {
-                                    navController.navigateTo(AppNavDestination.BluetoothDeviceConnectingDestination.route)
+                                disconnectDevice = { hidViewModel.disconnectDevice() },
+                                openRemoteScreen = {
+                                    navController.navigateTo(AppNavDestination.BluetoothRemoteDestination.route)
                                 },
                                 openBluetoothScanningDeviceScreen = {
                                     navController.navigateTo(AppNavDestination.BluetoothDeviceScanningDestination.route)
@@ -145,31 +145,15 @@ fun MainActivityRootView(
                                     bluetoothViewModel.cancelDiscovery()
                                     hidViewModel.connectDevice(device)
                                 },
-                                openConnectingScreen = {
-                                    navController.navigateTo(AppNavDestination.BluetoothDeviceConnectingDestination.route)
+                                disconnectDevice = { hidViewModel.disconnectDevice() },
+                                openRemoteScreen = {
+                                    navController.navigateTo(AppNavDestination.BluetoothRemoteDestination.route)
                                 },
                                 openSettings = openSettings,
                                 modifier = Modifier
                             )
                         },
 
-                        bluetoothDeviceConnectingScreen = {
-                            ConnectingScreen(
-                                deviceName = bluetoothDeviceHidConnectionState.deviceName,
-                                bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
-                                navigateUp = { navController.navigateUp() },
-                                openRemoteScreen = {
-                                    navController.navigateTo(AppNavDestination.BluetoothRemoteDestination.route)
-                                },
-                                cancelConnection = {
-                                    // If the disconnection fails, we stop the service.
-                                    if(!hidViewModel.disconnectDevice()) {
-                                        hidViewModel.stopService(context)
-                                    }
-                                },
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        },
                         bluetoothRemoteScreen = {
                             RemoteScreen(
                                 deviceName = bluetoothDeviceHidConnectionState.deviceName,

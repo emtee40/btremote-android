@@ -34,6 +34,7 @@ import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.BluetoothScanningScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.HelpAction
+import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.NavigateUpAction
 import com.atharok.btremote.ui.components.OnLifecycleEvent
 import com.atharok.btremote.ui.components.RefreshAction
@@ -52,7 +53,8 @@ fun BluetoothScanningScreen(
     startDiscovery: () -> Unit,
     cancelDiscovery: () -> Unit,
     connectToDevice: (DeviceEntity) -> Unit,
-    openConnectingScreen: (deviceName: String) -> Unit,
+    disconnectDevice: () -> Unit,
+    openRemoteScreen: (deviceName: String) -> Unit,
     openSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -64,7 +66,7 @@ fun BluetoothScanningScreen(
         navigateUp = navigateUp,
         startDiscovery = startDiscovery,
         cancelDiscovery = cancelDiscovery,
-        openConnectingScreen = openConnectingScreen
+        openRemoteScreen = openRemoteScreen
     ) { isDiscovering: Boolean, devices: List<DeviceEntity> ->
 
         var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
@@ -79,6 +81,15 @@ fun BluetoothScanningScreen(
             onShowHelpBottomSheetChanged = { showHelpBottomSheet = it },
             modifier = modifier
         )
+
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING) {
+            LoadingDialog(
+                title = stringResource(id = R.string.connection),
+                message = stringResource(id = R.string.bluetooth_device_connecting_message, bluetoothDeviceHidConnectionState.deviceName),
+                buttonText = stringResource(id = android.R.string.cancel),
+                onButtonClick = disconnectDevice
+            )
+        }
     }
 }
 
@@ -91,7 +102,7 @@ private fun StatefulBluetoothScanningScreen(
     navigateUp: () -> Unit,
     startDiscovery: () -> Unit,
     cancelDiscovery: () -> Unit,
-    openConnectingScreen: (deviceName: String) -> Unit,
+    openRemoteScreen: (deviceName: String) -> Unit,
     contents: @Composable (isDiscovering: Boolean, devices: List<DeviceEntity>) -> Unit
 ) {
 
@@ -110,8 +121,8 @@ private fun StatefulBluetoothScanningScreen(
     }
 
     DisposableEffect(bluetoothDeviceHidConnectionState.state) {
-        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING || bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
-            openConnectingScreen(bluetoothDeviceHidConnectionState.deviceName)
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
+            openRemoteScreen(bluetoothDeviceHidConnectionState.deviceName)
         }
         onDispose {}
     }

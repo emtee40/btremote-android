@@ -41,6 +41,7 @@ import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.CustomCard
 import com.atharok.btremote.ui.components.DevicesSelectionScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.HelpAction
+import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.PairingNewDeviceAction
 import com.atharok.btremote.ui.components.SettingsAction
 import com.atharok.btremote.ui.components.SimpleDialog
@@ -61,7 +62,8 @@ fun DevicesSelectionScreen(
     devicesFlow: StateFlow<List<DeviceEntity>>,
     findBondedDevices: () -> Unit,
     connectDevice: (DeviceEntity) -> Unit,
-    openConnectingScreen: (deviceName: String) -> Unit,
+    disconnectDevice: () -> Unit,
+    openRemoteScreen: (deviceName: String) -> Unit,
     openBluetoothScanningDeviceScreen: () -> Unit,
     openSettings: () -> Unit,
     modifier: Modifier = Modifier
@@ -76,7 +78,7 @@ fun DevicesSelectionScreen(
         navigateUp = navigateUp,
         startHidService = startHidService,
         stopHidService = stopHidService,
-        openConnectingScreen = openConnectingScreen,
+        openRemoteScreen = openRemoteScreen,
     ) { devices ->
 
         var showHelpBottomSheet: Boolean by remember { mutableStateOf(false) }
@@ -100,6 +102,13 @@ fun DevicesSelectionScreen(
                 dialogTitle = stringResource(id = R.string.error),
                 dialogText = stringResource(id = R.string.bluetooth_failed_to_register_app_message)
             )
+        } else if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING) {
+            LoadingDialog(
+                title = stringResource(id = R.string.connection),
+                message = stringResource(id = R.string.bluetooth_device_connecting_message, bluetoothDeviceHidConnectionState.deviceName),
+                buttonText = stringResource(id = android.R.string.cancel),
+                onButtonClick = disconnectDevice
+            )
         }
     }
 }
@@ -115,7 +124,7 @@ private fun StatefulDevicesSelectionScreen(
     navigateUp: () -> Unit,
     startHidService: () -> Unit,
     stopHidService: () -> Unit,
-    openConnectingScreen: (deviceName: String) -> Unit,
+    openRemoteScreen: (deviceName: String) -> Unit,
     content: @Composable (devices: List<DeviceEntity>) -> Unit
 ) {
     DisposableEffect(isBluetoothEnabled) {
@@ -141,8 +150,8 @@ private fun StatefulDevicesSelectionScreen(
     }
 
     DisposableEffect(bluetoothDeviceHidConnectionState.state) {
-        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING || bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
-            openConnectingScreen(bluetoothDeviceHidConnectionState.deviceName)
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTED) {
+            openRemoteScreen(bluetoothDeviceHidConnectionState.deviceName)
         }
         onDispose {}
     }

@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -46,6 +47,7 @@ import com.atharok.btremote.ui.components.FadeAnimatedContent
 import com.atharok.btremote.ui.components.HelpDropdownMenuItem
 import com.atharok.btremote.ui.components.KeyboardOverflowMenu
 import com.atharok.btremote.ui.components.KeyboardView
+import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.MoreOverflowMenu
 import com.atharok.btremote.ui.components.MouseAction
 import com.atharok.btremote.ui.components.MousePadLayout
@@ -118,6 +120,15 @@ fun RemoteScreen(
             shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
             modifier = modifier
         )
+
+        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_DISCONNECTING) {
+            LoadingDialog(
+                title = stringResource(id = R.string.connection),
+                message = stringResource(id = R.string.bluetooth_device_disconnecting_message, bluetoothDeviceHidConnectionState.deviceName),
+                buttonText = stringResource(id = R.string.disconnect),
+                onButtonClick = disconnectDevice
+            )
+        }
     }
 }
 

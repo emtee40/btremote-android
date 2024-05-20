@@ -116,6 +116,27 @@ fun ListDialog(
 }
 
 @Composable
+fun LoadingDialog(
+    title: String,
+    message: String,
+    buttonText: String,
+    onButtonClick: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            TextTitlePrimary(text = title)
+        },
+        text = {
+            LoadingView(message = message)
+        },
+        onDismissRequest = onButtonClick,
+        confirmButton = {
+            DialogButton(text = buttonText, action = onButtonClick)
+        }
+    )
+}
+
+@Composable
 private fun DialogButton(
     text: String?,
     action: () -> Unit,

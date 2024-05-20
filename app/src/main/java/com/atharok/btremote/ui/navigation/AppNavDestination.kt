@@ -7,6 +7,5 @@ sealed class AppNavDestination(val route: String) {
     data object BluetoothActivationDestination: AppNavDestination(route = "bluetooth_activation_route")
     data object BluetoothDeviceSelectionDestination: AppNavDestination(route = "bluetooth_device_selection_route")
     data object BluetoothDeviceScanningDestination: AppNavDestination(route = "bluetooth_device_scanning_route")
-    data object BluetoothDeviceConnectingDestination: AppNavDestination(route = "bluetooth_device_connecting_route")
     data object BluetoothRemoteDestination: AppNavDestination(route = "bluetooth_remote_route")
 }
