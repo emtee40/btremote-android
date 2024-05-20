@@ -9,6 +9,7 @@ import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.domain.entity.keyboard.layout.PLKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.RUKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.UKKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.USKeyboardLayout
@@ -66,6 +67,7 @@ class SettingsViewModel(
             KeyboardLanguage.GERMAN -> getKoin().get<DEKeyboardLayout>()
             KeyboardLanguage.RUSSIAN -> getKoin().get<RUKeyboardLayout>()
             KeyboardLanguage.CZECH -> getKoin().get<CSKeyboardLayout>()
+            KeyboardLanguage.POLISH -> getKoin().get<PLKeyboardLayout>()
         }
     }
 

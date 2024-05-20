@@ -83,6 +83,7 @@
     <string name="keyboard_de">Německá</string>
     <string name="keyboard_ru">Ruština</string>
     <string name="keyboard_cs">Čeština</string>
+    <string name="keyboard_pl">Polština</string>
     <string name="send">Odeslat</string>
     <string name="enter">Zadat</string>
     <string name="escape">Escape</string>
