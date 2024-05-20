@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Zamknij</string>
+    <string name="error">Błąd</string>
+    <string name="permission">Uprawnienia</string>
+    <string name="bluetooth_permission_button">Autoryzuj</string>
+    <string name="activation">Aktywacja</string>
+    <string name="about">O aplikacji</string>
+    <string name="website">Strona internetowa</string>
+    <string name="keyboard">Klawiatura</string>
+    <string name="connection">Połączenie</string>
+    <string name="pick">Wybierz</string>
+    <string name="devices">Urządzenia</string>
+    <string name="refresh">Odśwież</string>
+    <string name="disconnect">Rozłącz</string>
+    <string name="theme">Motyw</string>
+    <string name="theme_system">Zgodny z systemowym</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+    <string name="language">Język</string>
+    <string name="keyboard_es">Hiszpański</string>
+    <string name="keyboard_de">NIemiecki</string>
+    <string name="keyboard_ru">Rosyjski</string>
+    <string name="keyboard_cs">Czeski</string>
+    <string name="more">Więcej</string>
+    <string name="settings">Ustawienia</string>
+    <string name="appearance">Wygląd</string>
+    <string name="send">Wyślij</string>
+    <string name="app_name">BT Remote</string>
+    <string name="remote">Zdalne</string>
+    <string name="keyboard_fr">Francuski</string>
+    <string name="delete">Usuń</string>
+</resources>
