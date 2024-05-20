@@ -134,6 +134,7 @@
     <string name="help_device_failed_connection_check_1">• Ujistěte se, že na vzdáleném zařízení běží Android nebo Android TV.</string>
     <string name="help_device_failed_connection_check_2">• Ujistěte se, že na vzdáleném zařízení je zapnuto Bluetooth.</string>
     <string name="help_device_failed_connection_check_3">• Ujistěte se, že zařízení je v dosahu.</string>
+    <string name="help_device_failed_connection_check_4">• Zkuste se připojit vícekrát.</string>
     <string name="help_device_failed_connection_message_2">Pokud problém stále přetrvává, postupujte následovně:</string>
     <string name="help_device_failed_connection_check_5">• Zrušte párování zařízení, a to jak na tomto zařízení, tak na vzdáleném zařázení.</string>
     <string name="help_device_failed_connection_check_6">• Znovu spárujte vzdálené zařízení kliknutím na ikonu Bluetooth v horní liště.</string>

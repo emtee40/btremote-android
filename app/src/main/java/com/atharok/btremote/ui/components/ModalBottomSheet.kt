@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -79,9 +78,10 @@ fun DevicesSelectionScreenHelpModalBottomSheet(
     ) {
 
         // Instruction
-        TextTitleTertiary(
-            text = stringResource(id = R.string.help_select_device_from_list),
-            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_large))
+        Section(
+            title = stringResource(id = R.string.connection),
+            message = stringResource(id = R.string.help_select_device_from_list),
+            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_standard))
         )
 
         // Missing device
@@ -89,26 +89,6 @@ fun DevicesSelectionScreenHelpModalBottomSheet(
             title = stringResource(id = R.string.help_missing_device_title),
             message = stringResource(id = R.string.help_missing_device_message)
         )
-
-        // Initialization error
-        /*Section(
-            title = stringResource(id = R.string.help_connection_initialization_error_title),
-            message = buildString {
-                append(
-                    stringResource(
-                        id = R.string.help_connection_initialization_error_message_1,
-                        stringResource(id = R.string.bluetooth_failed_to_register_app_message),
-                        stringResource(id = R.string.bluetooth_failed_to_connect_to_device)
-                    )
-                )
-                append("\n\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_check_1))
-                append("\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_check_2))
-                append("\n\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_message_2))
-            }
-        )*/
 
         // Connection failure
         Section(
@@ -121,6 +101,8 @@ fun DevicesSelectionScreenHelpModalBottomSheet(
                 append(stringResource(id = R.string.help_device_failed_connection_check_2))
                 append("\n")
                 append(stringResource(id = R.string.help_device_failed_connection_check_3))
+                append("\n")
+                append(stringResource(id = R.string.help_device_failed_connection_check_4))
                 append("\n\n")
                 append(stringResource(id = R.string.help_device_failed_connection_message_2))
                 append("\n\n")
@@ -145,9 +127,10 @@ fun BluetoothScanningScreenHelpModalBottomSheet(
     ) {
 
         // Instruction
-        TextTitleTertiary(
-            text = stringResource(id = R.string.help_paring_select_device_from_list),
-            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_large))
+        Section(
+            title = stringResource(id = R.string.pairing_a_device),
+            message = stringResource(id = R.string.help_paring_select_device_from_list),
+            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_standard))
         )
 
         // Missing device
@@ -168,26 +151,6 @@ fun BluetoothScanningScreenHelpModalBottomSheet(
             }
         )
 
-        // Initialization error
-        /*Section(
-            title = stringResource(id = R.string.help_connection_initialization_error_title),
-            message = buildString {
-                append(
-                    stringResource(
-                        id = R.string.help_pairing_connection_initialization_error_message_1,
-                        stringResource(id = R.string.bluetooth_failed_to_register_app_message),
-                        stringResource(id = R.string.bluetooth_failed_to_connect_to_device)
-                    )
-                )
-                append("\n\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_check_1))
-                append("\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_check_2))
-                append("\n\n")
-                append(stringResource(id = R.string.help_connection_initialization_error_message_2))
-            }
-        )*/
-
         // Connection failure
         Section(
             title = stringResource(id = R.string.help_device_failed_connection_title),
@@ -199,6 +162,8 @@ fun BluetoothScanningScreenHelpModalBottomSheet(
                 append(stringResource(id = R.string.help_device_failed_connection_check_2))
                 append("\n")
                 append(stringResource(id = R.string.help_device_failed_connection_check_3))
+                append("\n")
+                append(stringResource(id = R.string.help_device_failed_connection_check_4))
             }
         )
     }
@@ -214,10 +179,6 @@ fun RemoteScreenHelpModalBottomSheet(
         modifier = modifier
     ) {
 
-        Spacer(
-            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_large))
-        )
-
         // Remote control buttons
         Section(
             title = stringResource(id = R.string.help_remote_control_buttons_are_not_working_title),
@@ -231,7 +192,8 @@ fun RemoteScreenHelpModalBottomSheet(
                 append(stringResource(id = R.string.help_remote_control_buttons_are_not_working_check_3))
                 append("\n")
                 append(stringResource(id = R.string.help_remote_control_buttons_are_not_working_check_4))
-            }
+            },
+            modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_standard))
         )
 
         // Keyboard

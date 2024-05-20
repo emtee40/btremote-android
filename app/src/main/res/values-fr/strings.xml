@@ -136,6 +136,7 @@
     <string name="help_device_failed_connection_check_1">• Vérifiez que l\'appareil distant fonctionne sous Android ou Android TV.</string>
     <string name="help_device_failed_connection_check_2">• Vérifiez que la fonction Bluetooth est activée sur l\'appareil distant.</string>
     <string name="help_device_failed_connection_check_3">• Assurez-vous que les deux appareils sont suffisamment proches l\'un de l\'autre.</string>
+    <string name="help_device_failed_connection_check_4">• Essayez de vous reconnecter plusieurs fois.</string>
     <string name="help_device_failed_connection_message_2">Si malgré ces vérifications vous ne parvenez toujours pas à vous connecter à l\'appareil distant, procédez comme suit :</string>
     <string name="help_device_failed_connection_check_5">• Dissociez les deux appareils, à la fois sur l\'appareil actuel et sur l\'appareil distant.</string>
     <string name="help_device_failed_connection_check_6">• Réassociez les deux appareils en appuyant sur l\'icône située dans la barre supérieure.</string>

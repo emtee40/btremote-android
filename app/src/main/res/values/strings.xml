@@ -136,6 +136,7 @@
     <string name="help_device_failed_connection_check_1">• Ensure that the remote device operates on Android or Android TV.</string>
     <string name="help_device_failed_connection_check_2">• Make sure that the Bluetooth function is enabled on the remote device.</string>
     <string name="help_device_failed_connection_check_3">• Make sure that both devices are close enough to each other.</string>
+    <string name="help_device_failed_connection_check_4">• Try connecting several times.</string>
     <string name="help_device_failed_connection_message_2">If despite these checks you still cannot connect to the remote device, proceed as follows:</string>
     <string name="help_device_failed_connection_check_5">• Unpair the two devices, both on the current device and on the remote device.</string>
     <string name="help_device_failed_connection_check_6">• Re-pair the two devices by pressing the icon located in the top bar.</string>

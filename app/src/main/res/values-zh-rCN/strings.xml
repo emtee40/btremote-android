@@ -89,6 +89,7 @@
     <string name="help_device_failed_connection_check_1">• 确保远程设备运行的是安卓系统。</string>
     <string name="help_device_failed_connection_check_2">• 确保已启用远程设备上的蓝牙。</string>
     <string name="help_device_failed_connection_check_3">• 确保设备彼此距离足够近。</string>
+    <string name="help_device_failed_connection_check_4">• 尝试多连接几次。</string>
     <string name="help_device_failed_connection_message_2">如果进行了这些检查，您仍然无法连接远程设备，请执行以下操作：</string>
     <string name="help_device_failed_connection_check_6">• 按下顶部栏中的图标，重新配对两个设备。</string>
     <string name="help_device_failed_connection_message_3">如果问题仍然存在，请确保设备的蓝牙传感器没有故障。</string>
