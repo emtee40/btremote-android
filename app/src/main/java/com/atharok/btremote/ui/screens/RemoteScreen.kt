@@ -69,11 +69,13 @@ private enum class NavigationView {
 @Composable
 fun RemoteScreen(
     deviceName: String,
+    isBluetoothHidProfileConnected: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     closeApp: () -> Unit,
     openSettings: () -> Unit,
     disconnectDevice: () -> Unit,
+    forceDisconnectDevice: () -> Unit,
     sendRemoteKeyReport: (ByteArray) -> Unit,
     sendMouseKeyReport: (MouseInput, Float, Float, Float) -> Unit,
     sendKeyboardKeyReport: (ByteArray) -> Unit,
@@ -86,6 +88,7 @@ fun RemoteScreen(
     modifier: Modifier = Modifier
 ) {
     StatefulRemoteScreen(
+        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
         bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
         navigateUp = navigateUp,
         closeApp = closeApp,
@@ -126,7 +129,7 @@ fun RemoteScreen(
                 title = stringResource(id = R.string.connection),
                 message = stringResource(id = R.string.bluetooth_device_disconnecting_message, bluetoothDeviceHidConnectionState.deviceName),
                 buttonText = stringResource(id = R.string.disconnect),
-                onButtonClick = disconnectDevice
+                onButtonClick = forceDisconnectDevice
             )
         }
     }
@@ -134,6 +137,7 @@ fun RemoteScreen(
 
 @Composable
 private fun StatefulRemoteScreen(
+    isBluetoothHidProfileConnected: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     closeApp: () -> Unit,
@@ -151,6 +155,13 @@ private fun StatefulRemoteScreen(
 ) {
 
     BackHandler(enabled = true, onBack = closeApp)
+
+    DisposableEffect(isBluetoothHidProfileConnected) {
+        if(!isBluetoothHidProfileConnected) {
+            navigateUp()
+        }
+        onDispose {}
+    }
 
     DisposableEffect(bluetoothDeviceHidConnectionState.state) {
         if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_DISCONNECTED) {

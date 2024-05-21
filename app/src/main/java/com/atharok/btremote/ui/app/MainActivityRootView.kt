@@ -116,7 +116,12 @@ fun MainActivityRootView(
                                 stopHidService = { hidViewModel.stopService(context) },
                                 devicesFlow = bluetoothViewModel.devicesEntityObserver,
                                 findBondedDevices = { bluetoothViewModel.findBondedDevices() },
-                                connectDevice = { device -> hidViewModel.connectDevice(device) },
+                                connectDevice = { device ->
+                                    if(!hidViewModel.connectDevice(device)) {
+                                        hidViewModel.disconnectDevice()
+                                        hidViewModel.connectDevice(device)
+                                    }
+                                },
                                 disconnectDevice = { hidViewModel.disconnectDevice() },
                                 openRemoteScreen = {
                                     navController.navigateTo(AppNavDestination.BluetoothRemoteDestination.route)
@@ -157,15 +162,17 @@ fun MainActivityRootView(
                         bluetoothRemoteScreen = {
                             RemoteScreen(
                                 deviceName = bluetoothDeviceHidConnectionState.deviceName,
+                                isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
                                 bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
                                 navigateUp = { navController.navigateUp() },
                                 closeApp = { context.getActivity()?.finish() },
                                 openSettings = openSettings,
                                 disconnectDevice = {
-                                    // If the disconnection fails, we stop the service.
-                                    if(!hidViewModel.disconnectDevice()) {
-                                        hidViewModel.stopService(context)
-                                    }
+                                    hidViewModel.disconnectDevice()
+                                },
+                                forceDisconnectDevice = {
+                                    hidViewModel.disconnectDevice()
+                                    hidViewModel.stopService(context)
                                 },
                                 sendRemoteKeyReport = { bytes -> hidViewModel.sendRemoteKeyReport(bytes) },
                                 sendMouseKeyReport = { input: MouseInput, x: Float, y: Float, wheel: Float -> hidViewModel.sendMouseKeyReport(input, x, y, wheel) },
