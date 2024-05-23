@@ -1,0 +1,15 @@
+Zmień swój smartfon w pilota Bluetooth do łatwej nawigacji i interakcji z Android TV.
+
+Funkcje:
+
+- Bezprzewodowe sterowanie za pomocą połączenia Bluetooth.
+- Zawiera wszystkie niezbędne przyciski do zdalnego sterowania urządzeniem.
+- Obsługa zintegrowanej myszy i klawiatury.
+- Brak konieczności instalacji dodatkowej aplikacji na urządzeniu Android TV dzięki protokołowi HID.
+- Nowoczesny i responsywny interfejs użytkownika.
+- Opracowany przy użyciu Kotlin, Jetpack Compose i Material 3.
+- Dbałość o prywatność i brak gromadzenia danych (wyłączone uprawnienia internetowe).
+- Brak reklam.
+- Otwarty kod źródłowy.
+
+Kod źródłowy jest dostępny tutaj: https://gitlab.com/Atharok/BtRemote
