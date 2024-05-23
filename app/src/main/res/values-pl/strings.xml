@@ -31,4 +31,21 @@
     <string name="remote">Zdalne</string>
     <string name="keyboard_fr">Francuski</string>
     <string name="delete">Usuń</string>
+    <string name="bluetooth_permission_message">Musisz zezwolić na dostęp do Bluetooth.</string>
+    <string name="bluetooth_not_supported_message">Twoje urządzenie nie obsługuje łączności Bluetooth.</string>
+    <string name="bluetooth_permission_not_granted">Uprawnienie nie zostało udzielone</string>
+    <string name="paired_devices">Sparowane urządzenia</string>
+    <string name="pairing_a_device">Parowanie urządzenia</string>
+    <string name="available_devices">Dostępne urządzenia</string>
+    <string name="bluetooth_device_connecting_message">Próba połączenia z urządzeniem \"%1$s\"…</string>
+    <string name="retry">Ponów</string>
+    <string name="bluetooth_permission_denied_message">Odmówiłeś/aś dostępu do Bluetooth.</string>
+    <string name="bluetooth_disabled_info">Bluetooth wyłączony</string>
+    <string name="bluetooth_disabled_message">Bluetooth w urządzeniu musi być włączony, aby możliwe było zdalne połączenie z urządzeniem.</string>
+    <string name="bluetooth_enabled_button">Włącz Bluetooth</string>
+    <string name="unpair_device">Rozłącz urządzenie</string>
+    <string name="bluetooth_pairing_device_not_found">Nie wykryto żadnego urządzenia.</string>
+    <string name="bluetooth_device_disconnecting_message">Rozłączanie \"%1$s\"…</string>
+    <string name="bluetooth_failed_to_register_app_message">Nie udało się zarejestrować aplikacji. Upewnij się, że w tle nie działa żadna inna usługa Bluetooth. Jeśli błąd nadal występuje, możliwe, że proces Bluetooth został nieoczekiwanie przerwany. Aby rozwiązać ten problem, wyłącz Bluetooth na swoim urządzeniu, a następnie włącz go ponownie.</string>
+    <string name="bluetooth_failed_to_connect_to_device">Próba nawiązania zdalnego połączenia z urządzeniem nie powiodła się.</string>
 </resources>
