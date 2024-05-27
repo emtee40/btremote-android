@@ -109,4 +109,13 @@
     <string name="help_pairing_missing_device_check_location_for_android_11_or_less">• Upewnij się, że usługi lokalizacji są włączone na Twoim urządzeniu.</string>
     <string name="help_pairing_device_failed_connection_message_1">Jeśli udało Ci się sparować oba urządzenia, ale nie możesz połączyć się z urządzeniem sparowanym, postępuj zgodnie z poniższymi instrukcjami:</string>
     <string name="help_keyboard_wrong_character_sent_message">Jeśli wysyłane znaki są nieprawidłowe, należy skonfigurować fizyczną klawiaturę na urządzeniu obsługiwanym zdalnie, aby odpowiadała językowi wybranemu w ustawieniach aplikacji.</string>
+    <string name="direction_arrows">Strzałki kierunkowe</string>
+    <string name="enter">Zatwierdzenie</string>
+    <string name="up">Góra</string>
+    <string name="down">Dół</string>
+    <string name="left">Lewo</string>
+    <string name="right">Prawo</string>
+    <string name="home">Strona główna</string>
+    <string name="standby">Stan spoczynku</string>
+    <string name="mouse_pad_tap">Kliknięcie</string>
 </resources>
