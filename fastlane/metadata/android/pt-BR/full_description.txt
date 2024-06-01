@@ -1,0 +1,15 @@
+Transforme seu smartphone em um controle remoto Bluetooth para navegar e interagir com sua Android TV.
+
+Funcionalidades:
+
+- Controle sem fio via conexão Bluetooth.
+- Incluí todos os botões necessários para o controle remoto do seu dispositivo.
+- Suporte integrado de mouse e teclado.
+- Instalação de apps adicionais não é necessária na sua Android TV graças ao protocolo HID.
+- Interface de usuário moderna e responsiva.
+- Desenvolvido com Kotlin, Jetpack Compose, e Material 3.
+- Focado na privacidade, sem coleção de dados (a permissão de internet é desativada).
+- Sem anúncios.
+- Código aberto.
+
+O código fonte pode ser encontrado aqui: https://gitlab.com/Atharok/BtRemote
