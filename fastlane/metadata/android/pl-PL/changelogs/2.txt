@@ -1,0 +1,12 @@
+1.1.0
+
+- Dodano następujące tłumaczenia:
+	- Czeski (dzięki tenJirka).
+	- Rosyjski (dzięki Yurt Page).
+	- Chiński uproszczony (dzięki yzqzss).
+	- Polski (dzięki Eryk Michalak).
+- Dodano czeskie, rosyjskie i polskie układy klawiatury.
+- Poprawiono stabilność aplikacji.
+- Naprawiono błędy inicjalizacji.
+- Połączenie i polecenia działają teraz w systemie Linux.
+- Zaktualizowano zależności.
