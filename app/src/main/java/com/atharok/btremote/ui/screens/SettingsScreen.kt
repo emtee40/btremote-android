@@ -43,9 +43,9 @@ import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.ListDialog
 import com.atharok.btremote.ui.components.NavigateUpAction
-import com.atharok.btremote.ui.components.TextStandardPrimary
-import com.atharok.btremote.ui.components.TextStandardSecondary
-import com.atharok.btremote.ui.components.TextTitleSettings
+import com.atharok.btremote.ui.components.TextMedium
+import com.atharok.btremote.ui.components.TextNormal
+import com.atharok.btremote.ui.components.TextNormalSecondary
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -355,7 +355,7 @@ private fun MouseSpeedItem(
     Column(
         modifier = modifier
     ) {
-        TextStandardPrimary(
+        TextNormal(
             text = stringResource(id = R.string.mouse_pointer_speed) + " (x$mouseSpeed)",
             modifier = Modifier.fillMaxWidth()
         )
@@ -464,8 +464,8 @@ fun <T> SettingsListDialogItem(
             .clickable { onShowDialogChange(true) }
             .then(modifier)
     ) {
-        TextStandardPrimary(text = stringResource(id = title))
-        TextStandardSecondary(text = convertValueToString(value))
+        TextNormal(text = stringResource(id = title))
+        TextNormalSecondary(text = convertValueToString(value))
     }
 }
 
@@ -487,9 +487,9 @@ private fun SettingsSwitchItem(
         Column(
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
-            TextStandardPrimary(text = primaryText)
+            TextNormal(text = primaryText)
             secondaryText?.let {
-                TextStandardSecondary(text = it)
+                TextNormalSecondary(text = it)
             }
         }
 
@@ -505,7 +505,7 @@ private fun TitleItem(
     text: String,
     modifier: Modifier = Modifier
 ) {
-    TextTitleSettings(
+    TextMedium(
         text = text,
         modifier = modifier
     )
@@ -517,7 +517,7 @@ private fun TextItem(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier) {
-        TextStandardPrimary(
+        TextNormal(
             text = text,
             modifier = Modifier.fillMaxSize()
         )

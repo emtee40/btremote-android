@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.RemoteLayout
-import com.atharok.btremote.ui.components.CustomCard
+import com.atharok.btremote.ui.components.CircleElevatedCard
 
 @Composable
 private fun RemoteButton(
@@ -74,10 +74,7 @@ private fun SingleRemoteButton(
     contentDescription: String,
     modifier: Modifier = Modifier
 ) {
-    CustomCard(
-        shape = CircleShape,
-        modifier = modifier
-    ) {
+    CircleElevatedCard(modifier = modifier) {
         RemoteButton(
             bytes = bytes,
             sendReport = sendReport,
@@ -179,10 +176,7 @@ private fun VerticalRemoteButtons(
     contentDown: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    CustomCard(
-        shape = CircleShape,
-        modifier = modifier
-    ) {
+    CircleElevatedCard(modifier = modifier) {
         Column(
             modifier = Modifier.fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,

@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components
+package com.atharok.btremote.ui.views
 
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.MouseInput
-import com.atharok.btremote.ui.components.buttons.MouseButton
+import com.atharok.btremote.ui.components.DefaultElevatedCard
+import com.atharok.btremote.ui.views.remoteButtons.MouseButton
 import kotlin.jvm.internal.Ref.BooleanRef
 import kotlin.jvm.internal.Ref.FloatRef
 
@@ -44,18 +45,17 @@ fun MousePadLayout(
 
     Column(modifier) {
 
-        CustomCard(
+        DefaultElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.8f)
+                .padding(dimensionResource(id = R.dimen.padding_standard)),
             shape = RoundedCornerShape(
                 topStart = dimensionResource(id = R.dimen.card_corner_radius),
                 topEnd = dimensionResource(id = R.dimen.card_corner_radius),
                 bottomEnd = 0.dp,
                 bottomStart = 0.dp
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.8f)
-                .padding(dimensionResource(id = R.dimen.padding_standard)),
-            surfaceElevation = dimensionResource(id = R.dimen.elevation)
+            )
         ) {
             MousePad(
                 mouseSpeed = mouseSpeedRef,
@@ -93,17 +93,16 @@ fun MousePadLayout(
                 )
         ) {
             // Start
-            CustomCard(
+            DefaultElevatedCard(
+                modifier = Modifier
+                    .weight(0.38f)
+                    .fillMaxHeight(),
                 shape = RoundedCornerShape(
                     topStart = 0.dp,
                     topEnd = 0.dp,
                     bottomEnd = 0.dp,
                     bottomStart = dimensionResource(id = R.dimen.card_corner_radius)
-                ),
-                modifier = Modifier
-                    .weight(0.38f)
-                    .fillMaxHeight(),
-                surfaceElevation = dimensionResource(id = R.dimen.elevation)
+                )
             ) {
                 MouseButton(
                     touchDown = {
@@ -119,13 +118,12 @@ fun MousePadLayout(
             }
 
             // Center
-            CustomCard(
-                shape = RoundedCornerShape(0.dp),
+            DefaultElevatedCard(
                 modifier = Modifier
                     .weight(0.24f)
                     .fillMaxHeight()
                     .padding(horizontal = dimensionResource(id = R.dimen.padding_standard)),
-                surfaceElevation = dimensionResource(id = R.dimen.elevation)
+                shape = RoundedCornerShape(0.dp)
             ) {
                 MouseButton(
                     touchDown = {
@@ -141,17 +139,16 @@ fun MousePadLayout(
             }
 
             // End
-            CustomCard(
+            DefaultElevatedCard(
+                modifier = Modifier
+                    .weight(0.38f)
+                    .fillMaxHeight(),
                 shape = RoundedCornerShape(
                     topStart = 0.dp,
                     topEnd = 0.dp,
                     bottomEnd = dimensionResource(id = R.dimen.card_corner_radius),
                     bottomStart = 0.dp
-                ),
-                modifier = Modifier
-                    .weight(0.38f)
-                    .fillMaxHeight(),
-                surfaceElevation = dimensionResource(id = R.dimen.elevation)
+                )
             ) {
                 MouseButton(
                     touchDown = {

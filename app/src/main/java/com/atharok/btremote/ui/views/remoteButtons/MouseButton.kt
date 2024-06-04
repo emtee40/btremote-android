@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable

@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource

@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -16,7 +16,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.toSize
-import com.atharok.btremote.ui.components.CustomCard
+import com.atharok.btremote.ui.components.CircleElevatedCard
 import com.atharok.btremote.ui.components.TextRemoteNumber
 
 @Composable
@@ -26,9 +26,9 @@ fun DialPadButton(
     sendRemoteKey: (bytes: ByteArray) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    CustomCard(
-        shape = CircleShape,
-        modifier = modifier
+    CircleElevatedCard(
+        modifier = modifier,
+        shape = CircleShape
     ) {
         StatefulRemoteButton(
             touchDown = { sendRemoteKey(byteArray) },

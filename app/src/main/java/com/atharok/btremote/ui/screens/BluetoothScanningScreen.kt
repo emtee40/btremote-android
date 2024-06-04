@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -32,7 +34,6 @@ import com.atharok.btremote.common.utils.checkBluetoothConnectPermission
 import com.atharok.btremote.domain.entity.DeviceEntity
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
-import com.atharok.btremote.ui.components.BluetoothScanningScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.HelpAction
 import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.NavigateUpAction
@@ -40,7 +41,9 @@ import com.atharok.btremote.ui.components.OnLifecycleEvent
 import com.atharok.btremote.ui.components.RefreshAction
 import com.atharok.btremote.ui.components.SettingsAction
 import com.atharok.btremote.ui.components.SystemBroadcastReceiver
-import com.atharok.btremote.ui.components.TextTitleTertiary
+import com.atharok.btremote.ui.components.TextNormalSecondary
+import com.atharok.btremote.ui.views.BluetoothScanningScreenHelpModalBottomSheet
+import com.atharok.btremote.ui.views.DeviceItemView
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
@@ -190,22 +193,18 @@ private fun StatelessBluetoothScanningScreen(
             NavigateUpAction(navigateUp)
         },
         topBarActions = {
-            RefreshAction(
-                refresh = startDiscovery
-            )
-            HelpAction(
-                showHelp = { onShowHelpBottomSheetChanged(!showHelpBottomSheet) }
-            )
+            RefreshAction(refresh = startDiscovery)
+            HelpAction(showHelp = { onShowHelpBottomSheetChanged(!showHelpBottomSheet) })
             SettingsAction(openSettings)
         }
     ) { innerPadding ->
 
-        BluetoothScanningView(
+        DiscoveredDevicesListView(
             isDiscovering = isDiscovering,
             devices = devices,
-            connect = connectToDevice,
+            onItemClick = connectToDevice,
             modifier = Modifier,
-            innerPadding = innerPadding
+            contentPadding = innerPadding
         )
 
         HelpBottomSheet(
@@ -216,19 +215,18 @@ private fun StatelessBluetoothScanningScreen(
 }
 
 @Composable
-private fun BluetoothScanningView(
+private fun DiscoveredDevicesListView(
     isDiscovering: Boolean,
     devices: List<DeviceEntity>,
-    connect: (DeviceEntity) -> Unit,
+    onItemClick: (DeviceEntity) -> Unit,
     modifier: Modifier = Modifier,
-    innerPadding: PaddingValues = PaddingValues(0.dp)
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
-    DevicesListView(
-        devices = devices,
-        onItemClick = connect,
+    LazyColumn(
         modifier = modifier,
-        contentPadding = innerPadding,
-        topContent = {
+        contentPadding = contentPadding
+    ) {
+        item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -244,7 +242,7 @@ private fun BluetoothScanningView(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_standard))
                     ) {
-                        TextTitleTertiary(
+                        TextNormalSecondary(
                             text = stringResource(id = R.string.available_devices),
                         )
                         if(isDiscovering) {
@@ -255,14 +253,28 @@ private fun BluetoothScanningView(
                         }
                     }
                 } else {
-                    TextTitleTertiary(
+                    TextNormalSecondary(
                         text = stringResource(id = R.string.bluetooth_pairing_device_not_found),
                         modifier = Modifier
                     )
                 }
             }
         }
-    )
+        items(devices) { device ->
+            DeviceItemView(
+                name = device.name,
+                macAddress = device.macAddress,
+                icon = device.imageVector,
+                onClick = { onItemClick(device) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = dimensionResource(id = R.dimen.padding_standard),
+                        vertical = dimensionResource(id = R.dimen.padding_small)
+                    )
+            )
+        }
+    }
 }
 
 @Composable

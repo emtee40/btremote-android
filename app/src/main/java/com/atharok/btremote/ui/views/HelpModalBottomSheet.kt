@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components
+package com.atharok.btremote.ui.views
 
 import android.os.Build
 import androidx.compose.foundation.Image
@@ -23,6 +23,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
+import com.atharok.btremote.ui.components.TextLarge
+import com.atharok.btremote.ui.components.TextMedium
+import com.atharok.btremote.ui.components.TextNormalSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,7 +59,7 @@ private fun HelpModalBottomSheet(
                         modifier = Modifier.size(dimensionResource(id = R.dimen.help_icon_size)),
                         colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
                     )
-                    TextTitlePrimary(
+                    TextLarge(
                         text = stringResource(id = R.string.help),
                         modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
                     )
@@ -211,10 +214,10 @@ private fun Section(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        TextTitleSecondary(
+        TextMedium(
             text = title
         )
-        TextTitleTertiary(
+        TextNormalSecondary(
             text = message,
             modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_large))
         )

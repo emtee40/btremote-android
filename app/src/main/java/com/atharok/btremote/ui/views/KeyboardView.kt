@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components
+package com.atharok.btremote.ui.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
-import com.atharok.btremote.ui.components.buttons.StatefulRemoteButton
+import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
 
 @Composable
 fun KeyboardView(

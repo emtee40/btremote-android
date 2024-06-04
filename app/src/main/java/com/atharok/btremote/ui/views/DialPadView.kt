@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components
+package com.atharok.btremote.ui.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
-import com.atharok.btremote.ui.components.buttons.ChannelVerticalRemoteButtons
-import com.atharok.btremote.ui.components.buttons.DialPadButton
+import com.atharok.btremote.ui.views.remoteButtons.ChannelVerticalRemoteButtons
+import com.atharok.btremote.ui.views.remoteButtons.DialPadButton
 
 @Composable
 fun DialPadLayout(

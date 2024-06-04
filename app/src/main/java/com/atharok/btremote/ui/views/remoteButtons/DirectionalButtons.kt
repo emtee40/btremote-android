@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -45,7 +45,7 @@ fun DirectionalButtons(
 ) {
     Box(
         modifier = modifier.shadow(
-            elevation = dimensionResource(id = R.dimen.shadow_elevation),
+            elevation = dimensionResource(id = R.dimen.elevation),
             shape = CircleShape
         )
     ) {

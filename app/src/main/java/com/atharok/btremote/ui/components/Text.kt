@@ -29,8 +29,11 @@ fun TextRemoteNumber(
     )
 }
 
+
+// ---- Large ----
+
 @Composable
-fun TextTitlePrimary(
+fun TextLarge(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
@@ -44,15 +47,17 @@ fun TextTitlePrimary(
         color = color,
         fontSize = fontSize,
         style = Typography.titleLarge,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Medium,
         overflow = TextOverflow.Ellipsis,
         maxLines = maxLines,
         textAlign = textAlign
     )
 }
 
+// ---- Medium ----
+
 @Composable
-fun TextTitleSecondary(
+fun TextMedium(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
@@ -63,50 +68,21 @@ fun TextTitleSecondary(
         modifier = modifier,
         color = color,
         style = Typography.titleMedium,
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.SemiBold,
         textAlign = textAlign
     )
 }
 
-@Composable
-fun TextTitleTertiary(
-    text: String,
-    modifier: Modifier = Modifier,
-    textAlign: TextAlign? = null
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        style = Typography.titleSmall,
-        fontWeight = FontWeight.Medium,
-        textAlign = textAlign
-    )
-}
+// ---- Normal ----
 
 @Composable
-fun TextTitleSettings(
-    text: String,
-    modifier: Modifier = Modifier,
-    textAlign: TextAlign? = null
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.primary,
-        style = Typography.titleSmall,
-        fontWeight = FontWeight.Black,
-        textAlign = textAlign
-    )
-}
-
-@Composable
-fun TextStandardPrimary(
+fun TextNormal(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
-    style: TextStyle = Typography.bodyMedium,
+    style: TextStyle = Typography.titleSmall,
+    textDecoration: TextDecoration? = null,
     textAlign: TextAlign? = null
 ) {
     Text(
@@ -115,38 +91,36 @@ fun TextStandardPrimary(
         color = color,
         fontSize = fontSize,
         style = style,
-        fontWeight = FontWeight.Medium,
+        textDecoration = textDecoration,
         textAlign = textAlign
     )
 }
 
 @Composable
-fun TextStandardSecondary(
+fun TextNormalSecondary(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign? = null
 ) {
-    TextStandardPrimary(
+    TextNormal(
         text = text,
         modifier = modifier,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
-        style = Typography.bodySmall,
+        style = Typography.bodyMedium,
         textAlign = textAlign
     )
 }
 
 @Composable
-fun TextLink(
+fun TextNormalLink(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign? = null
 ) {
-    Text(
+    TextNormal(
         text = text,
         modifier = modifier,
         color = MaterialTheme.colorScheme.primary,
-        style = Typography.titleSmall,
-        fontWeight = FontWeight.Medium,
         textDecoration = TextDecoration.Underline,
         textAlign = textAlign
     )

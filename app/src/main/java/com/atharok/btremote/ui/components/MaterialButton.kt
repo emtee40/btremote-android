@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.atharok.btremote.R
-import com.atharok.btremote.ui.components.TextStandardPrimary
 
 @Composable
 fun MaterialButton(
@@ -37,7 +36,7 @@ fun MaterialButton(
                 )
             }
 
-            TextStandardPrimary(text = text)
+            TextNormal(text = text)
         }
     }
 }

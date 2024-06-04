@@ -40,25 +40,25 @@ import com.atharok.btremote.domain.entity.MouseInput
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import com.atharok.btremote.ui.components.AppScaffold
-import com.atharok.btremote.ui.components.DialPadLayout
 import com.atharok.btremote.ui.components.DirectionButtonsAction
 import com.atharok.btremote.ui.components.DisconnectDropdownMenuItem
 import com.atharok.btremote.ui.components.FadeAnimatedContent
 import com.atharok.btremote.ui.components.HelpDropdownMenuItem
 import com.atharok.btremote.ui.components.KeyboardOverflowMenu
-import com.atharok.btremote.ui.components.KeyboardView
 import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.MoreOverflowMenu
 import com.atharok.btremote.ui.components.MouseAction
-import com.atharok.btremote.ui.components.MousePadLayout
-import com.atharok.btremote.ui.components.RemoteScreenHelpModalBottomSheet
 import com.atharok.btremote.ui.components.SettingsDropdownMenuItem
-import com.atharok.btremote.ui.components.buttons.BackRemoteButton
-import com.atharok.btremote.ui.components.buttons.DirectionalButtons
-import com.atharok.btremote.ui.components.buttons.HomeRemoteButton
-import com.atharok.btremote.ui.components.buttons.MultimediaButtons
-import com.atharok.btremote.ui.components.buttons.MuteRemoteButton
-import com.atharok.btremote.ui.components.buttons.VolumeVerticalRemoteButtons
+import com.atharok.btremote.ui.views.DialPadLayout
+import com.atharok.btremote.ui.views.KeyboardView
+import com.atharok.btremote.ui.views.MousePadLayout
+import com.atharok.btremote.ui.views.RemoteScreenHelpModalBottomSheet
+import com.atharok.btremote.ui.views.remoteButtons.BackRemoteButton
+import com.atharok.btremote.ui.views.remoteButtons.DirectionalButtons
+import com.atharok.btremote.ui.views.remoteButtons.HomeRemoteButton
+import com.atharok.btremote.ui.views.remoteButtons.MultimediaButtons
+import com.atharok.btremote.ui.views.remoteButtons.MuteRemoteButton
+import com.atharok.btremote.ui.views.remoteButtons.VolumeVerticalRemoteButtons
 import kotlinx.coroutines.flow.Flow
 
 private enum class NavigationView {

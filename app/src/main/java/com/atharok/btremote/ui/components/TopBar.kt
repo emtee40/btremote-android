@@ -19,7 +19,7 @@ fun TopBar(
 ) {
     TopAppBar(
         title = {
-            TextTitlePrimary(text = title)
+            TextLarge(text = title)
         },
         modifier = modifier,
         navigationIcon = navigateUp,

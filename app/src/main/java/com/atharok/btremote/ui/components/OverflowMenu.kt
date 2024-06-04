@@ -79,7 +79,7 @@ private fun DefaultDropdownMenuItem(
 ) {
     DropdownMenuItem(
         text = {
-            TextStandardPrimary(title)
+            TextNormal(title)
         },
         onClick = onClick,
         modifier = modifier,

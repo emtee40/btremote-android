@@ -31,7 +31,7 @@ import com.atharok.btremote.ui.theme.BtRemoteTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MainActivityRootView(
+fun ComposeRoot(
     navController: NavHostController = rememberNavController(),
     settingsViewModel: SettingsViewModel = koinViewModel(),
     bluetoothViewModel: BluetoothViewModel = koinViewModel(),
@@ -80,7 +80,7 @@ fun MainActivityRootView(
                             SettingsScreen(
                                 navigateUp = { navController.navigateUp() },
                                 openThirdLibrariesScreen = {
-                                    navController.navigate(AppNavDestination.ThirdLibrariesDestination.route)
+                                    navController.navigateTo(AppNavDestination.ThirdLibrariesDestination.route)
                                 },
                                 settingsViewModel = settingsViewModel,
                                 modifier = Modifier

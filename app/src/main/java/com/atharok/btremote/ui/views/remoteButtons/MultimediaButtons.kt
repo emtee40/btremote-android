@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.components.buttons
+package com.atharok.btremote.ui.views.remoteButtons
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -22,15 +21,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.RemoteLayout
-import com.atharok.btremote.ui.components.CustomCard
+import com.atharok.btremote.ui.components.CircleElevatedCard
 
 @Composable
 fun MultimediaButtons(
     sendRemoteKey: (bytes: ByteArray) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    CustomCard(
-        shape = CircleShape,
+    CircleElevatedCard(
         modifier = modifier
     ) {
         Row(

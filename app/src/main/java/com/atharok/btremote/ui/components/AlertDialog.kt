@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -30,10 +31,10 @@ fun SimpleDialog(
 ) {
     AlertDialog(
         title = {
-            TextTitlePrimary(text = dialogTitle)
+            TextLarge(text = dialogTitle)
         },
         text = {
-            TextStandardPrimary(text = dialogText)
+            TextNormal(text = dialogText)
         },
         onDismissRequest = {
             onDismissRequest()
@@ -63,12 +64,11 @@ fun ListDialog(
     AlertDialog(
         title = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                TextTitlePrimary(text = dialogTitle)
+                TextLarge(text = dialogTitle)
                 dialogMessage?.let {
-                    TextStandardPrimary(
+                    TextNormalSecondary(
                         text = it,
-                        modifier = Modifier
-                            .padding(top = dimensionResource(id = R.dimen.padding_standard))
+                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_large))
                     )
                 }
             }
@@ -90,7 +90,7 @@ fun ListDialog(
                             selected = selected.intValue == index,
                             onClick = { selected.intValue = index }
                         )
-                        TextStandardPrimary(
+                        TextNormal(
                             text = item,
                             modifier = Modifier.clickable { selected.intValue = index }
                         )
@@ -98,9 +98,7 @@ fun ListDialog(
                 }
             }
         },
-        onDismissRequest = {
-            onDismissRequest()
-        },
+        onDismissRequest = onDismissRequest,
         confirmButton = {
             DialogButton(
                 text = confirmButtonText,
@@ -124,10 +122,13 @@ fun LoadingDialog(
 ) {
     AlertDialog(
         title = {
-            TextTitlePrimary(text = title)
+            TextLarge(text = title)
         },
         text = {
-            LoadingView(message = message)
+            LoadingView(
+                message = message,
+                modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_large))
+            )
         },
         onDismissRequest = onButtonClick,
         confirmButton = {
@@ -147,7 +148,22 @@ private fun DialogButton(
             onClick = action,
             modifier = modifier
         ) {
-            TextStandardPrimary(text = text)
+            TextNormal(text = text)
         }
+    }
+}
+
+@Composable
+private fun LoadingView(
+    message: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
+    ) {
+        CircularProgressIndicator()
+        TextNormalSecondary(text = message)
     }
 }
