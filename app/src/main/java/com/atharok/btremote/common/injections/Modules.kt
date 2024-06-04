@@ -11,7 +11,7 @@ import com.atharok.btremote.data.bluetooth.BluetoothInteractions
 import com.atharok.btremote.data.dataStore.SettingsDataStore
 import com.atharok.btremote.data.repositories.BluetoothHidProfileRepositoryImpl
 import com.atharok.btremote.data.repositories.BluetoothRepositoryImpl
-import com.atharok.btremote.data.repositories.SettingsDataStoreRepositoryImpl
+import com.atharok.btremote.data.repositories.SettingsRepositoryImpl
 import com.atharok.btremote.domain.entity.keyboard.layout.CSKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
@@ -22,7 +22,7 @@ import com.atharok.btremote.domain.entity.keyboard.layout.UKKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.USKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import com.atharok.btremote.domain.repositories.BluetoothRepository
-import com.atharok.btremote.domain.repositories.SettingsDataStoreRepository
+import com.atharok.btremote.domain.repositories.SettingsRepository
 import com.atharok.btremote.domain.usecases.BluetoothHidServiceUseCase
 import com.atharok.btremote.domain.usecases.BluetoothHidUseCase
 import com.atharok.btremote.domain.usecases.BluetoothUseCase
@@ -105,7 +105,7 @@ private val useCaseModule: Module = module {
 
     single {
         SettingsUseCase(
-            repository = get<SettingsDataStoreRepository>()
+            repository = get<SettingsRepository>()
         )
     }
 }
@@ -124,8 +124,8 @@ private val repositoryModule: Module = module {
         )
     }
 
-    single<SettingsDataStoreRepository> {
-        SettingsDataStoreRepositoryImpl(
+    single<SettingsRepository> {
+        SettingsRepositoryImpl(
             settingsDataStore = get<SettingsDataStore>()
         )
     }

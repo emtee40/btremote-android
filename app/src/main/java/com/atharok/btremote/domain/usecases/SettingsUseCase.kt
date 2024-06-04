@@ -2,10 +2,10 @@ package com.atharok.btremote.domain.usecases
 
 import com.atharok.btremote.domain.entity.ThemeEntity
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
-import com.atharok.btremote.domain.repositories.SettingsDataStoreRepository
+import com.atharok.btremote.domain.repositories.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
-class SettingsUseCase(private val repository: SettingsDataStoreRepository) {
+class SettingsUseCase(private val repository: SettingsRepository) {
 
     suspend fun saveTheme(themeEntity: ThemeEntity) {
         repository.saveTheme(themeEntity)

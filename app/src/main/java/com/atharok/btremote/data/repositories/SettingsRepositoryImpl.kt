@@ -3,12 +3,12 @@ package com.atharok.btremote.data.repositories
 import com.atharok.btremote.data.dataStore.SettingsDataStore
 import com.atharok.btremote.domain.entity.ThemeEntity
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
-import com.atharok.btremote.domain.repositories.SettingsDataStoreRepository
+import com.atharok.btremote.domain.repositories.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
-class SettingsDataStoreRepositoryImpl(
+class SettingsRepositoryImpl(
     private val settingsDataStore: SettingsDataStore
-): SettingsDataStoreRepository {
+): SettingsRepository {
 
     override suspend fun saveTheme(themeEntity: ThemeEntity) {
         settingsDataStore.saveTheme(themeEntity)

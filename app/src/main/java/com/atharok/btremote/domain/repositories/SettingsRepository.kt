@@ -4,7 +4,7 @@ import com.atharok.btremote.domain.entity.ThemeEntity
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
 import kotlinx.coroutines.flow.Flow
 
-interface SettingsDataStoreRepository {
+interface SettingsRepository {
     suspend fun saveTheme(themeEntity: ThemeEntity)
     fun getTheme(): Flow<ThemeEntity>
 
