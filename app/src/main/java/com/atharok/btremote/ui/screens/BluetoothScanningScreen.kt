@@ -34,6 +34,7 @@ import com.atharok.btremote.common.utils.checkBluetoothConnectPermission
 import com.atharok.btremote.domain.entity.DeviceEntity
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.ui.components.AppScaffold
+import com.atharok.btremote.ui.components.CheckMultiplePermissions
 import com.atharok.btremote.ui.components.HelpAction
 import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.NavigateUpAction
@@ -48,6 +49,45 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun BluetoothScanningScreen(
+    bluetoothScanningPermissions: Array<String>,
+    areBluetoothScanningPermissionsGranted: () -> Boolean,
+    isBluetoothEnabled: Boolean,
+    isBluetoothHidProfileConnected: Boolean,
+    bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
+    navigateUp: () -> Unit,
+    isDiscoveringFlow: StateFlow<Boolean>,
+    startDiscovery: () -> Unit,
+    cancelDiscovery: () -> Unit,
+    connectToDevice: (DeviceEntity) -> Unit,
+    disconnectDevice: () -> Unit,
+    openRemoteScreen: (deviceName: String) -> Unit,
+    openSettings: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CheckMultiplePermissions(
+        permissions = bluetoothScanningPermissions,
+        arePermissionsGranted = areBluetoothScanningPermissionsGranted,
+        onPermissionsDenied = navigateUp
+    ) {
+        BluetoothScanningScreen(
+            isBluetoothEnabled = isBluetoothEnabled,
+            isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+            bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
+            navigateUp = navigateUp,
+            isDiscoveringFlow = isDiscoveringFlow,
+            startDiscovery = startDiscovery,
+            cancelDiscovery = cancelDiscovery,
+            connectToDevice = connectToDevice,
+            disconnectDevice = disconnectDevice,
+            openRemoteScreen = openRemoteScreen,
+            openSettings = openSettings,
+            modifier = modifier
+        )
+    }
+}
+
+@Composable
+private fun BluetoothScanningScreen(
     isBluetoothEnabled: Boolean,
     isBluetoothHidProfileConnected: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
@@ -85,10 +125,13 @@ fun BluetoothScanningScreen(
             modifier = modifier
         )
 
-        if(bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING) {
+        if (bluetoothDeviceHidConnectionState.state == BluetoothHidDevice.STATE_CONNECTING) {
             LoadingDialog(
                 title = stringResource(id = R.string.connection),
-                message = stringResource(id = R.string.bluetooth_device_connecting_message, bluetoothDeviceHidConnectionState.deviceName),
+                message = stringResource(
+                    id = R.string.bluetooth_device_connecting_message,
+                    bluetoothDeviceHidConnectionState.deviceName
+                ),
                 buttonText = stringResource(id = android.R.string.cancel),
                 onButtonClick = disconnectDevice
             )
@@ -139,7 +182,6 @@ private fun StatefulBluetoothScanningScreen(
     BackHandler(enabled = true, onBack = navigateUp)
 
     val devices = remember { mutableStateListOf<DeviceEntity>() }
-
 
     OnLifecycleEvent { _, event ->
         when(event) {

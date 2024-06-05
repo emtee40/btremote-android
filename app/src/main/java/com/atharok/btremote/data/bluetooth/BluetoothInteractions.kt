@@ -22,25 +22,37 @@ class BluetoothInteractions(
 
     // ---- Bluetooth permissions ----
 
-    val permissions: Array<String> by lazy {
+    val bluetoothMandatoryPermissions: Array<String> by lazy {
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
                 arrayOf(
                     Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.BLUETOOTH_SCAN,
                     Manifest.permission.POST_NOTIFICATIONS
                 )
             }
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
                 arrayOf(
-                    Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.BLUETOOTH_SCAN
+                    Manifest.permission.BLUETOOTH_CONNECT
                 )
             }
             else -> {
                 arrayOf(
                     Manifest.permission.BLUETOOTH,
-                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.BLUETOOTH_ADMIN
+                )
+            }
+        }
+    }
+
+    val bluetoothScanningPermissions: Array<String> by lazy {
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                arrayOf(
+                    Manifest.permission.BLUETOOTH_SCAN
+                )
+            }
+            else -> {
+                arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
@@ -48,12 +60,18 @@ class BluetoothInteractions(
         }
     }
 
-    fun arePermissionsGranted(): Boolean {
-        return permissions.all {
+    fun areBluetoothMandatoryPermissionsGranted(): Boolean {
+        return bluetoothMandatoryPermissions.all {
             if(it == Manifest.permission.POST_NOTIFICATIONS) // Not mandatory
                 true
             else
                 ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    fun areBluetoothScanningPermissionsGranted(): Boolean {
+        return bluetoothScanningPermissions.all {
+            ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
         }
     }
 

@@ -13,9 +13,13 @@ class BluetoothUseCase(private val bluetoothRepository: BluetoothRepository) {
 
     // ---- Bluetooth permissions ----
 
-    fun getPermissions(): Array<String> = bluetoothRepository.getPermissions()
+    fun getBluetoothPermissions(): Array<String> = bluetoothRepository.getBluetoothPermissions()
 
-    fun arePermissionsGranted(): Boolean = bluetoothRepository.arePermissionsGranted()
+    fun areBluetoothPermissionsGranted(): Boolean = bluetoothRepository.areBluetoothPermissionsGranted()
+
+    fun getBluetoothScanningPermissions(): Array<String> = bluetoothRepository.getBluetoothScanningPermissions()
+
+    fun areBluetoothScanningPermissionsGranted(): Boolean = bluetoothRepository.areBluetoothScanningPermissionsGranted()
 
     // ---- Get Bonded Devices ----
 

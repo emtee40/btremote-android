@@ -62,9 +62,9 @@ fun ComposeRoot(
 
                         bluetoothPermissionsScreen = {
                             BluetoothPermissionsScreen(
-                                permissions = bluetoothViewModel.getPermissions(),
-                                arePermissionsGranted = { bluetoothViewModel.arePermissionsGranted() },
-                                doAfterGrantPermissions = {
+                                permissions = bluetoothViewModel.getBluetoothPermissions(),
+                                arePermissionsGranted = { bluetoothViewModel.areBluetoothPermissionsGranted() },
+                                onPermissionsGranted = {
                                     navController.navigate(AppNavDestination.BluetoothActivationDestination.route) {
                                         popUpTo(0) {
                                             this.saveState = false
@@ -136,6 +136,10 @@ fun ComposeRoot(
 
                         bluetoothDeviceScanningScreen = {
                             BluetoothScanningScreen(
+                                bluetoothScanningPermissions = bluetoothViewModel.getBluetoothScanningPermissions(),
+                                areBluetoothScanningPermissionsGranted = {
+                                    bluetoothViewModel.areBluetoothScanningPermissionsGranted()
+                                },
                                 isBluetoothEnabled = isBluetoothEnabled,
                                 isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
                                 bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
@@ -194,7 +198,7 @@ fun ComposeRoot(
                         when(event) {
                             Lifecycle.Event.ON_RESUME -> {
                                 // Si une permission a été retirée par l'utilisateur pendant l'utilisation de l'application, on affiche l'écran de permissions
-                                if(!bluetoothViewModel.arePermissionsGranted() && navController.currentDestination?.route != AppNavDestination.BluetoothPermissionsDestination.route) {
+                                if(!bluetoothViewModel.areBluetoothPermissionsGranted() && navController.currentDestination?.route != AppNavDestination.BluetoothPermissionsDestination.route) {
                                     navController.navigate(AppNavDestination.BluetoothPermissionsDestination.route) {
                                         popUpTo(0) {
                                             this.saveState = false

@@ -64,19 +64,19 @@ fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) ->
 @Composable
 fun CheckSinglePermission(
     permission: String,
-    arePermissionGranted: () -> Boolean,
+    isPermissionGranted: () -> Boolean,
     doAfterGrantPermission: () -> Unit,
     permissionScreen: @Composable (grantPermissions: () -> Unit) -> Unit
 ) {
-    var permissionIsGranted by remember { mutableStateOf(arePermissionGranted()) }
+    var permissionIsGranted by remember { mutableStateOf(isPermissionGranted()) }
 
     if(permissionIsGranted) {
         doAfterGrantPermission()
     } else {
         val launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.RequestPermission(),
-            onResult = { isPermissionGranted: Boolean ->
-                permissionIsGranted = isPermissionGranted
+            onResult = {
+                permissionIsGranted = it
             }
         )
 
@@ -87,30 +87,88 @@ fun CheckSinglePermission(
 }
 
 @Composable
+fun CheckSinglePermission(
+    permission: String,
+    isPermissionGranted: () -> Boolean,
+    onPermissionDenied: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    var permissionGranted by remember { mutableStateOf(isPermissionGranted()) }
+
+    if(permissionGranted) {
+        content()
+    } else {
+        RequestSinglePermission(
+            permission = permission,
+            onPermissionGranted = { permissionGranted = true },
+            onPermissionDenied = onPermissionDenied
+        )
+    }
+}
+
+@Composable
+fun RequestSinglePermission(
+    permission: String,
+    onPermissionGranted: () -> Unit,
+    onPermissionDenied: () -> Unit
+) {
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = {
+            if(it) onPermissionGranted() else onPermissionDenied()
+        }
+    )
+
+    DisposableEffect(Unit) {
+        launcher.launch(permission)
+        onDispose {}
+    }
+}
+
+@Composable
 fun CheckMultiplePermissions(
     permissions: Array<String>,
     arePermissionsGranted: () -> Boolean,
-    doAfterGrantPermissions: () -> Unit,
-    permissionsScreen: @Composable (grantPermissions: () -> Unit) -> Unit
+    onPermissionsDenied: () -> Unit,
+    content: @Composable () -> Unit
 ) {
-    var permissionsAreGranted by remember { mutableStateOf(arePermissionsGranted()) }
+    var permissionsGranted by remember { mutableStateOf(arePermissionsGranted()) }
 
-    if(permissionsAreGranted) {
-        doAfterGrantPermissions()
+    if(permissionsGranted) {
+        content()
     } else {
-        val launcher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.RequestMultiplePermissions(),
-            onResult = { result: Map<String, Boolean> ->
-                permissionsAreGranted = result.all {
-                    if(it.key == Manifest.permission.POST_NOTIFICATIONS) // Not mandatory
-                        true
-                    else it.value
-                }
-            }
+        RequestMultiplePermissions(
+            permissions = permissions,
+            onPermissionsGranted = { permissionsGranted = true },
+            onPermissionsDenied = onPermissionsDenied
         )
+    }
+}
 
-        permissionsScreen {
-            launcher.launch(permissions)
+@Composable
+fun RequestMultiplePermissions(
+    permissions: Array<String>,
+    onPermissionsGranted: () -> Unit,
+    onPermissionsDenied: () -> Unit
+) {
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+        onResult = { result: Map<String, Boolean> ->
+            val arePermissionsGranted: Boolean = result.all {
+                if(it.key == Manifest.permission.POST_NOTIFICATIONS) // Not mandatory
+                    true
+                else it.value
+            }
+            if(arePermissionsGranted) {
+                onPermissionsGranted()
+            } else {
+                onPermissionsDenied()
+            }
         }
+    )
+
+    DisposableEffect(Unit) {
+        launcher.launch(permissions)
+        onDispose {}
     }
 }

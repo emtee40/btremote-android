@@ -11,9 +11,21 @@ class BluetoothRepositoryImpl(
 
     override fun isBluetoothEnabled(): Boolean = bluetoothInteractions.isBluetoothEnabled()
 
-    override fun getPermissions(): Array<String> = bluetoothInteractions.permissions
+    override fun getBluetoothPermissions(): Array<String> {
+        return bluetoothInteractions.bluetoothMandatoryPermissions
+    }
 
-    override fun arePermissionsGranted(): Boolean = bluetoothInteractions.arePermissionsGranted()
+    override fun areBluetoothPermissionsGranted(): Boolean {
+        return bluetoothInteractions.areBluetoothMandatoryPermissionsGranted()
+    }
+
+    override fun getBluetoothScanningPermissions(): Array<String> {
+        return bluetoothInteractions.bluetoothScanningPermissions
+    }
+
+    override fun areBluetoothScanningPermissionsGranted(): Boolean {
+        return bluetoothInteractions.areBluetoothScanningPermissionsGranted()
+    }
 
     override fun getBondedDevices(): List<DeviceEntity> = bluetoothInteractions.getBondedDevices()
 

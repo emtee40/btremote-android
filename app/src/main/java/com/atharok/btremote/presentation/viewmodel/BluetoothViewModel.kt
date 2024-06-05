@@ -22,9 +22,13 @@ class BluetoothViewModel(
 
     // ---- Bluetooth permissions ----
 
-    fun getPermissions(): Array<String> = useCase.getPermissions()
+    fun getBluetoothPermissions(): Array<String> = useCase.getBluetoothPermissions()
 
-    fun arePermissionsGranted(): Boolean = useCase.arePermissionsGranted()
+    fun areBluetoothPermissionsGranted(): Boolean = useCase.areBluetoothPermissionsGranted()
+
+    fun getBluetoothScanningPermissions(): Array<String> = useCase.getBluetoothScanningPermissions()
+
+    fun areBluetoothScanningPermissionsGranted(): Boolean = useCase.areBluetoothScanningPermissionsGranted()
 
     // ---- Get Bonded Devices ----
 
