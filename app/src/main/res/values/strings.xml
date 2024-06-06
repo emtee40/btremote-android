@@ -33,6 +33,8 @@
     <string name="devices">Devices</string>
     <string name="paired_devices">Paired devices</string>
     <string name="unpair_device">Unpair device</string>
+    <string name="unpair">Unpair</string>
+    <string name="unpair_device_warning_message">This device will be completely unpaired from your device. Do you really want to continue?</string>
 
     <!-- Bluetooth Pairing -->
     <string name="pairing_a_device">Pairing a device</string>
