@@ -17,6 +17,7 @@ import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.PLKeyboardLayout
+import com.atharok.btremote.domain.entity.keyboard.layout.PTKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.RUKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.UKKeyboardLayout
 import com.atharok.btremote.domain.entity.keyboard.layout.USKeyboardLayout
@@ -62,6 +63,7 @@ private val androidModule: Module = module {
     single { RUKeyboardLayout() }
     single { CSKeyboardLayout() }
     single { PLKeyboardLayout() }
+    single { PTKeyboardLayout() }
 }
 
 private val viewModelModule: Module = module {
