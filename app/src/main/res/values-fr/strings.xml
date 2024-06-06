@@ -34,7 +34,7 @@
     <string name="paired_devices">Appareils enregistrés</string>
     <string name="unpair_device">Dissocier l\'appareil</string>
     <string name="unpair">Dissocier</string>
-    <string name="unpair_device_warning_message">Ce périphérique sera complètement supprimé de votre appareil. Voulez-vous vraiment continuer ?</string>
+    <string name="unpair_device_warning_message">Ce périphérique sera complètement dissocié de votre appareil. Voulez-vous vraiment continuer ?</string>
 
     <!-- Bluetooth Pairing -->
     <string name="pairing_a_device">Associer un appareil</string>
