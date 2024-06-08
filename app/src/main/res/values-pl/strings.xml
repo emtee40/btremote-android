@@ -118,4 +118,8 @@
     <string name="home">Strona główna</string>
     <string name="standby">Stan spoczynku</string>
     <string name="mouse_pad_tap">Kliknięcie</string>
+    <string name="unpair">Rozparuj</string>
+    <string name="keyboard_pt">Portugalski</string>
+    <string name="keyboard_br">Brazylyjski</string>
+    <string name="unpair_device_warning_message">To urządzenie zostanie całkowicie rozparowane z twoim urządzeniem. Czy na pewno chcesz kontynuować?</string>
 </resources>
