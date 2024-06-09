@@ -164,6 +164,6 @@ private fun LoadingView(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         CircularProgressIndicator()
-        TextNormalSecondary(text = message)
+        TextNormal(text = message)
     }
 }
