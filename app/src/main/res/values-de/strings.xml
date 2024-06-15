@@ -118,4 +118,8 @@
     <string name="bluetooth_failed_to_connect_to_device">Der Versuch, zur Gegenstelle zu verbinden, ist fehlgeschlagen.</string>
     <string name="bluetooth_failed_to_register_app_message">Fehlschlag beim registrieren der Anwendung. Bitte sicherstellen, dass kein andere Bluetooth-Dienst im Hintergrund läuft. Es ist möglich, dass der Bluetooth-Prozess unerwartet unterbrochen wurde, falls der Fehler bestehen bleibt. Um dieses Problem zu lösen, Bluetooth auf dem Gerät deaktivieren und wieder aktivieren.</string>
     <string name="help_device_failed_connection_message_3">Wenn die Problematik weiterhin besteht, stelle sicher, dass die Bluetooth-Module in beiden Geräten in Ordnung sind.</string>
+    <string name="unpair">Entkoppeln</string>
+    <string name="keyboard_pt">Portugiesisch</string>
+    <string name="keyboard_br">Brasilianisch</string>
+    <string name="unpair_device_warning_message">Dieses Gerät wird vollständig von deinem Gerät entkoppelt werden. Willst du wirklich fortsetzen?</string>
 </resources>
