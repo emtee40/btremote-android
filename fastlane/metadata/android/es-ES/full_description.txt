@@ -1,0 +1,15 @@
+Convierte tu smartphone en un mando a distancia Bluetooth para navegar e interactuar fácilmente con tu Android TV.
+
+Características:
+
+- Control inalámbrico mediante conexión Bluetooth.
+- Incluye todos los botones necesarios para el control remoto de tu dispositivo.
+- Compatible con ratón y teclado integrados.
+- No requiere la instalación de ninguna aplicación adicional en tu dispositivo Android TV gracias al protocolo HID.
+- Interfaz de usuario moderna y responsive.
+- Desarrollado con Kotlin, Jetpack Compose y Material 3.
+- Centrado en la privacidad sin recopilación de datos (permiso de Internet desactivado).
+- Sin publicidad.
+- Código abierto.
+
+El código fuente está disponible aquí: https://gitlab.com/Atharok/BtRemote
