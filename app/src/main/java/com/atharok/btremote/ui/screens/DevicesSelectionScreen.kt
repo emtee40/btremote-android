@@ -36,8 +36,8 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun DevicesSelectionScreen(
     isBluetoothEnabled: Boolean,
-    isBluetoothHidProfileConnected: Boolean,
-    hasBluetoothHidProfileConnectionFailed: Boolean,
+    isBluetoothServiceStarted: Boolean,
+    isBluetoothHidProfileRegistered: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     closeApp: () -> Unit,
     navigateUp: () -> Unit,
@@ -56,8 +56,7 @@ fun DevicesSelectionScreen(
         devicesFlow = devicesFlow,
         findBondedDevices = findBondedDevices,
         isBluetoothEnabled = isBluetoothEnabled,
-        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
-        hasBluetoothHidProfileConnectionFailed = hasBluetoothHidProfileConnectionFailed,
+        isBluetoothServiceStarted = isBluetoothServiceStarted,
         bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
         closeApp = closeApp,
         navigateUp = navigateUp,
@@ -77,11 +76,14 @@ fun DevicesSelectionScreen(
             modifier = modifier
         )
 
-        if(hasBluetoothHidProfileConnectionFailed) {
+        if(isBluetoothServiceStarted && !isBluetoothHidProfileRegistered) {
             SimpleDialog(
                 confirmButtonText = stringResource(id = R.string.retry),
                 dismissButtonText = stringResource(id = R.string.close),
-                onConfirmation = { startHidService() },
+                onConfirmation = {
+                    stopHidService()
+                    startHidService()
+                },
                 onDismissRequest = closeApp,
                 dialogTitle = stringResource(id = R.string.error),
                 dialogText = stringResource(id = R.string.bluetooth_failed_to_register_app_message)
@@ -102,8 +104,7 @@ private fun StatefulDevicesSelectionScreen(
     devicesFlow: StateFlow<List<DeviceEntity>>,
     findBondedDevices: () -> Unit,
     isBluetoothEnabled: Boolean,
-    isBluetoothHidProfileConnected: Boolean,
-    hasBluetoothHidProfileConnectionFailed: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     closeApp: () -> Unit,
     navigateUp: () -> Unit,
@@ -120,16 +121,9 @@ private fun StatefulDevicesSelectionScreen(
         onDispose {}
     }
 
-    DisposableEffect(isBluetoothHidProfileConnected) {
-        if(!isBluetoothHidProfileConnected && isBluetoothEnabled && !hasBluetoothHidProfileConnectionFailed) {
+    DisposableEffect(isBluetoothServiceStarted) {
+        if(!isBluetoothServiceStarted && isBluetoothEnabled) {
             startHidService()
-        }
-        onDispose {}
-    }
-
-    DisposableEffect(hasBluetoothHidProfileConnectionFailed) {
-        if(hasBluetoothHidProfileConnectionFailed) {
-            stopHidService()
         }
         onDispose {}
     }

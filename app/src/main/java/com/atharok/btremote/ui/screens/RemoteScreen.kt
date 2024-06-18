@@ -2,6 +2,7 @@ package com.atharok.btremote.ui.screens
 
 import android.bluetooth.BluetoothHidDevice
 import android.content.res.Configuration
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,7 +70,7 @@ private enum class NavigationView {
 @Composable
 fun RemoteScreen(
     deviceName: String,
-    isBluetoothHidProfileConnected: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     closeApp: () -> Unit,
@@ -88,7 +89,7 @@ fun RemoteScreen(
     modifier: Modifier = Modifier
 ) {
     StatefulRemoteScreen(
-        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+        isBluetoothServiceStarted = isBluetoothServiceStarted,
         bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
         navigateUp = navigateUp,
         closeApp = closeApp,
@@ -137,7 +138,7 @@ fun RemoteScreen(
 
 @Composable
 private fun StatefulRemoteScreen(
-    isBluetoothHidProfileConnected: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     closeApp: () -> Unit,
@@ -156,8 +157,8 @@ private fun StatefulRemoteScreen(
 
     BackHandler(enabled = true, onBack = closeApp)
 
-    DisposableEffect(isBluetoothHidProfileConnected) {
-        if(!isBluetoothHidProfileConnected) {
+    DisposableEffect(isBluetoothServiceStarted) {
+        if(!isBluetoothServiceStarted) {
             navigateUp()
         }
         onDispose {}

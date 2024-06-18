@@ -16,12 +16,12 @@ class BluetoothHidProfileRepositoryImpl(private val hidProfile: BluetoothHidProf
         hidProfile.stopBluetoothHidProfile()
     }
 
-    override fun isBluetoothHidProfileConnected(): StateFlow<Boolean> {
-        return hidProfile.isBluetoothHidProfileConnected
+    override fun isBluetoothServiceStarted(): StateFlow<Boolean> {
+        return hidProfile.isBluetoothServiceStarted
     }
 
-    override fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean> {
-        return hidProfile.hasBluetoothHidProfileConnectionFailed
+    override fun isBluetoothHidProfileRegistered(): StateFlow<Boolean> {
+        return hidProfile.isBluetoothHidProfileRegistered
     }
 
     override fun connectDevice(deviceAddress: String): Boolean {

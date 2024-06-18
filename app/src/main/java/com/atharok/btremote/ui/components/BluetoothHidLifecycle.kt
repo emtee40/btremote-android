@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun BluetoothHidLifecycle(
     isEnabled: Boolean,
-    isBluetoothHidProfileConnectedFlow: StateFlow<Boolean>,
-    hasBluetoothHidProfileConnectionFailedFlow: StateFlow<Boolean>,
+    isBluetoothServiceStartedFlow: StateFlow<Boolean>,
+    isBluetoothHidProfileRegisteredFlow: StateFlow<Boolean>,
     bluetoothDeviceHidConnectionStateFlow: StateFlow<DeviceHidConnectionState>,
     content: @Composable (
         isBluetoothEnabled: Boolean,
@@ -29,11 +29,11 @@ fun BluetoothHidLifecycle(
         onBluetoothEnabledChanged = { isBluetoothEnabled = it }
     )
 
-    val isBluetoothHidProfileConnected by isBluetoothHidProfileConnectedFlow.collectAsStateWithLifecycle()
-    val hasBluetoothHidProfileConnectionFailed by hasBluetoothHidProfileConnectionFailedFlow.collectAsStateWithLifecycle()
+    val isBluetoothServiceStarted by isBluetoothServiceStartedFlow.collectAsStateWithLifecycle()
+    val isBluetoothHidProfileRegistered by isBluetoothHidProfileRegisteredFlow.collectAsStateWithLifecycle()
     val bluetoothDeviceHidConnectedState by bluetoothDeviceHidConnectionStateFlow.collectAsStateWithLifecycle()
 
-    content(isBluetoothEnabled, isBluetoothHidProfileConnected, hasBluetoothHidProfileConnectionFailed, bluetoothDeviceHidConnectedState)
+    content(isBluetoothEnabled, isBluetoothServiceStarted, isBluetoothHidProfileRegistered, bluetoothDeviceHidConnectedState)
 }
 
 @Composable

@@ -50,10 +50,10 @@ fun ComposeRoot(
 
                 BluetoothHidLifecycle(
                     isEnabled = bluetoothViewModel.isBluetoothEnable(),
-                    isBluetoothHidProfileConnectedFlow = hidViewModel.isBluetoothHidProfileConnected(),
-                    hasBluetoothHidProfileConnectionFailedFlow = hidViewModel.hasBluetoothHidProfileConnectionFailed(),
+                    isBluetoothServiceStartedFlow = hidViewModel.isBluetoothServiceStarted(),
+                    isBluetoothHidProfileRegisteredFlow = hidViewModel.isBluetoothHidProfileRegistered(),
                     bluetoothDeviceHidConnectionStateFlow = hidViewModel.getDeviceHidConnectionState()
-                ) { isBluetoothEnabled, isBluetoothHidProfileConnected, hasBluetoothHidProfileConnectionFailed, bluetoothDeviceHidConnectionState ->
+                ) { isBluetoothEnabled, isBluetoothServiceStarted, isBluetoothHidProfileRegistered, bluetoothDeviceHidConnectionState ->
 
                     // ---- NavHost ----
 
@@ -107,8 +107,8 @@ fun ComposeRoot(
                         bluetoothDeviceSelectionScreen = {
                             DevicesSelectionScreen(
                                 isBluetoothEnabled = isBluetoothEnabled,
-                                isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
-                                hasBluetoothHidProfileConnectionFailed = hasBluetoothHidProfileConnectionFailed,
+                                isBluetoothServiceStarted = isBluetoothServiceStarted,
+                                isBluetoothHidProfileRegistered = isBluetoothHidProfileRegistered,
                                 bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
                                 closeApp = { context.getActivity()?.finish() },
                                 navigateUp = { navController.navigateUp() },
@@ -141,7 +141,7 @@ fun ComposeRoot(
                                     bluetoothViewModel.areBluetoothScanningPermissionsGranted()
                                 },
                                 isBluetoothEnabled = isBluetoothEnabled,
-                                isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+                                isBluetoothServiceStarted = isBluetoothServiceStarted,
                                 bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
                                 navigateUp = {
                                     bluetoothViewModel.cancelDiscovery()
@@ -166,7 +166,7 @@ fun ComposeRoot(
                         bluetoothRemoteScreen = {
                             RemoteScreen(
                                 deviceName = bluetoothDeviceHidConnectionState.deviceName,
-                                isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+                                isBluetoothServiceStarted = isBluetoothServiceStarted,
                                 bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
                                 navigateUp = { navController.navigateUp() },
                                 closeApp = { context.getActivity()?.finish() },
@@ -208,7 +208,7 @@ fun ComposeRoot(
                             }
                             Lifecycle.Event.ON_STOP -> {
                                 if(navController.currentDestination?.route == AppNavDestination.BluetoothDeviceSelectionDestination.route) {
-                                    if(isBluetoothHidProfileConnected) {
+                                    if(isBluetoothServiceStarted) {
                                         hidViewModel.stopService(context)
                                     }
                                 }

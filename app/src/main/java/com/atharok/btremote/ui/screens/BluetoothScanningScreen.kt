@@ -52,7 +52,7 @@ fun BluetoothScanningScreen(
     bluetoothScanningPermissions: Array<String>,
     areBluetoothScanningPermissionsGranted: () -> Boolean,
     isBluetoothEnabled: Boolean,
-    isBluetoothHidProfileConnected: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     isDiscoveringFlow: StateFlow<Boolean>,
@@ -71,7 +71,7 @@ fun BluetoothScanningScreen(
     ) {
         BluetoothScanningScreen(
             isBluetoothEnabled = isBluetoothEnabled,
-            isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+            isBluetoothServiceStarted = isBluetoothServiceStarted,
             bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
             navigateUp = navigateUp,
             isDiscoveringFlow = isDiscoveringFlow,
@@ -89,7 +89,7 @@ fun BluetoothScanningScreen(
 @Composable
 private fun BluetoothScanningScreen(
     isBluetoothEnabled: Boolean,
-    isBluetoothHidProfileConnected: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     navigateUp: () -> Unit,
     isDiscoveringFlow: StateFlow<Boolean>,
@@ -103,7 +103,7 @@ private fun BluetoothScanningScreen(
 ) {
     StatefulBluetoothScanningScreen(
         isBluetoothEnabled = isBluetoothEnabled,
-        isBluetoothHidProfileConnected = isBluetoothHidProfileConnected,
+        isBluetoothServiceStarted = isBluetoothServiceStarted,
         bluetoothDeviceHidConnectionState = bluetoothDeviceHidConnectionState,
         isDiscoveringFlow = isDiscoveringFlow,
         navigateUp = navigateUp,
@@ -142,7 +142,7 @@ private fun BluetoothScanningScreen(
 @Composable
 private fun StatefulBluetoothScanningScreen(
     isBluetoothEnabled: Boolean,
-    isBluetoothHidProfileConnected: Boolean,
+    isBluetoothServiceStarted: Boolean,
     bluetoothDeviceHidConnectionState: DeviceHidConnectionState,
     isDiscoveringFlow: StateFlow<Boolean>,
     navigateUp: () -> Unit,
@@ -161,8 +161,8 @@ private fun StatefulBluetoothScanningScreen(
         }
     }
 
-    DisposableEffect(isBluetoothHidProfileConnected) {
-        if(!isBluetoothHidProfileConnected) {
+    DisposableEffect(isBluetoothServiceStarted) {
+        if(!isBluetoothServiceStarted) {
             navigateUp()
         }
         onDispose {

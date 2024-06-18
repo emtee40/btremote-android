@@ -10,9 +10,9 @@ interface BluetoothHidProfileRepository {
 
     fun stopHidProfile()
 
-    fun isBluetoothHidProfileConnected(): StateFlow<Boolean>
+    fun isBluetoothServiceStarted(): StateFlow<Boolean>
 
-    fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean>
+    fun isBluetoothHidProfileRegistered(): StateFlow<Boolean>
 
     fun connectDevice(deviceAddress: String): Boolean
 

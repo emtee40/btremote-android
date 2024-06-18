@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.StateFlow
 
 class BluetoothHidUseCase(private val repository: BluetoothHidProfileRepository) {
 
-    fun isBluetoothHidProfileConnected(): StateFlow<Boolean> {
-        return repository.isBluetoothHidProfileConnected()
+    fun isBluetoothServiceStarted(): StateFlow<Boolean> {
+        return repository.isBluetoothServiceStarted()
     }
 
-    fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean> {
-        return repository.hasBluetoothHidProfileConnectionFailed()
+    fun isBluetoothHidProfileRegistered(): StateFlow<Boolean> {
+        return repository.isBluetoothHidProfileRegistered()
     }
 
     fun connectDevice(deviceAddress: String): Boolean {

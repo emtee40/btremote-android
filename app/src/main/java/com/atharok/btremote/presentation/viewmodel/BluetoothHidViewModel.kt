@@ -29,12 +29,12 @@ class BluetoothHidViewModel(
         context.stopService(serviceIntent)
     }
 
-    fun isBluetoothHidProfileConnected(): StateFlow<Boolean> {
-        return useCase.isBluetoothHidProfileConnected()
+    fun isBluetoothServiceStarted(): StateFlow<Boolean> {
+        return useCase.isBluetoothServiceStarted()
     }
 
-    fun hasBluetoothHidProfileConnectionFailed(): StateFlow<Boolean> {
-        return useCase.hasBluetoothHidProfileConnectionFailed()
+    fun isBluetoothHidProfileRegistered(): StateFlow<Boolean> {
+        return useCase.isBluetoothHidProfileRegistered()
     }
 
     fun connectDevice(device: DeviceEntity): Boolean = useCase.connectDevice(device.macAddress)
