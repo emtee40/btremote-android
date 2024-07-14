@@ -1,0 +1,15 @@
+Maak van je smartphone een bluetoothafstandsbediening om je Android TV-apparaat te bedienen.
+
+Kenmerken:
+
+- Draadloze bediening via bluetooth;
+- Bevat alle denkbare afstandsbedieningsknoppen;
+- Ondersteuning voor muis en toetsenbord;
+- Geen extra app nodig op je Android TV-apparaat door gebruik van het hid-protocol;
+- Moderne en aanpasbare vormgeving;
+- Ontwikkeld met behulp van Kotlin, Jetpack Compose en Material 3;
+- Privacy staat hoog in het vaandel en er worden geen gegevens verzameld (sterker nog: internettoegang is uitgeschakeld);
+- Geen reclame;
+- Open source.
+
+De broncode is beschikbaar op https://gitlab.com/Atharok/BtRemote

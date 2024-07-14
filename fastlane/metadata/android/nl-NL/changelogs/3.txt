@@ -1,0 +1,12 @@
+1.2.0
+
+- Added the following translations:
+	- German (thanks to Atalanttore and Dirk).
+	- Filipino (thanks to Kita Ikuyo).
+	- Portuguese (Brazil) (thanks to lucas).
+- Updated Polish translation (thanks to Eryk Michalak and Kacperocik).
+- Added Portuguese and 	Brazilian keyboard layouts.
+- Modification of text styles to improve readability.
+- GPS permission is no longer mandatory for devices running on Android 11 or earlier.
+- Code improvement.
+- Updated dependencies.
