@@ -3,8 +3,10 @@
     <locale android:name="cs"/>
     <locale android:name="de"/>
     <locale android:name="en-US"/>
+    <locale android:name="es"/>
     <locale android:name="fil"/>
     <locale android:name="fr"/>
+    <locale android:name="nl"/>
     <locale android:name="pl"/>
     <locale android:name="pt-BR"/>
     <locale android:name="ru"/>
