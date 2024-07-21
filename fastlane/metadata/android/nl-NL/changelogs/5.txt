@@ -1,0 +1,6 @@
+1.2.2
+
+- Nieuw: Spaanse vertaling (met dank aan @cr1st);
+- Bijgewerkt: Duitse vertaling (met dank aan @Dirk);
+- Bijgewerkt: Filipijnse vertaling (met dank aan @Kita Ikuyo);
+- Opgelost: foutmelding op sommige apparaten waardoor koppelen via hid niet lukte.

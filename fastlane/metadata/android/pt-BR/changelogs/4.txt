@@ -1,0 +1,13 @@
+1.2.1
+Kotlin atualizado para versão 2.0.
+1.2.0
+- Foram adicionadas as seguintes traduções:
+- Alemão (agradecimentos para Atalanttore e Dirk).
+- Filipino (agradecimentos à Kita Ikuyo).
+- Português (Brazil) (agradecimento a lucas).
+- Atualizada tradução polonesa (graças à Eryck Michalak e Kacperocik).
+- Adicionado Português e layouts de teclado brazileiros.
+- Foram modificados estilos de texto para melhor legibilidade. 
+- As permissôes de GPS não mais são obrigatórias para dispositivos com Android 11 ou anterior.
+- Melhoramento no código.
+- Dependências atualizadas.
