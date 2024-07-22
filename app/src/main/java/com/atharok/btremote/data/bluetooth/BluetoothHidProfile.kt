@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothProfile
 import android.bluetooth.BluetoothProfile.ServiceListener
 import android.content.Context
-import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.atharok.btremote.common.utils.KEYBOARD_REPORT_ID
 import com.atharok.btremote.common.utils.checkBluetoothConnectPermission

@@ -2,7 +2,6 @@ package com.atharok.btremote.ui.screens
 
 import android.bluetooth.BluetoothHidDevice
 import android.content.res.Configuration
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,8 +51,8 @@ import com.atharok.btremote.ui.components.MouseAction
 import com.atharok.btremote.ui.components.SettingsDropdownMenuItem
 import com.atharok.btremote.ui.views.DialPadLayout
 import com.atharok.btremote.ui.views.KeyboardView
-import com.atharok.btremote.ui.views.MousePadLayout
 import com.atharok.btremote.ui.views.RemoteScreenHelpModalBottomSheet
+import com.atharok.btremote.ui.views.mouse.MousePadLayout
 import com.atharok.btremote.ui.views.remoteButtons.BackRemoteButton
 import com.atharok.btremote.ui.views.remoteButtons.DirectionalButtons
 import com.atharok.btremote.ui.views.remoteButtons.HomeRemoteButton
@@ -519,7 +518,7 @@ private fun NavigationBox(
                         mouseSpeed = mouseSpeed,
                         shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
                         sendMouseInput = sendMouseKeyReport,
-                        modifier = Modifier
+                        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard))
                     )
                 }
             }
