@@ -118,4 +118,8 @@
     <string name="bluetooth_permission_message">Você precisa autorizar o acesso ao Bluetooth.</string>
     <string name="help_device_failed_connection_check_4">• Tente se conectar várias vezes.</string>
     <string name="help_keyboard_wrong_character_sent_message">Se os caracteres enviados estão incorretos, você precisa configurar o teclado físico no dispositivo remoto para estar na mesma língua selecionada nas configurações do aplicativo.</string>
+    <string name="unpair">Desparear</string>
+    <string name="keyboard_pt">Português</string>
+    <string name="unpair_device_warning_message">Este dispositivo será completamente despareado do seu dispositivo. Tem certeza que deseja continuar?</string>
+    <string name="keyboard_br">Brasileiro</string>
 </resources>
