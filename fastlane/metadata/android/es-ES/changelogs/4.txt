@@ -1,0 +1,16 @@
+1.2.1
+
+Se actualizó Kotlin a la versión 2.0.
+
+1.2.0
+
+- Se agregaron las siguientes traducciones:
+	- Alemán (gracias a Atalanttore y Dirk).
+	- Filipino (gracias a Kita Ikuyo).
+	- Portugués (Brasil) (gracias a lucas).
+- Traducción al polaco actualizada (gracias a Eryk Michalak y Kacperocik).
+- Se agregó portugués y	Distribuciones de teclado brasileñas.
+- Modificación de estilos de texto para mejorar la legibilidad.
+- El permiso de GPS ya no es obligatorio para los dispositivos que ejecutan Android 11 o anterior.
+- Mejora del código.
+- Dependencias actualizadas.
