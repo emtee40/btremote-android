@@ -1,73 +1,34 @@
 package com.atharok.btremote.ui.views
 
 import android.os.Build
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.HelpOutline
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
-import com.atharok.btremote.ui.components.TextLarge
+import com.atharok.btremote.ui.components.CustomModalBottomSheet
 import com.atharok.btremote.ui.components.TextMedium
 import com.atharok.btremote.ui.components.TextNormalSecondary
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HelpModalBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
-    ModalBottomSheet(
+    CustomModalBottomSheet(
+        title = stringResource(id = R.string.help),
+        icon = Icons.AutoMirrored.Rounded.HelpOutline,
+        iconDescription = stringResource(id = R.string.help),
         onDismissRequest = onDismissRequest,
         modifier = modifier,
-        windowInsets = WindowInsets(0, 0, 0, 0)
-    ) {
-        Surface {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(
-                        start = dimensionResource(id = R.dimen.padding_large),
-                        end = dimensionResource(id = R.dimen.padding_large),
-                        bottom = dimensionResource(id = R.dimen.padding_large)
-                    )
-            ) {
-                Row(
-                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_large)),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        imageVector = Icons.AutoMirrored.Rounded.HelpOutline,
-                        contentDescription = stringResource(id = R.string.help),
-                        modifier = Modifier.size(dimensionResource(id = R.dimen.help_icon_size)),
-                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
-                    )
-                    TextLarge(
-                        text = stringResource(id = R.string.help),
-                        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
-                    )
-                }
-                content()
-            }
-        }
-    }
+        content = content
+    )
 }
 
 @Composable

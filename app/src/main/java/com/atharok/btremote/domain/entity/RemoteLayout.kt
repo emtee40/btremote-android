@@ -22,8 +22,8 @@ object RemoteLayout {
     val REMOTE_KEY_VOLUME_MUTE by lazy { byteArrayOf(0xE2.toByte(), 0x00) }
 
     // Brightness
-    val REMOTE_KEY_BRIGHTNESS_INC by lazy { byteArrayOf(0x6F.toByte(), 0x00) }
-    val REMOTE_KEY_BRIGHTNESS_DEC by lazy { byteArrayOf(0x70.toByte(), 0x00) }
+    //val REMOTE_KEY_BRIGHTNESS_INC by lazy { byteArrayOf(0x6F.toByte(), 0x00) }
+    //val REMOTE_KEY_BRIGHTNESS_DEC by lazy { byteArrayOf(0x70.toByte(), 0x00) }
 
     // Channel
     val REMOTE_KEY_CHANNEL_INC by lazy { byteArrayOf(0x9C.toByte(), 0x00) }
@@ -32,5 +32,5 @@ object RemoteLayout {
     // Others
     val REMOTE_KEY_HOME by lazy { byteArrayOf(0x23, 0x02) }
     val REMOTE_KEY_BACK by lazy { byteArrayOf(0x24, 0x02) }
-    val REMOTE_KEY_STANDBY by lazy { byteArrayOf(0x30, 0x00) }
+    val REMOTE_KEY_POWER by lazy { byteArrayOf(0x30, 0x00) }
 }

@@ -15,10 +15,7 @@ import androidx.compose.material.icons.automirrored.rounded.VolumeDown
 import androidx.compose.material.icons.automirrored.rounded.VolumeMute
 import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.BrightnessHigh
-import androidx.compose.material.icons.rounded.BrightnessLow
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.ModeStandby
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -41,7 +38,9 @@ private fun RemoteButton(
 ) {
     StatefulRemoteButton(
         touchDown = { sendReport(bytes) },
-        touchUp = { sendReport(RemoteLayout.REMOTE_KEY_NONE) }
+        touchUp = {
+            sendReport(RemoteLayout.REMOTE_KEY_NONE)
+        }
     ) {
         Box(
             modifier = Modifier
@@ -112,19 +111,19 @@ fun HomeRemoteButton(
     )
 }
 
-@Composable
-fun StandbyRemoteButton(
+/*@Composable
+fun PowerRemoteButton(
     sendReport: (ByteArray) -> Unit,
     modifier: Modifier = Modifier
 ) {
     SingleRemoteButton(
-        bytes = RemoteLayout.REMOTE_KEY_STANDBY,
+        bytes = RemoteLayout.REMOTE_KEY_POWER,
         sendReport = sendReport,
-        image = Icons.Rounded.ModeStandby,
-        contentDescription = stringResource(id = R.string.standby),
+        image = Icons.Rounded.PowerSettingsNew,
+        contentDescription = stringResource(id = R.string.power),
         modifier = modifier
     )
-}
+}*/
 
 @Composable
 fun MuteRemoteButton(
@@ -226,7 +225,7 @@ fun VolumeVerticalRemoteButtons(
     )
 }
 
-@Composable
+/*@Composable
 fun BrightnessVerticalRemoteButtons(
     sendReport: (ByteArray) -> Unit,
     modifier: Modifier = Modifier
@@ -250,7 +249,7 @@ fun BrightnessVerticalRemoteButtons(
         },
         modifier = modifier
     )
-}
+}*/
 
 @Composable
 fun ChannelVerticalRemoteButtons(

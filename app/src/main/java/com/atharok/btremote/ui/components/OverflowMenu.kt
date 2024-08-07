@@ -3,6 +3,7 @@ package com.atharok.btremote.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.HelpOutline
 import androidx.compose.material.icons.rounded.LinkOff
+import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
+import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
 
 @Composable
 private fun OverflowMenu(
@@ -93,6 +95,63 @@ private fun DefaultDropdownMenuItem(
 }
 
 @Composable
+private fun DefaultDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    image: ImageVector,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    StatefulRemoteButton(
+        touchDown = touchDown,
+        touchUp = touchUp
+    ) {
+        DropdownMenuItem(
+            text = {
+                TextNormal(title)
+            },
+            onClick = {},
+            modifier = modifier,
+            leadingIcon = {
+                Icon(
+                    imageVector = image,
+                    contentDescription = title
+                )
+            },
+            interactionSource = it
+        )
+    }
+}
+
+@Composable
+fun PowerDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        touchDown = touchDown,
+        touchUp = touchUp,
+        image = Icons.Rounded.PowerSettingsNew,
+        title = stringResource(id = R.string.power),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun DisconnectDropdownMenuItem(
+    disconnect: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        onClick = disconnect,
+        image = Icons.Rounded.LinkOff,
+        title = stringResource(id = R.string.disconnect),
+        modifier = modifier
+    )
+}
+
+@Composable
 fun HelpDropdownMenuItem(
     showHelp: () -> Unit,
     modifier: Modifier = Modifier
@@ -114,19 +173,6 @@ fun SettingsDropdownMenuItem(
         onClick = showSettingsScreen,
         image = Icons.Rounded.Settings,
         title = stringResource(id = R.string.settings),
-        modifier = modifier
-    )
-}
-
-@Composable
-fun DisconnectDropdownMenuItem(
-    disconnect: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    DefaultDropdownMenuItem(
-        onClick = disconnect,
-        image = Icons.Rounded.LinkOff,
-        title = stringResource(id = R.string.disconnect),
         modifier = modifier
     )
 }

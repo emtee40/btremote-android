@@ -37,6 +37,7 @@ import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.MOUSE_SPEED_DEFAULT_VALUE
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
 import com.atharok.btremote.domain.entity.MouseInput
+import com.atharok.btremote.domain.entity.RemoteLayout
 import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
 import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
 import com.atharok.btremote.ui.components.AppScaffold
@@ -48,6 +49,7 @@ import com.atharok.btremote.ui.components.KeyboardOverflowMenu
 import com.atharok.btremote.ui.components.LoadingDialog
 import com.atharok.btremote.ui.components.MoreOverflowMenu
 import com.atharok.btremote.ui.components.MouseAction
+import com.atharok.btremote.ui.components.PowerDropdownMenuItem
 import com.atharok.btremote.ui.components.SettingsDropdownMenuItem
 import com.atharok.btremote.ui.views.DialPadLayout
 import com.atharok.btremote.ui.views.KeyboardView
@@ -247,10 +249,19 @@ private fun StatelessRemoteScreen(
             }
 
             MoreOverflowMenu { closeDropdownMenu: () -> Unit ->
-                SettingsDropdownMenuItem(
-                    showSettingsScreen = {
+                PowerDropdownMenuItem(
+                    touchDown = {
+                        sendRemoteKeyReport(RemoteLayout.REMOTE_KEY_POWER)
+                    },
+                    touchUp = {
+                        sendRemoteKeyReport(RemoteLayout.REMOTE_KEY_NONE)
                         closeDropdownMenu()
-                        openSettings()
+                    }
+                )
+                DisconnectDropdownMenuItem(
+                    disconnect = {
+                        closeDropdownMenu()
+                        disconnectDevice()
                     }
                 )
                 HelpDropdownMenuItem(
@@ -259,10 +270,10 @@ private fun StatelessRemoteScreen(
                         onShowHelpBottomSheetChanged(!showHelpBottomSheet)
                     }
                 )
-                DisconnectDropdownMenuItem(
-                    disconnect = {
+                SettingsDropdownMenuItem(
+                    showSettingsScreen = {
                         closeDropdownMenu()
-                        disconnectDevice()
+                        openSettings()
                     }
                 )
             }

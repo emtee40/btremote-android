@@ -115,6 +115,7 @@
     <string name="standby">Veille</string>
     <string name="next_channel">Chaîne suivante</string>
     <string name="previous_channel">Chaîne précédente</string>
+    <string name="power">Power</string>
 
     <!-- Mouse -->
     <string name="mouse">Souris</string>
