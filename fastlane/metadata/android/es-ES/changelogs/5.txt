@@ -1,0 +1,6 @@
+1.2.2
+
+- Se agregó traducción al español (gracias a cr1st).
+- Traducción al alemán actualizada (gracias a Dirk).
+- Traducción al filipino actualizada (gracias a Kita Ikuyo).
+- Se corrigió un error que impedía la configuración inicial del protocolo HID en algunos dispositivos.

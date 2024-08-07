@@ -1,0 +1,12 @@
+1.2.0
+
+- As seguintes traduções foram adicionadas:
+	- Alemão (Atalanttore E Dirk).
+	- Filipino (Kita Ikuyo).
+	- Português (Brasil) (lucasmz). (oi ^^)
+- Tradução Polonês atualizada (Eryk Michalak e Kacperocik).
+- Layouts de teclado em Português e 	Brasileiro adicionados.
+- Modificação do estilo dos textos para melhorar leitura.
+- Permissão de GPS não é mais obrigatória para dispositivos no Android 11 ou mais velho.
+- Melhorias no código.
+- Dependências atualizadas.
