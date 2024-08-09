@@ -42,7 +42,7 @@
     <string name="theme_light">浅色</string>
     <string name="theme_dark">深色</string>
     <string name="theme_black">深色主题使用纯黑</string>
-    <string name="theme_black_oled_info">OLED屏幕能耗更低</string>
+    <string name="theme_black_oled_info">OLED 屏幕能耗更低</string>
     <string name="dynamic_colors">动态色彩</string>
     <string name="mouse_pointer_speed">指针速度</string>
     <string name="keyboard_and_input_field">键盘和输入框</string>
@@ -54,15 +54,15 @@
     <string name="source_code">源代码</string>
     <string name="keyboard">键盘</string>
     <string name="keyboard_language">键盘语言</string>
-    <string name="keyboard_us">English (United States)</string>
-    <string name="keyboard_uk">English (United Kingdom)</string>
-    <string name="keyboard_es">Spanish</string>
-    <string name="keyboard_fr">French</string>
-    <string name="keyboard_de">German</string>
-    <string name="keyboard_ru">Russian</string>
-    <string name="keyboard_cs">Czech</string>
+    <string name="keyboard_us">英语（美国）</string>
+    <string name="keyboard_uk">英语（英国）</string>
+    <string name="keyboard_es">西班牙语</string>
+    <string name="keyboard_fr">法语</string>
+    <string name="keyboard_de">德语</string>
+    <string name="keyboard_ru">俄语</string>
+    <string name="keyboard_cs">捷克语</string>
     <string name="send">发送</string>
-    <string name="enter">回车</string>
+    <string name="enter">回车（Enter）</string>
     <string name="escape">退出（Escape）</string>
     <string name="delete">删除（Del）</string>
     <string name="pick">选择</string>
@@ -82,7 +82,7 @@
     <string name="back">返回（Back）</string>
     <string name="mouse_pad_tap">点按</string>
     <string name="notification_channel_name">蓝牙HID连接</string>
-    <string name="connected_on">已于%1$s连接</string>
+    <string name="connected_on">已连接于 %1$s</string>
     <string name="help">帮助</string>
     <string name="help_missing_device_title">缺少设备</string>
     <string name="help_device_failed_connection_title">连接失败</string>
@@ -123,4 +123,12 @@
     <string name="volume_decrease">音量减</string>
     <string name="mouse_wheel_down">向下滑动</string>
     <string name="help_missing_device_message">如果远程设备未出现在配对设备列表中，则需要点下顶部栏中的图标来配对。</string>
+    <string name="unpair">取消配对</string>
+    <string name="unpair_device_warning_message">此设备将与您的设备完全解除配对，是否确定要继续？</string>
+    <string name="keyboard_pt">葡萄牙语</string>
+    <string name="keyboard_br">葡萄牙语（巴西）</string>
+    <string name="retry">重试</string>
+    <string name="unpair_device">取消设备配对</string>
+    <string name="keyboard_pl">波兰语</string>
+    <string name="power">电源</string>
 </resources>
