@@ -1,0 +1,12 @@
+1.1.0
+
+- Dinagdag ang mga sumusunod na pagsasalin:
+	- Czech (salamat kay tenJirka).
+	- Russian (salamat kay Yurt Page).
+	- Simplified Chinese (salamat kay yzqzss).
+	- Polish (salamat kay Eryk Michalak).
+- Dinagdag ang Czech, Russian, at Polish na mga keyboard layout.
+- Ginawang mas mahusay ang stability ng application.
+- Inayos ang mga error sa initialization.
+- Gumagana na ang koneksyon at mga command sa Linux.
+- In-update ang mga dependency.
