@@ -123,4 +123,12 @@
     <string name="volume_decrease">音量减</string>
     <string name="mouse_wheel_down">向下滑动</string>
     <string name="help_missing_device_message">如果远程设备未出现在配对设备列表中，则需要点下顶部栏中的图标来配对。</string>
+    <string name="unpair">解除配对</string>
+    <string name="unpair_device_warning_message">此设备将与您的设备完全断开配对。你真的想继续吗？</string>
+    <string name="keyboard_pl">Polish</string>
+    <string name="keyboard_pt">Portuguese</string>
+    <string name="keyboard_br">Brazilian</string>
+    <string name="power">电源</string>
+    <string name="retry">重试</string>
+    <string name="unpair_device">解除配对设备</string>
 </resources>
