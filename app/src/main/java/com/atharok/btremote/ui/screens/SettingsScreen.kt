@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,9 +16,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.rounded.Keyboard
+import androidx.compose.material.icons.rounded.Mouse
+import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
@@ -27,6 +35,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.dimensionResource
@@ -77,6 +87,8 @@ fun SettingsScreen(
 
             TitleItem(
                 text = stringResource(id = R.string.appearance),
+                icon = Icons.Rounded.Palette,
+                iconDescription = stringResource(id = R.string.appearance),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -131,6 +143,8 @@ fun SettingsScreen(
 
             TitleItem(
                 text = stringResource(id = R.string.mouse),
+                icon = Icons.Rounded.Mouse,
+                iconDescription = stringResource(id = R.string.mouse),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -171,6 +185,8 @@ fun SettingsScreen(
 
             TitleItem(
                 text = stringResource(id = R.string.keyboard_and_input_field),
+                icon = Icons.Rounded.Keyboard,
+                iconDescription = stringResource(id = R.string.keyboard),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -223,6 +239,8 @@ fun SettingsScreen(
 
             TitleItem(
                 text = stringResource(id = R.string.about),
+                icon = Icons.Outlined.Info,
+                iconDescription = stringResource(id = R.string.about),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -532,12 +550,25 @@ private fun SettingsSwitchItem(
 @Composable
 private fun TitleItem(
     text: String,
+    icon: ImageVector,
+    iconDescription: String,
     modifier: Modifier = Modifier
 ) {
-    TextMedium(
-        text = text,
-        modifier = modifier
-    )
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            imageVector = icon,
+            contentDescription = iconDescription,
+            modifier = Modifier.size(dimensionResource(id = R.dimen.medium_icon_size)),
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
+        )
+        TextMedium(
+            text = text,
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
+        )
+    }
 }
 
 @Composable

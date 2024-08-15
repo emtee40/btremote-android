@@ -52,7 +52,7 @@ fun TemplateModalBottomSheet(
                 Image(
                     imageVector = icon,
                     contentDescription = iconDescription,
-                    modifier = Modifier.size(dimensionResource(id = R.dimen.help_icon_size)),
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.large_icon_size)),
                     colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
                 )
                 TextLarge(
