@@ -122,4 +122,5 @@
     <string name="unpair_device_warning_message">Ang device na ito ay maa-unpair sa device na ito. Gusto mo ba talagang magpatuloy?</string>
     <string name="keyboard_pt">Portuguese</string>
     <string name="keyboard_br">Brazilian</string>
+    <string name="power">Power</string>
 </resources>
