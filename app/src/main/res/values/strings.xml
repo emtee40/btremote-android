@@ -80,6 +80,7 @@
     <string name="keyboard">Keyboard</string>
     <string name="keyboard_language">Keyboard language</string>
     <string name="keyboard_language_info">Ensure that the selected keyboard language matches the one configured on the remote device.</string>
+    <string name="advanced_keyboard">Advanced keyboard</string>
     <string name="keyboard_us">English (United States)</string>
     <string name="keyboard_uk">English (United Kingdom)</string>
     <string name="keyboard_es">Spanish</string>
@@ -92,8 +93,13 @@
     <string name="keyboard_br">Brazilian</string>
     <string name="send">Send</string>
     <string name="enter">Enter</string>
-    <string name="escape">Escape</string>
+    <string name="escape">Esc</string>
     <string name="delete">Delete</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
 
     <!-- Remote button description -->
     <string name="pick">Pick</string>

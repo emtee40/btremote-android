@@ -12,16 +12,26 @@ import com.atharok.btremote.data.dataStore.SettingsDataStore
 import com.atharok.btremote.data.repositories.BluetoothHidProfileRepositoryImpl
 import com.atharok.btremote.data.repositories.BluetoothRepositoryImpl
 import com.atharok.btremote.data.repositories.SettingsRepositoryImpl
-import com.atharok.btremote.domain.entity.keyboard.layout.BRKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.CSKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.PLKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.PTKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.RUKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.UKKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.USKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.BRAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.CSAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.DEAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.ESAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.FRAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PLAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PTAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.RUAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.UKAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.USAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.BRVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.CSVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.DEVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.ESVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.FRVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PLVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PTVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.RUVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.UKVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.USVirtualKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import com.atharok.btremote.domain.repositories.BluetoothRepository
 import com.atharok.btremote.domain.repositories.SettingsRepository
@@ -56,16 +66,27 @@ private val androidModule: Module = module {
         )
     }
 
-    single { USKeyboardLayout() }
-    single { UKKeyboardLayout() }
-    single { ESKeyboardLayout() }
-    single { FRKeyboardLayout() }
-    single { DEKeyboardLayout() }
-    single { RUKeyboardLayout() }
-    single { CSKeyboardLayout() }
-    single { PLKeyboardLayout() }
-    single { PTKeyboardLayout() }
-    single { BRKeyboardLayout() }
+    single { USVirtualKeyboardLayout() }
+    single { UKVirtualKeyboardLayout() }
+    single { ESVirtualKeyboardLayout() }
+    single { FRVirtualKeyboardLayout() }
+    single { DEVirtualKeyboardLayout() }
+    single { RUVirtualKeyboardLayout() }
+    single { CSVirtualKeyboardLayout() }
+    single { PLVirtualKeyboardLayout() }
+    single { PTVirtualKeyboardLayout() }
+    single { BRVirtualKeyboardLayout() }
+
+    single { USAdvancedKeyboardLayout(context = androidContext()) }
+    single { UKAdvancedKeyboardLayout(context = androidContext()) }
+    single { ESAdvancedKeyboardLayout(context = androidContext()) }
+    single { FRAdvancedKeyboardLayout(context = androidContext()) }
+    single { DEAdvancedKeyboardLayout(context = androidContext()) }
+    single { RUAdvancedKeyboardLayout(context = androidContext()) }
+    single { CSAdvancedKeyboardLayout(context = androidContext()) }
+    single { PLAdvancedKeyboardLayout(context = androidContext()) }
+    single { PTAdvancedKeyboardLayout(context = androidContext()) }
+    single { BRAdvancedKeyboardLayout(context = androidContext()) }
 }
 
 private val viewModelModule: Module = module {

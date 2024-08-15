@@ -1,4 +1,4 @@
-package com.atharok.btremote.domain.entity.keyboard
+package com.atharok.btremote.domain.entity.remoteInput.keyboard
 
 enum class KeyboardKey(val byte: Byte) {
     ROW_1_KEY_00(0x35), // `
@@ -52,4 +52,37 @@ enum class KeyboardKey(val byte: Byte) {
     ROW_4_KEY_08(0x36), // ,
     ROW_4_KEY_09(0x37), // .
     ROW_4_KEY_10(0x38), // /
+
+    KEY_F1(0x3A),
+    KEY_F2(0x3B),
+    KEY_F3(0x3C),
+    KEY_F4(0x3D),
+    KEY_F5(0x3E),
+    KEY_F6(0x3F),
+    KEY_F7(0x40),
+    KEY_F8(0x41),
+    KEY_F9(0x42),
+    KEY_F10(0x43),
+    KEY_F11(0x44),
+    KEY_F12(0x45),
+    KEY_PRINT_SCREEN(0x46),
+    KEY_ENTER(0x28),
+    KEY_ESCAPE(0x29),
+    KEY_DELETE(0x2A),
+    KEY_TAB(0x2B),
+    KEY_SPACE_BAR(0x2C),
+    KEY_RIGHT_ARROW(0x4F),
+    KEY_LEFT_ARROW(0x50),
+    KEY_DOWN_ARROW(0x51),
+    KEY_UP_ARROW(0x52),
+
+    // Modifier keys
+    KEY_SHIFT_LEFT(0x02),
+    KEY_SHIFT_RIGHT(0x20),
+    KEY_META_LEFT(0x08),
+    KEY_META_RIGHT(0x80.toByte()),
+    KEY_CTRL_LEFT(0x01),
+    KEY_CTRL_RIGHT(0x10),
+    KEY_ALT(0x04),
+    KEY_ALT_GR(0x40)
 }

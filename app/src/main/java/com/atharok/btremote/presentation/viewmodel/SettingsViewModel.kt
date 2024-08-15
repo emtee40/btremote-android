@@ -3,81 +3,52 @@ package com.atharok.btremote.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.atharok.btremote.domain.entity.ThemeEntity
-import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
-import com.atharok.btremote.domain.entity.keyboard.layout.BRKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.CSKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.DEKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.ESKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.FRKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.PLKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.PTKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.RUKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.UKKeyboardLayout
-import com.atharok.btremote.domain.entity.keyboard.layout.USKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.KeyboardLanguage
 import com.atharok.btremote.domain.usecases.SettingsUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import org.koin.mp.KoinPlatform.getKoin
 
 class SettingsViewModel(
     private val useCase: SettingsUseCase
 ): ViewModel() {
 
-    val theme: Flow<ThemeEntity> = useCase.getTheme()
-
+    val theme: Flow<ThemeEntity> get() = useCase.getTheme()
     fun changeTheme(newTheme: ThemeEntity) = viewModelScope.launch {
         useCase.saveTheme(newTheme)
     }
 
-    val useDynamicColors: Flow<Boolean> = useCase.useDynamicColors()
-
+    val useDynamicColors: Flow<Boolean> get() = useCase.useDynamicColors()
     fun setUseDynamicColors(useDynamicColors: Boolean) = viewModelScope.launch {
         useCase.saveUseDynamicColors(useDynamicColors)
     }
 
-    val useBlackColorForDarkTheme: Flow<Boolean> = useCase.useBlackColorForDarkTheme()
-
+    val useBlackColorForDarkTheme: Flow<Boolean> get() = useCase.useBlackColorForDarkTheme()
     fun setUseBlackColorForDarkTheme(useBlackColorForDarkTheme: Boolean) = viewModelScope.launch {
         useCase.saveUseBlackColorForDarkTheme(useBlackColorForDarkTheme)
     }
 
+    val mouseSpeed: Flow<Float> get() = useCase.getMouseSpeed()
     fun saveMouseSpeed(mouseSpeed: Float) = viewModelScope.launch {
         useCase.saveMouseSpeed(mouseSpeed)
     }
 
-    fun getMouseSpeed(): Flow<Float> = useCase.getMouseSpeed()
-
+    val shouldInvertMouseScrollingDirection: Flow<Boolean> get() = useCase.shouldInvertMouseScrollingDirection()
     fun saveInvertMouseScrollingDirection(invertScrollingDirection: Boolean) = viewModelScope.launch {
         useCase.saveInvertMouseScrollingDirection(invertScrollingDirection)
     }
 
-    fun shouldInvertMouseScrollingDirection(): Flow<Boolean> = useCase.shouldInvertMouseScrollingDirection()
-
+    val keyboardLanguage: Flow<KeyboardLanguage> get() = useCase.getKeyboardLanguage()
     fun changeKeyboardLanguage(language: KeyboardLanguage) = viewModelScope.launch {
         useCase.saveKeyboardLanguage(language)
     }
 
-    val keyboardLanguage: Flow<KeyboardLanguage> = useCase.getKeyboardLanguage()
-
-    fun getKeyboardLayout(language: KeyboardLanguage): KeyboardLayout {
-        return when(language) {
-            KeyboardLanguage.ENGLISH_US -> getKoin().get<USKeyboardLayout>()
-            KeyboardLanguage.ENGLISH_UK -> getKoin().get<UKKeyboardLayout>()
-            KeyboardLanguage.SPANISH -> getKoin().get<ESKeyboardLayout>()
-            KeyboardLanguage.FRENCH -> getKoin().get<FRKeyboardLayout>()
-            KeyboardLanguage.GERMAN -> getKoin().get<DEKeyboardLayout>()
-            KeyboardLanguage.RUSSIAN -> getKoin().get<RUKeyboardLayout>()
-            KeyboardLanguage.CZECH -> getKoin().get<CSKeyboardLayout>()
-            KeyboardLanguage.POLISH -> getKoin().get<PLKeyboardLayout>()
-            KeyboardLanguage.PORTUGUESE -> getKoin().get<PTKeyboardLayout>()
-            KeyboardLanguage.BRAZILIAN -> getKoin().get<BRKeyboardLayout>()
-        }
-    }
-
+    val mustClearInputField: Flow<Boolean> get() = useCase.mustClearInputField()
     fun saveMustClearInputField(mustClearInputField: Boolean) = viewModelScope.launch {
         useCase.saveMustClearInputField(mustClearInputField)
     }
 
-    fun mustClearInputField(): Flow<Boolean> = useCase.mustClearInputField()
+    val useAdvancedKeyboard: Flow<Boolean> get() = useCase.useAdvancedKeyboard()
+    fun saveUseAdvancedKeyboard(useAdvancedKeyboard: Boolean) = viewModelScope.launch {
+        useCase.saveUseAdvancedKeyboard(useAdvancedKeyboard)
+    }
 }

@@ -26,7 +26,8 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
-import com.atharok.btremote.domain.entity.RemoteLayout
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
+import com.atharok.btremote.domain.entity.remoteInput.RemoteInput
 import com.atharok.btremote.ui.components.CircleElevatedCard
 
 @Composable
@@ -39,7 +40,7 @@ private fun RemoteButton(
     StatefulRemoteButton(
         touchDown = { sendReport(bytes) },
         touchUp = {
-            sendReport(RemoteLayout.REMOTE_KEY_NONE)
+            sendReport(REMOTE_INPUT_NONE)
         }
     ) {
         Box(
@@ -89,7 +90,7 @@ fun BackRemoteButton(
     modifier: Modifier = Modifier
 ) {
     SingleRemoteButton(
-        bytes = RemoteLayout.REMOTE_KEY_BACK,
+        bytes = RemoteInput.REMOTE_INPUT_BACK,
         sendReport = sendReport,
         image = Icons.AutoMirrored.Rounded.ArrowBack,
         contentDescription = stringResource(id = R.string.back),
@@ -103,7 +104,7 @@ fun HomeRemoteButton(
     modifier: Modifier = Modifier
 ) {
     SingleRemoteButton(
-        bytes = RemoteLayout.REMOTE_KEY_HOME,
+        bytes = RemoteInput.REMOTE_INPUT_HOME,
         sendReport = sendReport,
         image = Icons.Rounded.Home,
         contentDescription = stringResource(id = R.string.home),
@@ -131,7 +132,7 @@ fun MuteRemoteButton(
     modifier: Modifier = Modifier
 ) {
     SingleRemoteButton(
-        bytes = RemoteLayout.REMOTE_KEY_VOLUME_MUTE,
+        bytes = RemoteInput.REMOTE_INPUT_VOLUME_MUTE,
         sendReport = sendReport,
         image = Icons.AutoMirrored.Rounded.VolumeMute,
         contentDescription = stringResource(id = R.string.mute),
@@ -207,7 +208,7 @@ fun VolumeVerticalRemoteButtons(
     VerticalRemoteButtons(
         contentUp = {
             RemoteButton(
-                bytes = RemoteLayout.REMOTE_KEY_VOLUME_INC,
+                bytes = RemoteInput.REMOTE_INPUT_VOLUME_INC,
                 sendReport = sendReport,
                 image = Icons.AutoMirrored.Rounded.VolumeUp,
                 contentDescription = stringResource(id = R.string.volume_increase)
@@ -215,7 +216,7 @@ fun VolumeVerticalRemoteButtons(
         },
         contentDown = {
             RemoteButton(
-                bytes = RemoteLayout.REMOTE_KEY_VOLUME_DEC,
+                bytes = RemoteInput.REMOTE_INPUT_VOLUME_DEC,
                 sendReport = sendReport,
                 image = Icons.AutoMirrored.Rounded.VolumeDown,
                 contentDescription = stringResource(id = R.string.volume_decrease)
@@ -259,7 +260,7 @@ fun ChannelVerticalRemoteButtons(
     VerticalRemoteButtons(
         contentUp = {
             RemoteButton(
-                bytes = RemoteLayout.REMOTE_KEY_CHANNEL_INC,
+                bytes = RemoteInput.REMOTE_INPUT_CHANNEL_INC,
                 sendReport = sendReport,
                 image = Icons.Rounded.Add,
                 contentDescription = stringResource(id = R.string.next_channel)
@@ -267,7 +268,7 @@ fun ChannelVerticalRemoteButtons(
         },
         contentDown = {
             RemoteButton(
-                bytes = RemoteLayout.REMOTE_KEY_CHANNEL_DEC,
+                bytes = RemoteInput.REMOTE_INPUT_CHANNEL_DEC,
                 sendReport = sendReport,
                 image = Icons.Rounded.Remove,
                 contentDescription = stringResource(id = R.string.previous_channel)

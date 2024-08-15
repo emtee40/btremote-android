@@ -20,7 +20,8 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
-import com.atharok.btremote.domain.entity.RemoteLayout
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
+import com.atharok.btremote.domain.entity.remoteInput.RemoteInput
 import com.atharok.btremote.ui.components.CircleElevatedCard
 
 @Composable
@@ -37,19 +38,19 @@ fun MultimediaButtons(
             verticalAlignment = Alignment.CenterVertically
         ) {
             MultimediaButton(
-                bytes = RemoteLayout.REMOTE_KEY_PREVIOUS,
+                bytes = RemoteInput.REMOTE_INPUT_PREVIOUS,
                 sendReport = sendRemoteKey,
                 image = Icons.Rounded.SkipPrevious,
                 contentDescription = stringResource(id = R.string.previous),
                 modifier = Modifier.weight(1f)
             )
             PlayPauseButton(
-                bytes = RemoteLayout.REMOTE_KEY_PLAY_PAUSE,
+                bytes = RemoteInput.REMOTE_INPUT_PLAY_PAUSE,
                 sendReport = sendRemoteKey,
                 modifier = Modifier.weight(1f)
             )
             MultimediaButton(
-                bytes = RemoteLayout.REMOTE_KEY_NEXT,
+                bytes = RemoteInput.REMOTE_INPUT_NEXT,
                 sendReport = sendRemoteKey,
                 image = Icons.Rounded.SkipNext,
                 contentDescription = stringResource(id = R.string.next),
@@ -70,7 +71,7 @@ private fun MultimediaButton(
     Box(modifier = modifier) {
         StatefulRemoteButton(
             touchDown = { sendReport(bytes) },
-            touchUp = { sendReport(RemoteLayout.REMOTE_KEY_NONE) }
+            touchUp = { sendReport(REMOTE_INPUT_NONE) }
         ) {
             Box(
                 modifier = Modifier
@@ -102,7 +103,7 @@ private fun PlayPauseButton(
     Box(modifier = modifier) {
         StatefulRemoteButton(
             touchDown = { sendReport(bytes) },
-            touchUp = { sendReport(RemoteLayout.REMOTE_KEY_NONE) }
+            touchUp = { sendReport(REMOTE_INPUT_NONE) }
         ) {
             Box(
                 modifier = Modifier

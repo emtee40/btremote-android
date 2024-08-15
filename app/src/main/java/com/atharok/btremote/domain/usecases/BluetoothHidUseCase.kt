@@ -1,7 +1,7 @@
 package com.atharok.btremote.domain.usecases
 
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import kotlinx.coroutines.flow.StateFlow
 
@@ -33,7 +33,7 @@ class BluetoothHidUseCase(private val repository: BluetoothHidProfileRepository)
         return repository.sendReport(id, bytes)
     }
 
-    fun sendTextReport(text: String, keyboardLayout: KeyboardLayout): Boolean {
-        return repository.sendTextReport(text, keyboardLayout)
+    fun sendTextReport(text: String, virtualKeyboardLayout: VirtualKeyboardLayout): Boolean {
+        return repository.sendTextReport(text, virtualKeyboardLayout)
     }
 }

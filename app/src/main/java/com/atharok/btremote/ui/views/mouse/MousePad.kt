@@ -10,14 +10,14 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.changedToDown
 import androidx.compose.ui.input.pointer.changedToUp
 import androidx.compose.ui.input.pointer.pointerInput
-import com.atharok.btremote.domain.entity.MouseInput
+import com.atharok.btremote.domain.entity.remoteInput.MouseAction
 import com.atharok.btremote.ui.components.DefaultElevatedCard
 import kotlin.jvm.internal.Ref.FloatRef
 
 @Composable
 fun MousePad(
     mouseSpeed: FloatRef,
-    updateMouseInput: (input: MouseInput) -> Unit,
+    updateMouseInput: (input: MouseAction) -> Unit,
     updateTouchPosition: (Float, Float) -> Unit,
     updateWheel: (Float) -> Unit,
     shape: Shape,
@@ -85,7 +85,7 @@ private fun moveMouse(
 private var tapTimestamp: Long = 0L
 private fun doTap(
     inputChange: PointerInputChange,
-    updateMouseInput: (input: MouseInput) -> Unit
+    updateMouseInput: (input: MouseAction) -> Unit
 ) {
     val currentTime = System.currentTimeMillis()
 
@@ -95,7 +95,7 @@ private fun doTap(
             val position = inputChange.position
             val previousPosition= inputChange.previousPosition
             if(currentTime - tapTimestamp < 200 && position.x == previousPosition.x && position.y == previousPosition.y) {
-                updateMouseInput(MouseInput.PAD_TAP)
+                updateMouseInput(MouseAction.PAD_TAP)
             }
             tapTimestamp = 0L
         }
@@ -104,7 +104,7 @@ private fun doTap(
 
 private fun doWheel(
     inputChanges: List<PointerInputChange>,
-    updateMouseInput: (input: MouseInput) -> Unit,
+    updateMouseInput: (input: MouseAction) -> Unit,
     updateWheel: (Float) -> Unit
 ) {
     var posY = 0f
@@ -114,12 +114,12 @@ private fun doWheel(
 
     when {
         posY != 0f -> updateWheel(posY / 10f)
-        else -> updateMouseInput(MouseInput.NONE)
+        else -> updateMouseInput(MouseAction.NONE)
     }
 
     for (inputChange in inputChanges) {
         if(inputChange.changedToUp()) {
-            updateMouseInput(MouseInput.NONE)
+            updateMouseInput(MouseAction.NONE)
             break
         }
     }

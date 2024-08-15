@@ -1,28 +1,31 @@
 package com.atharok.btremote.domain.repositories
 
 import com.atharok.btremote.domain.entity.ThemeEntity
-import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.KeyboardLanguage
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
-    suspend fun saveTheme(themeEntity: ThemeEntity)
     fun getTheme(): Flow<ThemeEntity>
+    suspend fun saveTheme(themeEntity: ThemeEntity)
 
-    suspend fun saveUseDynamicColors(useDynamicColors: Boolean)
     fun useDynamicColors(): Flow<Boolean>
+    suspend fun saveUseDynamicColors(useDynamicColors: Boolean)
 
-    suspend fun saveUseBlackColorForDarkTheme(useBlackColorForDarkTheme: Boolean)
     fun useBlackColorForDarkTheme(): Flow<Boolean>
+    suspend fun saveUseBlackColorForDarkTheme(useBlackColorForDarkTheme: Boolean)
 
-    suspend fun saveMouseSpeed(mouseSpeed: Float)
     fun getMouseSpeed(): Flow<Float>
+    suspend fun saveMouseSpeed(mouseSpeed: Float)
 
-    suspend fun saveInvertMouseScrollingDirection(invertScrollingDirection: Boolean)
     fun shouldInvertMouseScrollingDirection(): Flow<Boolean>
+    suspend fun saveInvertMouseScrollingDirection(invertScrollingDirection: Boolean)
 
-    suspend fun saveKeyboardLanguage(language: KeyboardLanguage)
     fun getKeyboardLanguage(): Flow<KeyboardLanguage>
+    suspend fun saveKeyboardLanguage(language: KeyboardLanguage)
 
-    suspend fun saveMustClearInputField(mustClearInputField: Boolean)
     fun mustClearInputField(): Flow<Boolean>
+    suspend fun saveMustClearInputField(mustClearInputField: Boolean)
+
+    fun useAdvancedKeyboard(): Flow<Boolean>
+    suspend fun saveUseAdvancedKeyboard(useAdvancedKeyboard: Boolean)
 }

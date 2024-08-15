@@ -2,7 +2,7 @@ package com.atharok.btremote.data.repositories
 
 import com.atharok.btremote.data.bluetooth.BluetoothHidProfile
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import kotlinx.coroutines.flow.StateFlow
 
@@ -42,7 +42,7 @@ class BluetoothHidProfileRepositoryImpl(private val hidProfile: BluetoothHidProf
         return hidProfile.sendReport(id, bytes)
     }
 
-    override fun sendTextReport(text: String, keyboardLayout: KeyboardLayout): Boolean {
-        return hidProfile.sendTextReport(text, keyboardLayout)
+    override fun sendTextReport(text: String, virtualKeyboardLayout: VirtualKeyboardLayout): Boolean {
+        return hidProfile.sendTextReport(text, virtualKeyboardLayout)
     }
 }

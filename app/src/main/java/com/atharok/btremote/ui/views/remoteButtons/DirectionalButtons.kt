@@ -31,7 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.ArcShape
-import com.atharok.btremote.domain.entity.RemoteLayout
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
+import com.atharok.btremote.domain.entity.remoteInput.RemoteInput
 
 private val TopArcShape = ArcShape(-45f, -90f)
 private val BottomArcShape = ArcShape(45f, 90f)
@@ -60,7 +61,7 @@ fun DirectionalButtons(
                 modifier = Modifier.fillMaxSize(),
                 tonalElevation = dimensionResource(id = R.dimen.elevation)
             ) {
-                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteLayout.REMOTE_KEY_MENU_UP)
+                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_UP)
             }
 
             // ---- Bottom ----
@@ -69,7 +70,7 @@ fun DirectionalButtons(
                 modifier = Modifier.fillMaxSize(),
                 tonalElevation = dimensionResource(id = R.dimen.elevation)
             ) {
-                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteLayout.REMOTE_KEY_MENU_DOWN)
+                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_DOWN)
             }
 
             // ---- Left ----
@@ -78,7 +79,7 @@ fun DirectionalButtons(
                 modifier = Modifier.fillMaxSize(),
                 tonalElevation = dimensionResource(id = R.dimen.elevation)
             ) {
-                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteLayout.REMOTE_KEY_MENU_LEFT)
+                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_LEFT)
             }
 
             // ---- Right ----
@@ -87,7 +88,7 @@ fun DirectionalButtons(
                 modifier = Modifier.fillMaxSize(),
                 tonalElevation = dimensionResource(id = R.dimen.elevation)
             ) {
-                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteLayout.REMOTE_KEY_MENU_RIGHT)
+                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_RIGHT)
             }
 
             // ---- Center ----
@@ -96,7 +97,7 @@ fun DirectionalButtons(
                 modifier = Modifier.fillMaxSize(0.3333f),
                 tonalElevation = dimensionResource(id = R.dimen.elevation)
             ) {
-                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteLayout.REMOTE_KEY_MENU_PICK)
+                DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_PICK)
             }
 
         }
@@ -174,7 +175,7 @@ private fun DirectionalButton(
 ) {
     StatefulRemoteButton(
         touchDown = { sendReport(bytes) },
-        touchUp = { sendReport(RemoteLayout.REMOTE_KEY_NONE) }
+        touchUp = { sendReport(REMOTE_INPUT_NONE) }
     ) {
         Spacer(
             modifier = Modifier

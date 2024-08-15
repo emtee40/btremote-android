@@ -1,4 +1,4 @@
-package com.atharok.btremote.ui.views
+package com.atharok.btremote.ui.views.keyboard
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,28 +32,36 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import com.atharok.btremote.R
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
 import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
 
 @Composable
-fun KeyboardView(
+fun VirtualKeyboardView(
     mustClearInputField: Boolean,
     sendKeyboardKeyReport: (ByteArray) -> Unit,
     sendTextReport: (String) -> Unit,
+    showKeyboardBottomSheet: Boolean,
+    onShowKeyboardBottomSheetChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    StatefulKeyboardView { focusRequester, textState ->
-        StatelessKeyboardView(
-            mustClearInputField = mustClearInputField,
-            focusRequester = focusRequester,
-            text = textState.value,
-            onTextChange = {
-                textState.value = it
-            },
-            sendKeyboardKeyReport = sendKeyboardKeyReport,
-            sendTextReport = sendTextReport,
-            modifier = modifier
-        )
+    KeyboardModalBottomSheet(
+        showKeyboardBottomSheet = showKeyboardBottomSheet,
+        onShowKeyboardBottomSheetChanged = onShowKeyboardBottomSheetChanged,
+        modifier = modifier
+    ) {
+        StatefulKeyboardView { focusRequester, textState ->
+            StatelessKeyboardView(
+                mustClearInputField = mustClearInputField,
+                focusRequester = focusRequester,
+                text = textState.value,
+                onTextChange = {
+                    textState.value = it
+                },
+                sendKeyboardKeyReport = sendKeyboardKeyReport,
+                sendTextReport = sendTextReport
+            )
+        }
     }
 }
 
@@ -81,7 +89,6 @@ private fun StatelessKeyboardView(
     sendTextReport: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     Column(modifier = modifier) {
         Row(
             modifier = Modifier
@@ -93,15 +100,17 @@ private fun StatelessKeyboardView(
             TextField(
                 value = text,
                 onValueChange = onTextChange,
-                modifier = Modifier.weight(1f).focusRequester(focusRequester),
+                modifier = Modifier
+                    .weight(1f)
+                    .focusRequester(focusRequester),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
                         sendTextReport(text)
-                        sendKeyboardKeyReport(KeyboardLayout.KEYBOARD_KEY_ENTER)
-                        sendKeyboardKeyReport(KeyboardLayout.KEYBOARD_KEY_NONE)
+                        sendKeyboardKeyReport(VirtualKeyboardLayout.KEYBOARD_KEY_ENTER)
+                        sendKeyboardKeyReport(REMOTE_INPUT_NONE)
                         if(mustClearInputField) {
                             onTextChange("")
                         }
@@ -134,8 +143,9 @@ private fun StatelessKeyboardView(
     }
 }
 
+
 @Composable
-fun AdditionalKeyboardKeys(
+private fun AdditionalKeyboardKeys(
     sendKeyboardKeyReport: (ByteArray) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -143,28 +153,28 @@ fun AdditionalKeyboardKeys(
         KeyboardKey(
             image = Icons.AutoMirrored.Rounded.Backspace,
             contentDescription = stringResource(id = R.string.delete),
-            key = KeyboardLayout.KEYBOARD_KEY_DELETE,
+            key = VirtualKeyboardLayout.KEYBOARD_KEY_DELETE,
             sendKeyboardKey = sendKeyboardKeyReport
         )
 
         KeyboardKey(
             image = Icons.AutoMirrored.Rounded.KeyboardReturn,
             contentDescription = stringResource(id = R.string.enter),
-            key = KeyboardLayout.KEYBOARD_KEY_ENTER,
+            key = VirtualKeyboardLayout.KEYBOARD_KEY_ENTER,
             sendKeyboardKey = sendKeyboardKeyReport
         )
 
         KeyboardKey(
             image = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
             contentDescription = stringResource(id = R.string.left),
-            key = KeyboardLayout.KEYBOARD_KEY_LEFT,
+            key = VirtualKeyboardLayout.KEYBOARD_KEY_LEFT,
             sendKeyboardKey = sendKeyboardKeyReport
         )
 
         KeyboardKey(
             image = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
             contentDescription = stringResource(id = R.string.right),
-            key = KeyboardLayout.KEYBOARD_KEY_RIGHT,
+            key = VirtualKeyboardLayout.KEYBOARD_KEY_RIGHT,
             sendKeyboardKey = sendKeyboardKeyReport
         )
     }
@@ -179,7 +189,7 @@ private fun KeyboardKey(
 ) {
     StatefulRemoteButton(
         touchDown = { sendKeyboardKey(key) },
-        touchUp = { sendKeyboardKey(KeyboardLayout.KEYBOARD_KEY_NONE) }
+        touchUp = { sendKeyboardKey(REMOTE_INPUT_NONE) }
     ) {
         IconButton(
             onClick = {},

@@ -6,18 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.toSize
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
+import com.atharok.btremote.ui.components.AdaptiveText
 import com.atharok.btremote.ui.components.CircleElevatedCard
-import com.atharok.btremote.ui.components.TextRemoteNumber
 
 @Composable
 fun DialPadButton(
@@ -32,11 +27,8 @@ fun DialPadButton(
     ) {
         StatefulRemoteButton(
             touchDown = { sendRemoteKey(byteArray) },
-            touchUp = { sendRemoteKey(byteArrayOf(0x00.toByte(), 0x00.toByte())) }
+            touchUp = { sendRemoteKey(REMOTE_INPUT_NONE) }
         ) {
-
-            var boxSize by remember { mutableStateOf(Size.Zero) }
-
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -44,13 +36,15 @@ fun DialPadButton(
                         interactionSource = it,
                         indication = LocalIndication.current,
                         onClick = {}
-                    )
-                    .onGloballyPositioned { layoutCoordinates -> boxSize = layoutCoordinates.size.toSize() },
+                    ),
                 contentAlignment = Alignment.Center
             ) {
-                TextRemoteNumber(
+                AdaptiveText(
                     text = text,
-                    fontSize = with(LocalDensity.current) { (0.45f * boxSize.height).toSp() }
+                    percent = 0.45f,
+                    modifier = Modifier.fillMaxSize(),
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
                 )
             }
         }

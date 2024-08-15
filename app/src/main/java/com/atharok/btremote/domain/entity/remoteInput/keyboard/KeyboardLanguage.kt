@@ -1,4 +1,4 @@
-package com.atharok.btremote.domain.entity.keyboard
+package com.atharok.btremote.domain.entity.remoteInput.keyboard
 
 import androidx.annotation.StringRes
 import com.atharok.btremote.R

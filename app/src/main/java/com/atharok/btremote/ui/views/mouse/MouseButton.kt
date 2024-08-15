@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.atharok.btremote.domain.entity.MouseInput
+import com.atharok.btremote.domain.entity.remoteInput.MouseAction
 import com.atharok.btremote.ui.components.DefaultElevatedCard
 import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
 
@@ -47,7 +47,7 @@ fun MouseButton(
 @Composable
 fun ScrollMouseButton(
     direction: Float,
-    sendMouseInput: (MouseInput, Float, Float, Float) -> Unit,
+    sendMouseInput: (MouseAction, Float, Float, Float) -> Unit,
     image: ImageVector,
     contentDescription: String,
     shape: Shape,
@@ -58,8 +58,8 @@ fun ScrollMouseButton(
         shape = shape
     ) {
         StatefulRemoteButton(
-            touchDown = { sendMouseInput(MouseInput.MOUSE_WHEEL, 0f, 0f, direction) },
-            touchUp = { sendMouseInput(MouseInput.NONE, 0f, 0f, 0f) }
+            touchDown = { sendMouseInput(MouseAction.MOUSE_WHEEL, 0f, 0f, direction) },
+            touchUp = { sendMouseInput(MouseAction.NONE, 0f, 0f, 0f) }
         ) {
             Box(
                 modifier = Modifier

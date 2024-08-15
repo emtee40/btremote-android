@@ -38,7 +38,7 @@ import com.atharok.btremote.common.utils.SOURCE_CODE_LINK
 import com.atharok.btremote.common.utils.WEB_SITE_LINK
 import com.atharok.btremote.common.utils.isDynamicColorsAvailable
 import com.atharok.btremote.domain.entity.ThemeEntity
-import com.atharok.btremote.domain.entity.keyboard.KeyboardLanguage
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.KeyboardLanguage
 import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.ListDialog
@@ -140,7 +140,7 @@ fun SettingsScreen(
             )
 
             MouseSpeedItem(
-                mouseSpeedFlow = settingsViewModel.getMouseSpeed(),
+                mouseSpeedFlow = settingsViewModel.mouseSpeed,
                 onMouseSpeedChange = { settingsViewModel.saveMouseSpeed(it) },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -151,7 +151,7 @@ fun SettingsScreen(
             )
 
             InvertMouseScrollingDirectionSwitchItem(
-                shouldInvertMouseScrollingDirectionFlow = settingsViewModel.shouldInvertMouseScrollingDirection(),
+                shouldInvertMouseScrollingDirectionFlow = settingsViewModel.shouldInvertMouseScrollingDirection,
                 onShouldInvertMouseScrollingDirectionChange = { settingsViewModel.saveInvertMouseScrollingDirection(it) },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -192,8 +192,19 @@ fun SettingsScreen(
             )
 
             MustClearedInputFieldSwitchItem(
-                mustClearInputFieldFlow = settingsViewModel.mustClearInputField(),
+                mustClearInputFieldFlow = settingsViewModel.mustClearInputField,
                 onMustClearInputFieldChange = { settingsViewModel.saveMustClearInputField(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = horizontalPadding,
+                        vertical = verticalPadding
+                    )
+            )
+
+            AdvancedKeyboardSwitchItem(
+                useAdvancedKeyboardFlow = settingsViewModel.useAdvancedKeyboard,
+                onUseAdvancedKeyboardChange = { settingsViewModel.saveUseAdvancedKeyboard(it) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -425,6 +436,24 @@ private fun MustClearedInputFieldSwitchItem(
         secondaryText = null,
         checked = mustClearInputField,
         onCheckedChange = onMustClearInputFieldChange,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun AdvancedKeyboardSwitchItem(
+    useAdvancedKeyboardFlow: Flow<Boolean>,
+    onUseAdvancedKeyboardChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val useAdvancedKeyboard: Boolean by useAdvancedKeyboardFlow
+        .collectAsStateWithLifecycle(initialValue = true)
+
+    SettingsSwitchItem(
+        primaryText = stringResource(id = R.string.advanced_keyboard),
+        secondaryText = null,
+        checked = useAdvancedKeyboard,
+        onCheckedChange = onUseAdvancedKeyboardChange,
         modifier = modifier
     )
 }

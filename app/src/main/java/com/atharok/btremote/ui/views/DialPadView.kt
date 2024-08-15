@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.atharok.btremote.R
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.ChannelInput
 import com.atharok.btremote.ui.views.remoteButtons.ChannelVerticalRemoteButtons
 import com.atharok.btremote.ui.views.remoteButtons.DialPadButton
 
@@ -17,7 +17,6 @@ import com.atharok.btremote.ui.views.remoteButtons.DialPadButton
 fun DialPadLayout(
     sendRemoteKeyReport: (bytes: ByteArray) -> Unit,
     sendNumberKeyReport: (bytes: ByteArray) -> Unit,
-    keyboardLayout: KeyboardLayout,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -28,27 +27,27 @@ fun DialPadLayout(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            DialButton(value = "1", byteArray = keyboardLayout.getKeyboardKey('1'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "4", byteArray = keyboardLayout.getKeyboardKey('4'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "7", byteArray = keyboardLayout.getKeyboardKey('7'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "1", byteArray = ChannelInput.CHANNEL_INPUT_1, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "4", byteArray = ChannelInput.CHANNEL_INPUT_4, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "7", byteArray = ChannelInput.CHANNEL_INPUT_7, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
         }
 
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            DialButton(value = "2", byteArray = keyboardLayout.getKeyboardKey('2'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "5", byteArray = keyboardLayout.getKeyboardKey('5'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "8", byteArray = keyboardLayout.getKeyboardKey('8'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "2", byteArray = ChannelInput.CHANNEL_INPUT_2, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "5", byteArray = ChannelInput.CHANNEL_INPUT_5, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "8", byteArray = ChannelInput.CHANNEL_INPUT_8, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
         }
 
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            DialButton(value = "3", byteArray = keyboardLayout.getKeyboardKey('3'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "6", byteArray = keyboardLayout.getKeyboardKey('6'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
-            DialButton(value = "9", byteArray = keyboardLayout.getKeyboardKey('9'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "3", byteArray = ChannelInput.CHANNEL_INPUT_3, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "6", byteArray = ChannelInput.CHANNEL_INPUT_6, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "9", byteArray = ChannelInput.CHANNEL_INPUT_9, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
         }
 
         Column(
@@ -62,7 +61,7 @@ fun DialPadLayout(
                     .padding(dimensionResource(id = R.dimen.padding_standard))
                     .align(Alignment.End)
             )
-            DialButton(value = "0", byteArray = keyboardLayout.getKeyboardKey('0'), sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
+            DialButton(value = "0", byteArray = ChannelInput.CHANNEL_INPUT_0, sendNumberKeyReport = sendNumberKeyReport, modifier = Modifier.weight(1f))
         }
     }
 }

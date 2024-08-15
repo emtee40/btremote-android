@@ -18,7 +18,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.atharok.btremote.R
-import com.atharok.btremote.domain.entity.MouseInput
+import com.atharok.btremote.domain.entity.remoteInput.MouseAction
 import kotlin.jvm.internal.Ref.BooleanRef
 import kotlin.jvm.internal.Ref.FloatRef
 
@@ -26,10 +26,10 @@ import kotlin.jvm.internal.Ref.FloatRef
 fun MousePadLayout(
     mouseSpeed: Float,
     shouldInvertMouseScrollingDirection: Boolean,
-    sendMouseInput: (MouseInput, Float, Float, Float) -> Unit,
+    sendMouseInput: (MouseAction, Float, Float, Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var mouseInput: MouseInput = MouseInput.NONE
+    var mouseAction: MouseAction = MouseAction.NONE
     var mouseX = 0f
     var mouseY = 0f
     var mouseWheel = 0f
@@ -49,22 +49,22 @@ fun MousePadLayout(
             MousePad(
                 mouseSpeed = mouseSpeedRef,
                 updateMouseInput = {
-                    mouseInput = it
-                    sendMouseInput(mouseInput, mouseX, mouseY, mouseWheel)
-                    if (it == MouseInput.PAD_TAP) {
-                        mouseInput = MouseInput.NONE
-                        sendMouseInput(mouseInput, mouseX, mouseY, mouseWheel)
+                    mouseAction = it
+                    sendMouseInput(mouseAction, mouseX, mouseY, mouseWheel)
+                    if (it == MouseAction.PAD_TAP) {
+                        mouseAction = MouseAction.NONE
+                        sendMouseInput(mouseAction, mouseX, mouseY, mouseWheel)
                     }
                 },
                 updateTouchPosition = { x: Float, y: Float ->
                     mouseX = x
                     mouseY = y
-                    sendMouseInput(mouseInput, mouseX, mouseY, mouseWheel)
+                    sendMouseInput(mouseAction, mouseX, mouseY, mouseWheel)
                 },
                 updateWheel = { wheel: Float ->
-                    mouseInput = MouseInput.MOUSE_WHEEL
+                    mouseAction = MouseAction.MOUSE_WHEEL
                     mouseWheel = wheel * if(shouldInvertMouseScrollingDirectionRef.element) -1f else 1f
-                    sendMouseInput(mouseInput, mouseX, mouseY, mouseWheel)
+                    sendMouseInput(mouseAction, 0f, 0f, mouseWheel)
                 },
                 shape = RoundedCornerShape(
                     topStart = dimensionResource(id = R.dimen.card_corner_radius),
@@ -87,8 +87,8 @@ fun MousePadLayout(
 
         MouseButtonsLayout(
             sendMouseInput = {
-                mouseInput = it
-                sendMouseInput(mouseInput, mouseX, mouseY, mouseWheel)
+                mouseAction = it
+                sendMouseInput(mouseAction, mouseX, mouseY, mouseWheel)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,15 +102,15 @@ fun MousePadLayout(
 
 @Composable
 private fun MouseButtonsLayout(
-    sendMouseInput: (MouseInput) -> Unit,
+    sendMouseInput: (MouseAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
 
         // Start
         MouseButton(
-            touchDown = { sendMouseInput(MouseInput.MOUSE_CLICK_LEFT) },
-            touchUp = { sendMouseInput(MouseInput.NONE) },
+            touchDown = { sendMouseInput(MouseAction.MOUSE_CLICK_LEFT) },
+            touchUp = { sendMouseInput(MouseAction.NONE) },
             shape = RoundedCornerShape(
                 topStart = 0.dp,
                 topEnd = 0.dp,
@@ -125,8 +125,8 @@ private fun MouseButtonsLayout(
 
         // Center
         MouseButton(
-            touchDown = { sendMouseInput(MouseInput.MOUSE_CLICK_MIDDLE) },
-            touchUp = { sendMouseInput(MouseInput.NONE) },
+            touchDown = { sendMouseInput(MouseAction.MOUSE_CLICK_MIDDLE) },
+            touchUp = { sendMouseInput(MouseAction.NONE) },
             shape = RectangleShape,
             modifier = Modifier
                 .weight(0.24f)
@@ -139,8 +139,8 @@ private fun MouseButtonsLayout(
 
         // End
         MouseButton(
-            touchDown = { sendMouseInput(MouseInput.MOUSE_CLICK_RIGHT) },
-            touchUp = { sendMouseInput(MouseInput.NONE) },
+            touchDown = { sendMouseInput(MouseAction.MOUSE_CLICK_RIGHT) },
+            touchUp = { sendMouseInput(MouseAction.NONE) },
             shape = RoundedCornerShape(
                 topStart = 0.dp,
                 topEnd = 0.dp,
@@ -159,7 +159,7 @@ private fun MouseButtonsLayout(
 
 @Composable
 private fun ScrollMouseButtonsLayout(
-    sendMouseInput: (MouseInput, Float, Float, Float) -> Unit,
+    sendMouseInput: (MouseAction, Float, Float, Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {

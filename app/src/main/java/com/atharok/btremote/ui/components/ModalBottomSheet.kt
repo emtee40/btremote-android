@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -13,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +22,7 @@ import com.atharok.btremote.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomModalBottomSheet(
+fun TemplateModalBottomSheet(
     title: String,
     icon: ImageVector,
     iconDescription: String,
@@ -35,35 +33,34 @@ fun CustomModalBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(
-                        start = dimensionResource(id = R.dimen.padding_large),
-                        end = dimensionResource(id = R.dimen.padding_large),
-                        bottom = dimensionResource(id = R.dimen.padding_large)
-                    )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    start = dimensionResource(id = R.dimen.padding_large),
+                    end = dimensionResource(id = R.dimen.padding_large),
+                    bottom = dimensionResource(id = R.dimen.padding_large)
+                )
+        ) {
+            Row(
+                modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_large)),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_large)),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        imageVector = icon,
-                        contentDescription = iconDescription,
-                        modifier = Modifier.size(dimensionResource(id = R.dimen.help_icon_size)),
-                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
-                    )
-                    TextLarge(
-                        text = title,
-                        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
-                    )
-                }
-                content()
+                Image(
+                    imageVector = icon,
+                    contentDescription = iconDescription,
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.help_icon_size)),
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
+                )
+                TextLarge(
+                    text = title,
+                    modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
+                )
             }
+            content()
         }
     }
 }

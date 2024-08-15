@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.atharok.btremote.common.extensions.getActivity
-import com.atharok.btremote.domain.entity.MouseInput
+import com.atharok.btremote.domain.entity.remoteInput.MouseAction
 import com.atharok.btremote.presentation.viewmodel.BluetoothHidViewModel
 import com.atharok.btremote.presentation.viewmodel.BluetoothViewModel
 import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
@@ -171,6 +171,7 @@ fun ComposeRoot(
                                 navigateUp = { navController.navigateUp() },
                                 closeApp = { context.getActivity()?.finish() },
                                 openSettings = openSettings,
+                                settingsViewModel = settingsViewModel,
                                 disconnectDevice = {
                                     hidViewModel.disconnectDevice()
                                 },
@@ -179,14 +180,9 @@ fun ComposeRoot(
                                     hidViewModel.stopService(context)
                                 },
                                 sendRemoteKeyReport = { bytes -> hidViewModel.sendRemoteKeyReport(bytes) },
-                                sendMouseKeyReport = { input: MouseInput, x: Float, y: Float, wheel: Float -> hidViewModel.sendMouseKeyReport(input, x, y, wheel) },
+                                sendMouseKeyReport = { input: MouseAction, x: Float, y: Float, wheel: Float -> hidViewModel.sendMouseKeyReport(input, x, y, wheel) },
                                 sendKeyboardKeyReport = { bytes -> hidViewModel.sendKeyboardKeyReport(bytes) },
                                 sendTextReport = { text, keyboardLayout -> hidViewModel.sendTextReport(text, keyboardLayout) },
-                                keyboardLanguageFlow = settingsViewModel.keyboardLanguage,
-                                getKeyboardLayout = { settingsViewModel.getKeyboardLayout(it) },
-                                mustClearInputFieldFlow = settingsViewModel.mustClearInputField(),
-                                mouseSpeedFlow = settingsViewModel.getMouseSpeed(),
-                                shouldInvertMouseScrollingDirectionFlow = settingsViewModel.shouldInvertMouseScrollingDirection(),
                                 modifier = Modifier
                             )
                         }

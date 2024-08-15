@@ -13,6 +13,8 @@ const val KEYBOARD_REPORT_ID = 0x01
 const val REMOTE_REPORT_ID = 0x02
 const val MOUSE_REPORT_ID = 0x03
 
+val REMOTE_INPUT_NONE = byteArrayOf(0x00, 0x00)
+
 val bluetoothHidDescriptor = byteArrayOf(
     // Remote Control
     0x05.toByte(), 0x0C.toByte(),                    // Usage Page (Consumer Devices)

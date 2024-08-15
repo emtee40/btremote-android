@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
-import com.atharok.btremote.ui.components.CustomModalBottomSheet
+import com.atharok.btremote.ui.components.TemplateModalBottomSheet
 import com.atharok.btremote.ui.components.TextMedium
 import com.atharok.btremote.ui.components.TextNormalSecondary
 
@@ -21,7 +21,7 @@ private fun HelpModalBottomSheet(
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
-    CustomModalBottomSheet(
+    TemplateModalBottomSheet(
         title = stringResource(id = R.string.help),
         icon = Icons.AutoMirrored.Rounded.HelpOutline,
         iconDescription = stringResource(id = R.string.help),

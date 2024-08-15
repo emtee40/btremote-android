@@ -9,9 +9,10 @@ import android.bluetooth.BluetoothProfile.ServiceListener
 import android.content.Context
 import androidx.annotation.RequiresPermission
 import com.atharok.btremote.common.utils.KEYBOARD_REPORT_ID
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
 import com.atharok.btremote.common.utils.checkBluetoothConnectPermission
 import com.atharok.btremote.domain.entity.DeviceHidConnectionState
-import com.atharok.btremote.domain.entity.keyboard.layout.KeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -158,17 +159,17 @@ class BluetoothHidProfile(
         return success
     }
 
-    fun sendTextReport(text: String, keyboardLayout: KeyboardLayout): Boolean {
+    fun sendTextReport(text: String, virtualKeyboardLayout: VirtualKeyboardLayout): Boolean {
         var success = false
         bluetoothDevice?.let { device ->
             bluetoothHidDevice?.let { hidDevice ->
                 if (checkBluetoothConnectPermission(context)) {
                     success = true
                     text.forEach {
-                        if(!hidDevice.sendReport(device, KEYBOARD_REPORT_ID, keyboardLayout.getKeyboardKey(it))) {
+                        if(!hidDevice.sendReport(device, KEYBOARD_REPORT_ID, virtualKeyboardLayout.getKeyboardKey(it))) {
                             success = false
                         }
-                        hidDevice.sendReport(device, KEYBOARD_REPORT_ID, KeyboardLayout.KEYBOARD_KEY_NONE)
+                        hidDevice.sendReport(device, KEYBOARD_REPORT_ID, REMOTE_INPUT_NONE)
                     }
                 }
             }

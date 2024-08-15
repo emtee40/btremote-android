@@ -1,9 +1,11 @@
-package com.atharok.btremote.domain.entity.keyboard.layout
+package com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard
+
+import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
 
 // https://source.android.com/docs/core/interaction/input/keyboard-devices#hid-keyboard-and-keypad-page-0x07
-abstract class KeyboardLayout {
+abstract class VirtualKeyboardLayout {
     companion object {
-        val KEYBOARD_KEY_NONE by lazy { byteArrayOf(0x00, 0x00) }
+        //val KEYBOARD_KEY_NONE by lazy { byteArrayOf(0x00, 0x00) }
         val KEYBOARD_KEY_ENTER by lazy { byteArrayOf(0x00, 0x28) }
         val KEYBOARD_KEY_ESCAPE by lazy { byteArrayOf(0x00, 0x29) }
         val KEYBOARD_KEY_DELETE by lazy { byteArrayOf(0x00, 0x2A) }
@@ -16,10 +18,10 @@ abstract class KeyboardLayout {
     // KEY_LEFT_SHIFT: 0x02
     // KEY_ALT_GR: 0x40
 
-    private val keys: Map<Char, ByteArray> by lazy { keyboardKeys + extraKeys }
+    private val inputs: Map<Char, ByteArray> by lazy { keyboardInputs + extraInputs }
 
-    protected abstract val keyboardKeys: Map<Char, ByteArray>
-    protected abstract val extraKeys: Map<Char, ByteArray>
+    protected abstract val keyboardInputs: Map<Char, ByteArray>
+    protected abstract val extraInputs: Map<Char, ByteArray>
 
-    fun getKeyboardKey(key: Char): ByteArray = keys[key] ?: KEYBOARD_KEY_NONE
+    fun getKeyboardKey(key: Char): ByteArray = inputs[key] ?: REMOTE_INPUT_NONE
 }

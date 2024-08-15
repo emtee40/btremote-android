@@ -80,6 +80,7 @@
     <string name="keyboard">Clavier</string>
     <string name="keyboard_language">Langue du clavier</string>
     <string name="keyboard_language_info">Assurez-vous que la langue du clavier choisie soit identique à celle configurée sur l\'appareil distant.</string>
+    <string name="advanced_keyboard">Clavier avancé</string>
     <string name="keyboard_us">Anglais (États-Unis)</string>
     <string name="keyboard_uk">Anglais (Royaume-Uni)</string>
     <string name="keyboard_es">Espagnol</string>
@@ -94,6 +95,11 @@
     <string name="enter">Entrer</string>
     <string name="escape">Echap</string>
     <string name="delete">Supprimer</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
 
     <!-- Remote button description -->
     <string name="pick">Choisir</string>
