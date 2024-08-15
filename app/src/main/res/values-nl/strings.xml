@@ -122,4 +122,5 @@
     <string name="help_device_failed_connection_check_6">• Koppel ze opnieuw door op het overeenkomende pictogram op de werkbalk te drukken.</string>
     <string name="help_pairing_missing_device_check_2">• Zorg ervoor dat het apparaat op basis van bluetooth gevonden kan worden.</string>
     <string name="bluetooth_failed_to_register_app_message">De appdienst kan niet worden gestart. Zorg ervoor dat bluetooth op de achtergrond actief is. Als de foutmelding blijft verschijnen, dan kan het zijn dat het bluetoothproces onverwacht onderbroken is. Schakel in dat geval bluetooth uit en weer in.</string>
+    <string name="power">Energie</string>
 </resources>

@@ -1,0 +1,12 @@
+1.2.0
+
+Dinagdag ang mga sumusunod na pagsasalin:
+	- German (salamat kay Atalanttore at Dirk).
+	- Filipino (salamat kay Kita Ikuyo).
+	- Portuguese (Brazil) (salamat kay lucas).
+- In-update ang Polish na pagsasalin (salamat kay Eryk Michalak at Kacperocik).
+- Dinagdag ang Portuguese at Brazilian na mga keyboard layout.
+- Mga pagbabago sa istilio ng teksto para gawing mas mahusay ang pagbabasa.
+- Hindi na kinakailangan ang GPS na pahintulot para sa mga device na tumatakbo ng Android 11 o mas luma.
+- Mga improvement sa code.
+- In-update ang mga dependency.

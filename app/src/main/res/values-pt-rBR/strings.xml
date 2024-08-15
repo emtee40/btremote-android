@@ -91,7 +91,7 @@
     <string name="mute">Silenciar</string>
     <string name="home">Início</string>
     <string name="back">Voltar</string>
-    <string name="standby">Standby</string>
+    <string name="standby">Em repouso</string>
     <string name="next_channel">Próximo canal</string>
     <string name="previous_channel">Canal anterior</string>
     <string name="mouse">Mouse</string>
@@ -122,4 +122,5 @@
     <string name="keyboard_pt">Português</string>
     <string name="unpair_device_warning_message">Este dispositivo será completamente despareado do seu dispositivo. Tem certeza que deseja continuar?</string>
     <string name="keyboard_br">Brasileiro</string>
+    <string name="power">Energia</string>
 </resources>

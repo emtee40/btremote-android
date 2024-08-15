@@ -1,15 +1,15 @@
-智能手机变身蓝牙遥控器，轻松交互并与 Android TV 互动。
+将您的智能手机变成蓝牙遥控器，轻松导航并与您的 Android TV 互动。
 
-特点：
+特征：
 
--蓝牙无线控制。
--必要的遥控按键咱都有。
--支持集成鼠标和键盘。
--借助 HID 协议，无需在 Android 电视上安装其他应用程序。
--现代且顺畅的用户界面。
--采用 Kotlin、Jetpack Compose 和 Material 3 开发。
--注重隐私，无数据收集（无互联网访问权限）
--无广告
--开源
+- 通过蓝牙连接进行无线控制。
+- 包含远程控制设备所需的所有按钮。
+- 支持集成鼠标和键盘。
+- 由于采用了 HID 协议，因此无需在 Android TV 设备上安装其他应用。
+- 现代且响应迅速的用户界面。
+- 使用 Kotlin、Jetpack Compose 和 Material 3 开发。
+- 注重隐私，不收集数据（禁用互联网权限）。
+- 无广告。
+- 开源。
 
-源码在： https://gitlab.com/Atharok/BtRemote
+源代码可在此处获取：https://gitlab.com/Atharok/BtRemote
