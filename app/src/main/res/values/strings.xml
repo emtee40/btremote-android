@@ -95,6 +95,8 @@
     <string name="enter">Enter</string>
     <string name="escape">Esc</string>
     <string name="delete">Delete</string>
+    <string name="space_bar">Space Bar</string>
+    <string name="print_screen">Print Screen</string>
     <string name="shift">Shift</string>
     <string name="meta">Meta</string>
     <string name="ctrl">Ctrl</string>

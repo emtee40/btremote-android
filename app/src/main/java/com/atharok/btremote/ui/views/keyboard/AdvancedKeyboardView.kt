@@ -1,7 +1,6 @@
 package com.atharok.btremote.ui.views.keyboard
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -77,7 +76,6 @@ private fun AdvancedKeyboardLayoutView(
     }
 
     LaunchedEffect(modifierKeyByte, keyByte) {
-        Log.i("HELLO", "$modifierKeyByte | $keyByte")
         sendKeyboardKeyReport(byteArrayOf(modifierKeyByte, keyByte))
     }
 
@@ -117,7 +115,7 @@ private fun AdvancedKeyboardLayoutView(
                                     }
                                 }
                             },
-                            Modifier.weight(keyboardKey.weight)
+                            Modifier.weight(keyboardKey.weight).padding(dimensionResource(id = R.dimen.padding_thin))
                         )
                     }
                 }

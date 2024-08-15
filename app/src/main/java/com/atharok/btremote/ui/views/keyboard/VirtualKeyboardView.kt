@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,6 +14,10 @@ import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.rounded.KeyboardReturn
 import androidx.compose.material.icons.automirrored.rounded.Send
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.KeyboardArrowUp
+import androidx.compose.material.icons.rounded.ScreenshotMonitor
+import androidx.compose.material.icons.rounded.SpaceBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextField
@@ -34,7 +39,6 @@ import androidx.compose.ui.text.input.ImeAction
 import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
-import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
 
 @Composable
 fun VirtualKeyboardView(
@@ -59,7 +63,11 @@ fun VirtualKeyboardView(
                     textState.value = it
                 },
                 sendKeyboardKeyReport = sendKeyboardKeyReport,
-                sendTextReport = sendTextReport
+                sendTextReport = sendTextReport,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_standard))
+                    .padding(bottom = dimensionResource(id = R.dimen.padding_large))
             )
         }
     }
@@ -93,15 +101,15 @@ private fun StatelessKeyboardView(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(dimensionResource(id = R.dimen.padding_standard)),
+                .padding(bottom = dimensionResource(id = R.dimen.padding_standard)),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             TextField(
                 value = text,
                 onValueChange = onTextChange,
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(4f)
+                    .padding(end = dimensionResource(id = R.dimen.padding_thin))
                     .focusRequester(focusRequester),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
@@ -116,7 +124,7 @@ private fun StatelessKeyboardView(
                         }
                     }
                 ),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius)),
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.keyboard_key_corner_radius)),
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent
                 )
@@ -127,7 +135,8 @@ private fun StatelessKeyboardView(
                     if(mustClearInputField) {
                         onTextChange("")
                     }
-                }
+                },
+                modifier = Modifier.weight(1f).padding(start = dimensionResource(id = R.dimen.padding_thin))
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.Send,
@@ -137,8 +146,11 @@ private fun StatelessKeyboardView(
         }
 
         AdditionalKeyboardKeys(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard)),
-            sendKeyboardKeyReport = sendKeyboardKeyReport
+            sendKeyboardKeyReport = sendKeyboardKeyReport,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(unbounded = true)
+                .padding(top = dimensionResource(id = R.dimen.padding_standard))
         )
     }
 }
@@ -149,56 +161,98 @@ private fun AdditionalKeyboardKeys(
     sendKeyboardKeyReport: (ByteArray) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier) {
-        KeyboardKey(
-            image = Icons.AutoMirrored.Rounded.Backspace,
-            contentDescription = stringResource(id = R.string.delete),
-            key = VirtualKeyboardLayout.KEYBOARD_KEY_DELETE,
-            sendKeyboardKey = sendKeyboardKeyReport
-        )
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_thin))
+        ) {
+            VirtualKeyboardKey(
+                image = Icons.Rounded.SpaceBar,
+                contentDescription = stringResource(id = R.string.space_bar),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_SPACE_BAR,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(3f).padding(end = dimensionResource(id = R.dimen.padding_thin))
+            )
 
-        KeyboardKey(
-            image = Icons.AutoMirrored.Rounded.KeyboardReturn,
-            contentDescription = stringResource(id = R.string.enter),
-            key = VirtualKeyboardLayout.KEYBOARD_KEY_ENTER,
-            sendKeyboardKey = sendKeyboardKeyReport
-        )
+            VirtualKeyboardKey(
+                image = Icons.Rounded.KeyboardArrowUp,
+                contentDescription = stringResource(id = R.string.up),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_UP,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(horizontal = dimensionResource(id = R.dimen.padding_thin))
+            )
 
-        KeyboardKey(
-            image = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
-            contentDescription = stringResource(id = R.string.left),
-            key = VirtualKeyboardLayout.KEYBOARD_KEY_LEFT,
-            sendKeyboardKey = sendKeyboardKeyReport
-        )
+            VirtualKeyboardKey(
+                image = Icons.Rounded.ScreenshotMonitor,
+                contentDescription = stringResource(id = R.string.print_screen),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_PRINT_SCREEN,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(start = dimensionResource(id = R.dimen.padding_thin))
+            )
+        }
 
-        KeyboardKey(
-            image = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
-            contentDescription = stringResource(id = R.string.right),
-            key = VirtualKeyboardLayout.KEYBOARD_KEY_RIGHT,
-            sendKeyboardKey = sendKeyboardKeyReport
-        )
+        Row(
+            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_thin))
+        ) {
+            VirtualKeyboardKey(
+                image = Icons.AutoMirrored.Rounded.Backspace,
+                contentDescription = stringResource(id = R.string.delete),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_DELETE,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(end = dimensionResource(id = R.dimen.padding_thin))
+            )
+
+            VirtualKeyboardKey(
+                image = Icons.AutoMirrored.Rounded.KeyboardReturn,
+                contentDescription = stringResource(id = R.string.enter),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_ENTER,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(horizontal = dimensionResource(id = R.dimen.padding_thin))
+            )
+
+            VirtualKeyboardKey(
+                image = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
+                contentDescription = stringResource(id = R.string.left),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_LEFT,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(horizontal = dimensionResource(id = R.dimen.padding_thin))
+            )
+
+            VirtualKeyboardKey(
+                image = Icons.Rounded.KeyboardArrowDown,
+                contentDescription = stringResource(id = R.string.down),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_DOWN,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(horizontal = dimensionResource(id = R.dimen.padding_thin))
+            )
+
+            VirtualKeyboardKey(
+                image = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+                contentDescription = stringResource(id = R.string.right),
+                bytes = VirtualKeyboardLayout.KEYBOARD_KEY_RIGHT,
+                sendKeyboardKey = sendKeyboardKeyReport,
+                modifier = Modifier.weight(1f).padding(start = dimensionResource(id = R.dimen.padding_thin))
+            )
+        }
     }
 }
 
 @Composable
-private fun KeyboardKey(
+private fun VirtualKeyboardKey(
     image: ImageVector,
     contentDescription: String,
-    key: ByteArray,
+    bytes: ByteArray,
     sendKeyboardKey: (ByteArray) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    StatefulRemoteButton(
-        touchDown = { sendKeyboardKey(key) },
-        touchUp = { sendKeyboardKey(REMOTE_INPUT_NONE) }
+    KeyboardKeyView(
+        touchDown = { sendKeyboardKey(bytes) },
+        touchUp = { sendKeyboardKey(REMOTE_INPUT_NONE) },
+        modifier = modifier,
     ) {
-        IconButton(
-            onClick = {},
-            interactionSource = it
-        ) {
-            Icon(
-                imageVector = image,
-                contentDescription = contentDescription
-            )
-        }
+        Icon(
+            imageVector = image,
+            contentDescription = contentDescription,
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard))
+        )
     }
 }
