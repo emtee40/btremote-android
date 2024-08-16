@@ -1,0 +1,9 @@
+1.3.0
+
+- Added Dutch translation (thanks to Vistaus).
+- Updated translations.
+- Added an advanced keyboard that allows direct character input, including integration of modifier keys similar to those on a physical keyboard (can be enabled in the settings).
+- Added 'Power', 'Menu', 'CC', and 'Brightness' buttons to the TopBar items.
+- Added scroll buttons for the mouse and some buttons for the keyboard.
+- Code improvements and bug fixes.
+- Updated dependencies.
