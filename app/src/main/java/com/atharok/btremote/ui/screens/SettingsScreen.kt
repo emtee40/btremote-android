@@ -53,7 +53,6 @@ import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import com.atharok.btremote.ui.components.AppScaffold
 import com.atharok.btremote.ui.components.ListDialog
 import com.atharok.btremote.ui.components.NavigateUpAction
-import com.atharok.btremote.ui.components.TextMedium
 import com.atharok.btremote.ui.components.TextNormal
 import com.atharok.btremote.ui.components.TextNormalSecondary
 import kotlinx.coroutines.flow.Flow

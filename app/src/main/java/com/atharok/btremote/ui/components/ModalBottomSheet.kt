@@ -33,7 +33,6 @@ fun TemplateModalBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
         Column(

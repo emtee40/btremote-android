@@ -115,7 +115,7 @@
     <string name="next">Suivant</string>
     <string name="volume_increase">Augmentation du volume</string>
     <string name="volume_decrease">Diminution du volume</string>
-    <string name="brightness_increase">Augmentation de le luminosité</string>
+    <string name="brightness_increase">Augmentation de la luminosité</string>
     <string name="brightness_decrease">Diminution de la luminosité</string>
     <string name="mute">Sourdine</string>
     <string name="home">Accueil</string>
@@ -124,6 +124,8 @@
     <string name="next_channel">Chaîne suivante</string>
     <string name="previous_channel">Chaîne précédente</string>
     <string name="power">Power</string>
+    <string name="menu">Menu</string>
+    <string name="closed_captions">Sous-titres</string>
 
     <!-- Mouse -->
     <string name="mouse">Souris</string>

@@ -124,6 +124,8 @@
     <string name="next_channel">Next channel</string>
     <string name="previous_channel">Previous channel</string>
     <string name="power">Power</string>
+    <string name="menu">Menu</string>
+    <string name="closed_captions">Closed captions</string>
 
     <!-- Mouse -->
     <string name="mouse">Mouse</string>

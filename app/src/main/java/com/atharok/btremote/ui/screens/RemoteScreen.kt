@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -45,12 +46,16 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.KeyboardLanguage
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.VirtualKeyboardLayout
 import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import com.atharok.btremote.ui.components.AppScaffold
+import com.atharok.btremote.ui.components.BrightnessDecDropdownMenuItem
+import com.atharok.btremote.ui.components.BrightnessIncDropdownMenuItem
+import com.atharok.btremote.ui.components.ClosedCaptionDropdownMenuItem
 import com.atharok.btremote.ui.components.DirectionButtonsAction
 import com.atharok.btremote.ui.components.DisconnectDropdownMenuItem
 import com.atharok.btremote.ui.components.FadeAnimatedContent
 import com.atharok.btremote.ui.components.HelpDropdownMenuItem
 import com.atharok.btremote.ui.components.KeyboardAction
 import com.atharok.btremote.ui.components.LoadingDialog
+import com.atharok.btremote.ui.components.MenuDropdownMenuItem
 import com.atharok.btremote.ui.components.MoreOverflowMenu
 import com.atharok.btremote.ui.components.MouseAction
 import com.atharok.btremote.ui.components.PowerDropdownMenuItem
@@ -517,7 +522,38 @@ private fun TopBarActions(
             },
             touchUp = {
                 sendRemoteKeyReport(REMOTE_INPUT_NONE)
-                closeDropdownMenu()
+            }
+        )
+        MenuDropdownMenuItem(
+            touchDown = {
+                sendRemoteKeyReport(RemoteInput.REMOTE_INPUT_MENU)
+            },
+            touchUp = {
+                sendRemoteKeyReport(REMOTE_INPUT_NONE)
+            }
+        )
+        ClosedCaptionDropdownMenuItem(
+            touchDown = {
+                sendRemoteKeyReport(RemoteInput.REMOTE_INPUT_CLOSED_CAPTIONS)
+            },
+            touchUp = {
+                sendRemoteKeyReport(REMOTE_INPUT_NONE)
+            }
+        )
+        BrightnessIncDropdownMenuItem(
+            touchDown = {
+                sendRemoteKeyReport(RemoteInput.REMOTE_INPUT_BRIGHTNESS_INC)
+            },
+            touchUp = {
+                sendRemoteKeyReport(REMOTE_INPUT_NONE)
+            }
+        )
+        BrightnessDecDropdownMenuItem(
+            touchDown = {
+                sendRemoteKeyReport(RemoteInput.REMOTE_INPUT_BRIGHTNESS_DEC)
+            },
+            touchUp = {
+                sendRemoteKeyReport(REMOTE_INPUT_NONE)
             }
         )
         DisconnectDropdownMenuItem(
@@ -525,6 +561,11 @@ private fun TopBarActions(
                 closeDropdownMenu()
                 disconnectDevice()
             }
+        )
+        HorizontalDivider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.padding_standard))
         )
         HelpDropdownMenuItem(
             showHelp = {

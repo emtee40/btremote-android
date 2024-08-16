@@ -2,6 +2,10 @@ package com.atharok.btremote.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.HelpOutline
+import androidx.compose.material.icons.automirrored.rounded.List
+import androidx.compose.material.icons.rounded.BrightnessHigh
+import androidx.compose.material.icons.rounded.BrightnessLow
+import androidx.compose.material.icons.rounded.ClosedCaption
 import androidx.compose.material.icons.rounded.LinkOff
 import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.Settings
@@ -47,22 +51,6 @@ fun MoreOverflowMenu(
         topBarAction = {
             MoreAction(
                 showMenu = it,
-                modifier = modifier
-            )
-        },
-        content = content
-    )
-}
-
-@Composable
-fun KeyboardOverflowMenu(
-    modifier: Modifier = Modifier,
-    content: @Composable (closeDropdownMenu: () -> Unit) -> Unit
-) {
-    OverflowMenu(
-        topBarAction = {
-            KeyboardAction(
-                showKeyboard = it,
                 modifier = modifier
             )
         },
@@ -134,6 +122,66 @@ fun PowerDropdownMenuItem(
         touchUp = touchUp,
         image = Icons.Rounded.PowerSettingsNew,
         title = stringResource(id = R.string.power),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun MenuDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        touchDown = touchDown,
+        touchUp = touchUp,
+        image = Icons.AutoMirrored.Rounded.List,
+        title = stringResource(id = R.string.menu),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun ClosedCaptionDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        touchDown = touchDown,
+        touchUp = touchUp,
+        image = Icons.Rounded.ClosedCaption,
+        title = stringResource(id = R.string.closed_captions),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun BrightnessIncDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        touchDown = touchDown,
+        touchUp = touchUp,
+        image = Icons.Rounded.BrightnessHigh,
+        title = stringResource(id = R.string.brightness_increase),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun BrightnessDecDropdownMenuItem(
+    touchDown: () -> Unit,
+    touchUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    DefaultDropdownMenuItem(
+        touchDown = touchDown,
+        touchUp = touchUp,
+        image = Icons.Rounded.BrightnessLow,
+        title = stringResource(id = R.string.brightness_decrease),
         modifier = modifier
     )
 }
