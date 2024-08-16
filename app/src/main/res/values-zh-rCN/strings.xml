@@ -62,9 +62,9 @@
     <string name="keyboard_ru">俄语</string>
     <string name="keyboard_cs">捷克语</string>
     <string name="send">发送</string>
-    <string name="enter">回车（Enter）</string>
-    <string name="escape">退出（Escape）</string>
-    <string name="delete">删除（Del）</string>
+    <string name="enter">Enter</string>
+    <string name="escape">Esc</string>
+    <string name="delete">Delete</string>
     <string name="pick">选择</string>
     <string name="up">上</string>
     <string name="down">下</string>
@@ -131,4 +131,12 @@
     <string name="unpair_device">取消设备配对</string>
     <string name="keyboard_pl">波兰语</string>
     <string name="power">电源</string>
+    <string name="space_bar">空格键</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
+    <string name="print_screen">PrtSc</string>
+    <string name="advanced_keyboard">高级键盘</string>
 </resources>
