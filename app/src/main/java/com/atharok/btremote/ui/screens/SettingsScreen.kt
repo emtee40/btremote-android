@@ -562,11 +562,12 @@ private fun TitleItem(
             imageVector = icon,
             contentDescription = iconDescription,
             modifier = Modifier.size(dimensionResource(id = R.dimen.medium_icon_size)),
-            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary)
         )
-        TextMedium(
+        TextNormal(
             text = text,
-            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard))
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_standard)),
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }

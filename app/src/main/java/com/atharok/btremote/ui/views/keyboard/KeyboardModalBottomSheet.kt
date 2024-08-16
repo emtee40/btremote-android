@@ -7,7 +7,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,7 +21,6 @@ fun KeyboardModalBottomSheet(
             onDismissRequest = { onShowKeyboardBottomSheetChanged(false) },
             modifier = modifier,
             sheetState = rememberModalBottomSheetState(true),
-            tonalElevation = 0.dp,
             windowInsets = WindowInsets(0, 0, 0, 0)
         ) {
             content()
