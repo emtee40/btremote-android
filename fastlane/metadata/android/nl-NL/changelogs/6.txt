@@ -1,0 +1,9 @@
+1.3.0
+
+- Nieuw: Nederlandse vertaling (met dank aan @Vistaus);
+- Bijgewerkt: vertalingen;
+- Nieuw: uitgebreid toetsenbord met directe invoer en sneltoetsen, gelijk aan die op een fysiek toetsenbord (zie de instellingen);
+- Nieuwe werkbalkitems: ‘energie’, ‘menu’, ‘ondertiteling’ en ‘helderheid’;
+- Nieuw: schuifknoppen voor de muis en enkele toetsenbordtoetsen;
+- Verbeterd: code, en bugs opgelost;
+- Bijgewerkt: afhankelijkheden.
