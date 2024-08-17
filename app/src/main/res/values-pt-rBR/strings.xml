@@ -123,4 +123,14 @@
     <string name="unpair_device_warning_message">Este dispositivo será completamente despareado do seu dispositivo. Tem certeza que deseja continuar?</string>
     <string name="keyboard_br">Brasileiro</string>
     <string name="power">Energia</string>
+    <string name="advanced_keyboard">Teclado avançado</string>
+    <string name="space_bar">Barra de Espaço</string>
+    <string name="print_screen">Print Screen</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
+    <string name="closed_captions">CC</string>
+    <string name="menu">Menu</string>
 </resources>
