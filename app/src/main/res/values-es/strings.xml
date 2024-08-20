@@ -84,7 +84,7 @@
     <string name="connected_on">Conectado a %1$s</string>
     <string name="help">Ayuda</string>
     <string name="enter">Ingresar</string>
-    <string name="escape">Escape</string>
+    <string name="escape">Esc</string>
     <string name="up">Up</string>
     <string name="previous">Anterior</string>
     <string name="next">Siguiente</string>
@@ -122,4 +122,14 @@
     <string name="help_remote_control_buttons_are_not_working_title">Botones del mando a distancia</string>
     <string name="help_remote_control_buttons_are_not_working_message">Si el teclado, el ratón o algunos botones no funcionan, sigue las siguientes instrucciones:</string>
     <string name="help_remote_control_buttons_are_not_working_check_2">• Desconectarse del dispositivo remoto.</string>
+    <string name="print_screen">Print Screen</string>
+    <string name="space_bar">Barra espaciadora</string>
+    <string name="power">Power</string>
+    <string name="advanced_keyboard">Teclado avanzado</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
+    <string name="menu">Menú</string>
 </resources>
