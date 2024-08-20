@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 fun KeyboardModalBottomSheet(
     showKeyboardBottomSheet: Boolean,
     onShowKeyboardBottomSheetChanged: (Boolean) -> Unit,
+    windowInsets: WindowInsets,
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
@@ -21,7 +22,7 @@ fun KeyboardModalBottomSheet(
             onDismissRequest = { onShowKeyboardBottomSheetChanged(false) },
             modifier = modifier,
             sheetState = rememberModalBottomSheetState(true),
-            windowInsets = WindowInsets(0, 0, 0, 0)
+            windowInsets = windowInsets
         ) {
             content()
         }
