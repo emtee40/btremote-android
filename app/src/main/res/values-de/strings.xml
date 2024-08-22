@@ -66,7 +66,7 @@
     <string name="keyboard_pl">Polnisch</string>
     <string name="send">Senden</string>
     <string name="enter">Eingabe</string>
-    <string name="escape">Escape</string>
+    <string name="escape">Esc</string>
     <string name="delete">Löschen</string>
     <string name="left">Links</string>
     <string name="right">Rechts</string>
@@ -122,4 +122,15 @@
     <string name="keyboard_pt">Portugiesisch</string>
     <string name="keyboard_br">Brasilianisch</string>
     <string name="unpair_device_warning_message">Dieses Gerät wird vollständig von deinem Gerät entkoppelt werden. Willst du wirklich fortsetzen?</string>
+    <string name="power">Power</string>
+    <string name="advanced_keyboard">Erweiterte Tastatur</string>
+    <string name="space_bar">Leertaste</string>
+    <string name="print_screen">Druck</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Strg</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
+    <string name="menu">Menü</string>
+    <string name="closed_captions">Untertitel</string>
 </resources>
