@@ -1,9 +1,9 @@
 1.3.0
 
-Ajout de la traduction en néerlandais (merci à Vistaus).
-Mise à jour des traductions.
-Ajout d'un clavier avancé permettant une saisie directe des caractères, similaire à un clavier physique (à activer dans les paramètres).
-Ajout des boutons 'Power', 'Menu', 'CC' et 'Brightness' dans la barre supérieure.
-Ajout de boutons de défilement pour la souris et de boutons supplémentaires pour le clavier.
-Améliorations du code et corrections de bugs.
-Mise à jour des dépendances.
+- Ajout de la traduction en néerlandais (merci à Vistaus).
+- Mise à jour des traductions.
+- Ajout d'un clavier avancé permettant une saisie directe des caractères, similaire à un clavier physique (à activer dans les paramètres).
+- Ajout des boutons 'Power', 'Menu', 'CC' et 'Brightness' dans la barre supérieure.
+- Ajout de boutons de défilement pour la souris et de boutons supplémentaires pour le clavier.
+- Améliorations du code et corrections de bugs.
+- Mise à jour des dépendances.
