@@ -24,7 +24,7 @@
     <string name="mouse_click_middle">Mag-click sa gitna</string>
     <string name="mouse_wheel_down">Mag-swipe pababa</string>
     <string name="mouse_pad_tap">I-tap</string>
-    <string name="escape">Escape</string>
+    <string name="escape">Esc</string>
     <string name="help_device_failed_connection_message_3">Kung nagpapatuloy pa rin ang problema, siguraduhin na ang Bluetooth sensor ng iyong mga device ay hindi sira.</string>
     <string name="help_keyboard_wrong_character_sent_message">Kung mali ang mga character na pinapadala, kailangan mong i-configure ang physical keyboard sa remote device na tumugma sa wika na pinili sa mga setting ng application.</string>
     <string name="bluetooth_permission_denied_message">Tinanggihan mo ang access sa Bluetooth.</string>
@@ -123,4 +123,14 @@
     <string name="keyboard_pt">Portuguese</string>
     <string name="keyboard_br">Brazilian</string>
     <string name="power">Power</string>
+    <string name="advanced_keyboard">Advanced na keyboard</string>
+    <string name="space_bar">Space Bar</string>
+    <string name="print_screen">Print Screen</string>
+    <string name="shift">Shift</string>
+    <string name="meta">Meta</string>
+    <string name="ctrl">Ctrl</string>
+    <string name="alt">Alt</string>
+    <string name="alt_gr">Alt Gr</string>
+    <string name="closed_captions">Mga closed caption</string>
+    <string name="menu">Menu</string>
 </resources>
