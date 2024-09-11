@@ -33,7 +33,9 @@ fun TemplateModalBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
-        windowInsets = WindowInsets(0, 0, 0, 0)
+        contentWindowInsets = {
+            WindowInsets(0, 0, 0, 0)
+        }
     ) {
         Column(
             modifier = Modifier

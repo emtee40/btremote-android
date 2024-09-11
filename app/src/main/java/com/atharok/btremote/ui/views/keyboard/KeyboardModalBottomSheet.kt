@@ -22,7 +22,9 @@ fun KeyboardModalBottomSheet(
             onDismissRequest = { onShowKeyboardBottomSheetChanged(false) },
             modifier = modifier,
             sheetState = rememberModalBottomSheetState(true),
-            windowInsets = windowInsets
+            contentWindowInsets = {
+                windowInsets
+            }
         ) {
             content()
         }

@@ -20,14 +20,17 @@ import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.ArcShape
@@ -42,11 +45,13 @@ private val RightArcShape = ArcShape(-45f, 90f)
 @Composable
 fun DirectionalButtons(
     sendRemoteKeyReport: (bytes: ByteArray) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.surfaceContainerLow,
+    shadowElevation: Dp = dimensionResource(id = R.dimen.elevation)
 ) {
     Box(
         modifier = modifier.shadow(
-            elevation = dimensionResource(id = R.dimen.elevation),
+            elevation = shadowElevation,
             shape = CircleShape
         )
     ) {
@@ -57,45 +62,45 @@ fun DirectionalButtons(
 
             // ---- Top ----
             Surface(
-                shape = TopArcShape,
                 modifier = Modifier.fillMaxSize(),
-                tonalElevation = dimensionResource(id = R.dimen.elevation)
+                shape = TopArcShape,
+                color = color
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_UP)
             }
 
             // ---- Bottom ----
             Surface(
-                shape = BottomArcShape,
                 modifier = Modifier.fillMaxSize(),
-                tonalElevation = dimensionResource(id = R.dimen.elevation)
+                shape = BottomArcShape,
+                color = color
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_DOWN)
             }
 
             // ---- Left ----
             Surface(
-                shape = LeftArcShape,
                 modifier = Modifier.fillMaxSize(),
-                tonalElevation = dimensionResource(id = R.dimen.elevation)
+                shape = LeftArcShape,
+                color = color
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_LEFT)
             }
 
             // ---- Right ----
             Surface(
-                shape = RightArcShape,
                 modifier = Modifier.fillMaxSize(),
-                tonalElevation = dimensionResource(id = R.dimen.elevation)
+                shape = RightArcShape,
+                color = color
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_RIGHT)
             }
 
             // ---- Center ----
             Surface(
-                shape = CircleShape,
                 modifier = Modifier.fillMaxSize(0.3333f),
-                tonalElevation = dimensionResource(id = R.dimen.elevation)
+                shape = CircleShape,
+                color = color
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_PICK)
             }
