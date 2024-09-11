@@ -1,0 +1,5 @@
+1.3.2
+
+- Updated dependencies and code adjustments.
+- Some minor improvements.
+- Updated Filipino translation (thanks to kita).

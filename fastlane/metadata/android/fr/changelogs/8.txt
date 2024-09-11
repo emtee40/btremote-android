@@ -1,0 +1,5 @@
+1.3.2
+
+- Mise à jour des dépendances et ajustements du code.
+- Quelques améliorations mineures.
+- Mise à jour de la traduction en philippin (merci à kita).
