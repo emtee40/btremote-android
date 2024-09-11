@@ -2,14 +2,15 @@ package com.atharok.btremote.ui.screens
 
 import android.content.Context
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.OpenInBrowser
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,10 +22,10 @@ import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.ThirdLibrary
 import com.atharok.btremote.ui.components.AppScaffold
-import com.atharok.btremote.ui.components.DefaultElevatedCard
+import com.atharok.btremote.ui.components.CardsLayout
+import com.atharok.btremote.ui.components.MaterialButton
 import com.atharok.btremote.ui.components.NavigateUpAction
 import com.atharok.btremote.ui.components.TextMedium
-import com.atharok.btremote.ui.components.TextNormalLink
 import com.atharok.btremote.ui.components.TextNormalSecondary
 
 @Composable
@@ -53,19 +54,25 @@ fun StatelessThirdLibrariesScreen(
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier,
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard)),
             contentPadding = innerPadding
         ) {
-            items(libraries) { item ->
-                ThirdLibraryItem(
-                    library = item,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = dimensionResource(id = R.dimen.padding_standard),
-                            vertical = dimensionResource(id = R.dimen.padding_small)
-                        )
-                )
+            itemsIndexed(libraries) { index, item ->
+
+                CardsLayout(
+                    currentIndex = index,
+                    lastIndex = libraries.size,
+                    modifier = Modifier.padding(
+                        vertical = dimensionResource(id = R.dimen.padding_thin)
+                    )
+                ) {
+                    ThirdLibraryItem(
+                        library = item,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(dimensionResource(id = R.dimen.padding_medium))
+                    )
+                }
             }
         }
     }
@@ -76,47 +83,45 @@ private fun ThirdLibraryItem(
     library: ThirdLibrary,
     modifier: Modifier = Modifier,
 ) {
-    DefaultElevatedCard(modifier = modifier) {
-        Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+    Column(
+        modifier = modifier
+    ) {
+        TextMedium(text = stringResource(id = library.title))
+        TextNormalSecondary(text = stringResource(id = library.id))
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = dimensionResource(id = R.dimen.padding_small)),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_standard)),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            TextMedium(text = stringResource(id = library.title))
-            TextNormalSecondary(text = stringResource(id = library.id))
+            ButtonOpenInBrowser(
+                textId = library.codeHost,
+                urlId = library.codeUrl
+            )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = dimensionResource(id = R.dimen.padding_small)),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_standard)),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ClickableLink(
-                    textId = library.codeHost,
-                    urlId = library.codeUrl
-                )
-
-                TextNormalSecondary(text = "|")
-
-                ClickableLink(
-                    textId = library.license,
-                    urlId = library.licenseUrl
-                )
-            }
+            ButtonOpenInBrowser(
+                textId = library.license,
+                urlId = library.licenseUrl
+            )
         }
     }
 }
 
 @Composable
-private fun ClickableLink(
+private fun ButtonOpenInBrowser(
     @StringRes textId: Int,
     @StringRes urlId: Int,
     context: Context = LocalContext.current,
     uriHandler: UriHandler = LocalUriHandler.current,
 ) {
-    TextNormalLink(
-        text = stringResource(id = textId),
-        modifier = Modifier.clickable {
+    MaterialButton(
+        onClick = {
             uriHandler.openUri(context.getString(urlId))
-        }
+        },
+        text = stringResource(id = textId),
+        icon = Icons.Rounded.OpenInBrowser
     )
 }
+

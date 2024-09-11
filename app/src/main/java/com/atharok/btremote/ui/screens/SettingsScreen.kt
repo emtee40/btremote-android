@@ -385,7 +385,7 @@ private fun MouseSpeedItem(
     ) {
         TextNormal(
             text = stringResource(id = R.string.mouse_pointer_speed) + " (x$mouseSpeed)",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().padding(bottom = dimensionResource(R.dimen.padding_small))
         )
         Slider(
             value = mouseSpeed,
@@ -464,7 +464,7 @@ private fun AdvancedKeyboardSwitchItem(
     modifier: Modifier = Modifier
 ) {
     val useAdvancedKeyboard: Boolean by useAdvancedKeyboardFlow
-        .collectAsStateWithLifecycle(initialValue = true)
+        .collectAsStateWithLifecycle(initialValue = false)
 
     SettingsSwitchItem(
         primaryText = stringResource(id = R.string.advanced_keyboard),
