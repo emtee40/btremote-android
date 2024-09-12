@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.OpenInBrowser
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,8 +23,7 @@ import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.domain.entity.ThirdLibrary
 import com.atharok.btremote.ui.components.AppScaffold
-import com.atharok.btremote.ui.components.CardsLayout
-import com.atharok.btremote.ui.components.MaterialButton
+import com.atharok.btremote.ui.components.MaterialFilledTonalButton
 import com.atharok.btremote.ui.components.NavigateUpAction
 import com.atharok.btremote.ui.components.TextMedium
 import com.atharok.btremote.ui.components.TextNormalSecondary
@@ -53,25 +53,20 @@ fun StatelessThirdLibrariesScreen(
             NavigateUpAction(navigateUp)
         }
     ) { innerPadding ->
+
         LazyColumn(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard)),
             contentPadding = innerPadding
         ) {
             itemsIndexed(libraries) { index, item ->
+                ThirdLibraryItem(
+                    library = item,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(dimensionResource(id = R.dimen.padding_medium))
+                )
 
-                CardsLayout(
-                    currentIndex = index,
-                    lastIndex = libraries.size,
-                    modifier = Modifier.padding(
-                        vertical = dimensionResource(id = R.dimen.padding_thin)
-                    )
-                ) {
-                    ThirdLibraryItem(
-                        library = item,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(dimensionResource(id = R.dimen.padding_medium))
-                    )
+                if (index < libraries.lastIndex) {
+                    HorizontalDivider()
                 }
             }
         }
@@ -116,7 +111,7 @@ private fun ButtonOpenInBrowser(
     context: Context = LocalContext.current,
     uriHandler: UriHandler = LocalUriHandler.current,
 ) {
-    MaterialButton(
+    MaterialFilledTonalButton(
         onClick = {
             uriHandler.openUri(context.getString(urlId))
         },

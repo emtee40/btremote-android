@@ -10,8 +10,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -44,7 +46,8 @@ fun SimpleDialog(
         },
         dismissButton = {
             DialogButton(text = dismissButtonText, action = onDismissRequest)
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(dimensionResource(id = R.dimen.elevation_2))
     )
 }
 
@@ -109,7 +112,8 @@ fun ListDialog(
         },
         dismissButton = {
             DialogButton(text = dismissButtonText, action = onDismissRequest)
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(dimensionResource(id = R.dimen.elevation_2))
     )
 }
 
@@ -133,7 +137,8 @@ fun LoadingDialog(
         onDismissRequest = onButtonClick,
         confirmButton = {
             DialogButton(text = buttonText, action = onButtonClick)
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(dimensionResource(id = R.dimen.elevation_2))
     )
 }
 

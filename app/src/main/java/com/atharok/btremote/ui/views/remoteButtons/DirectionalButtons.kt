@@ -20,14 +20,12 @@ import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
@@ -46,12 +44,11 @@ private val RightArcShape = ArcShape(-45f, 90f)
 fun DirectionalButtons(
     sendRemoteKeyReport: (bytes: ByteArray) -> Unit,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.surfaceContainerLow,
-    shadowElevation: Dp = dimensionResource(id = R.dimen.elevation)
+    elevation: Dp = dimensionResource(id = R.dimen.elevation_1)
 ) {
     Box(
         modifier = modifier.shadow(
-            elevation = shadowElevation,
+            elevation = elevation,
             shape = CircleShape
         )
     ) {
@@ -64,7 +61,7 @@ fun DirectionalButtons(
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = TopArcShape,
-                color = color
+                tonalElevation = elevation
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_UP)
             }
@@ -73,7 +70,7 @@ fun DirectionalButtons(
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = BottomArcShape,
-                color = color
+                tonalElevation = elevation
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_DOWN)
             }
@@ -82,7 +79,7 @@ fun DirectionalButtons(
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = LeftArcShape,
-                color = color
+                tonalElevation = elevation
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_LEFT)
             }
@@ -91,7 +88,7 @@ fun DirectionalButtons(
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = RightArcShape,
-                color = color
+                tonalElevation = elevation
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_RIGHT)
             }
@@ -100,7 +97,7 @@ fun DirectionalButtons(
             Surface(
                 modifier = Modifier.fillMaxSize(0.3333f),
                 shape = CircleShape,
-                color = color
+                tonalElevation = elevation
             ) {
                 DirectionalButton(sendReport = sendRemoteKeyReport, bytes = RemoteInput.REMOTE_INPUT_MENU_PICK)
             }

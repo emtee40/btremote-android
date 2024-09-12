@@ -4,6 +4,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
@@ -16,12 +18,15 @@ import com.atharok.btremote.R
 fun DefaultElevatedCard(
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius)),
-    elevation: Dp = dimensionResource(id = R.dimen.elevation),
+    elevation: Dp = dimensionResource(id = R.dimen.elevation_1),
     content: @Composable () -> Unit
 ) {
     ElevatedCard(
         modifier = modifier,
         shape = shape,
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(elevation)
+        ),
         elevation = CardDefaults.cardElevation(
             defaultElevation = elevation
         ),
@@ -34,7 +39,7 @@ fun DefaultElevatedCard(
 fun CircleElevatedCard(
     modifier: Modifier = Modifier,
     shape: Shape = CircleShape,
-    elevation: Dp = dimensionResource(id = R.dimen.elevation),
+    elevation: Dp = dimensionResource(id = R.dimen.elevation_1),
     content: @Composable () -> Unit
 ) {
     DefaultElevatedCard(

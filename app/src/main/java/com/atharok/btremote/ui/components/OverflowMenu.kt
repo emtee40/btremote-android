@@ -12,6 +12,8 @@ import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.atharok.btremote.R
 import com.atharok.btremote.ui.views.remoteButtons.StatefulRemoteButton
@@ -34,7 +37,8 @@ private fun OverflowMenu(
 
     DropdownMenu(
         expanded = showMenu,
-        onDismissRequest = { showMenu = false }
+        onDismissRequest = { showMenu = false },
+        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(dimensionResource(id = R.dimen.elevation_2))
     ) {
         content { showMenu = false }
     }
