@@ -1,0 +1,5 @@
+1.3.2
+
+- Bijgewerkt: afhankelijkheden en code;
+- Verbeterd: enkele kleine zaken;
+- Bijgewerkt: Filipijnse vertaling (met dank aan @kita).
