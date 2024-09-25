@@ -12,6 +12,7 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.DEAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.ESAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.FRAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.GRAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PLAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PTAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.RUAdvancedKeyboardLayout
@@ -22,6 +23,7 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.C
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.DEVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.ESVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.FRVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.GRVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PLVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PTVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.RUVirtualKeyboardLayout
@@ -54,6 +56,7 @@ fun getKeyboardLayout(language: KeyboardLanguage): VirtualKeyboardLayout {
         KeyboardLanguage.POLISH -> getKoin().get<PLVirtualKeyboardLayout>()
         KeyboardLanguage.PORTUGUESE -> getKoin().get<PTVirtualKeyboardLayout>()
         KeyboardLanguage.BRAZILIAN -> getKoin().get<BRVirtualKeyboardLayout>()
+        KeyboardLanguage.GREEK -> getKoin().get<GRVirtualKeyboardLayout>()
     }
 }
 
@@ -69,5 +72,6 @@ fun getAdvancedKeyboardLayout(language: KeyboardLanguage): AdvancedKeyboardLayou
         KeyboardLanguage.POLISH -> getKoin().get<PLAdvancedKeyboardLayout>()
         KeyboardLanguage.PORTUGUESE -> getKoin().get<PTAdvancedKeyboardLayout>()
         KeyboardLanguage.BRAZILIAN -> getKoin().get<BRAdvancedKeyboardLayout>()
+        KeyboardLanguage.GREEK -> getKoin().get<GRAdvancedKeyboardLayout>()
     }
 }
