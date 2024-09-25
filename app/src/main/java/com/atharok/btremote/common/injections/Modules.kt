@@ -21,6 +21,7 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PLAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.PTAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.RUAdvancedKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.TRAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.UKAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.USAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.BRVirtualKeyboardLayout
@@ -32,6 +33,7 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.G
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PLVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.PTVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.RUVirtualKeyboardLayout
+import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.TRVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.UKVirtualKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.USVirtualKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
@@ -79,6 +81,7 @@ private val androidModule: Module = module {
     single { PTVirtualKeyboardLayout() }
     single { BRVirtualKeyboardLayout() }
     single { GRVirtualKeyboardLayout() }
+    single { TRVirtualKeyboardLayout() }
 
     single { USAdvancedKeyboardLayout(context = androidContext()) }
     single { UKAdvancedKeyboardLayout(context = androidContext()) }
@@ -91,6 +94,7 @@ private val androidModule: Module = module {
     single { PTAdvancedKeyboardLayout(context = androidContext()) }
     single { BRAdvancedKeyboardLayout(context = androidContext()) }
     single { GRAdvancedKeyboardLayout(context = androidContext()) }
+    single { TRAdvancedKeyboardLayout(context = androidContext()) }
 }
 
 private val viewModelModule: Module = module {
