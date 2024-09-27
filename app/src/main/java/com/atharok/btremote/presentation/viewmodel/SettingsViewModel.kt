@@ -37,6 +37,11 @@ class SettingsViewModel(
         useCase.saveInvertMouseScrollingDirection(invertScrollingDirection)
     }
 
+    val useGyroscope: Flow<Boolean> get() = useCase.useGyroscope()
+    fun saveUseGyroscope(useGyroscope: Boolean) = viewModelScope.launch {
+        useCase.saveUseGyroscope(useGyroscope)
+    }
+
     val keyboardLanguage: Flow<KeyboardLanguage> get() = useCase.getKeyboardLanguage()
     fun changeKeyboardLanguage(language: KeyboardLanguage) = viewModelScope.launch {
         useCase.saveKeyboardLanguage(language)

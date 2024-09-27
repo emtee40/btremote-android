@@ -25,6 +25,7 @@ class SettingsDataStore(private val context: Context) {
         private const val BLACK_COLOR_KEY = "black_color_key"
         private const val MOUSE_SPEED_KEY = "mouse_speed_key"
         private const val INVERT_MOUSE_SCROLLING_DIRECTION_KEY = "invert_mouse_scrolling_direction_key"
+        private const val USE_GYROSCOPE_KEY = "use_gyroscope_key"
         private const val KEYBOARD_LANGUAGE = "keyboard_language"
         private const val MUST_CLEAR_INPUT_FIELD_KEY = "must_clear_input_field_key"
         private const val USE_ADVANCED_KEYBOARD_KEY = "use_advanced_keyboard_key"
@@ -35,6 +36,7 @@ class SettingsDataStore(private val context: Context) {
     private val useBlackColorForDarkThemeKey = booleanPreferencesKey(BLACK_COLOR_KEY)
     private val mouseSpeedKey = floatPreferencesKey(MOUSE_SPEED_KEY)
     private val invertMouseScrollingDirectionKey = booleanPreferencesKey(INVERT_MOUSE_SCROLLING_DIRECTION_KEY)
+    private val useGyroscopeKey = booleanPreferencesKey(USE_GYROSCOPE_KEY)
     private val keyboardLanguageKey = stringPreferencesKey(KEYBOARD_LANGUAGE)
     private val mustClearInputFieldKey = booleanPreferencesKey(MUST_CLEAR_INPUT_FIELD_KEY)
     private val useAdvancedKeyboardKey = booleanPreferencesKey(USE_ADVANCED_KEYBOARD_KEY)
@@ -47,6 +49,8 @@ class SettingsDataStore(private val context: Context) {
             throw it
         }
     }
+
+    // ---- Appearance ----
 
     val themeFlow: Flow<ThemeEntity> by lazy {
         context.dataStore.data
@@ -96,6 +100,8 @@ class SettingsDataStore(private val context: Context) {
         }
     }
 
+    // ---- Mouse ----
+
     val mouseSpeed: Flow<Float> by lazy {
         context.dataStore.data
             .catchException()
@@ -123,6 +129,22 @@ class SettingsDataStore(private val context: Context) {
             it[invertMouseScrollingDirectionKey] = invertScrollingDirection
         }
     }
+
+    val useGyroscope: Flow<Boolean> by lazy {
+        context.dataStore.data
+            .catchException()
+            .map { preferences ->
+                preferences[useGyroscopeKey] ?: false
+            }
+    }
+
+    suspend fun saveUseGyroscope(useGyroscope: Boolean) {
+        context.dataStore.edit {
+            it[useGyroscopeKey] = useGyroscope
+        }
+    }
+
+    // ---- Keyboard ----
 
     val keyboardLanguageFlow: Flow<KeyboardLanguage> by lazy {
         context.dataStore.data

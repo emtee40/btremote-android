@@ -60,6 +60,7 @@
     <string name="dynamic_colors">Couleurs dynamiques</string>
     <string name="mouse_pointer_speed">Vitesse du pointeur</string>
     <string name="invert_mouse_scrolling_direction">Inverser le sens du défilement</string>
+    <string name="use_the_gyroscope_to_control_the_mouse">Utiliser le gyroscope pour contrôler la souris</string>
     <string name="keyboard_and_input_field">Clavier et champ de saisie</string>
     <string name="clear_input_field">Effacer le champ de saisie après l\'envoi du texte</string>
     <string name="about">À propos</string>

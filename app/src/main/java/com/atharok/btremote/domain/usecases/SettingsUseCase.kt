@@ -32,6 +32,11 @@ class SettingsUseCase(private val repository: SettingsRepository) {
         repository.saveInvertMouseScrollingDirection(invertScrollingDirection)
     }
 
+    fun useGyroscope(): Flow<Boolean> = repository.useGyroscope()
+    suspend fun saveUseGyroscope(useGyroscope: Boolean) {
+        repository.saveUseGyroscope(useGyroscope)
+    }
+
     fun getKeyboardLanguage(): Flow<KeyboardLanguage> = repository.getKeyboardLanguage()
     suspend fun saveKeyboardLanguage(language: KeyboardLanguage) {
         repository.saveKeyboardLanguage(language)

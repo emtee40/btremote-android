@@ -35,6 +35,11 @@ class SettingsRepositoryImpl(
         settingsDataStore.saveInvertMouseScrollingDirection(invertScrollingDirection)
     }
 
+    override fun useGyroscope(): Flow<Boolean> = settingsDataStore.useGyroscope
+    override suspend fun saveUseGyroscope(useGyroscope: Boolean) {
+        settingsDataStore.saveUseGyroscope(useGyroscope)
+    }
+
     override fun getKeyboardLanguage(): Flow<KeyboardLanguage> = settingsDataStore.keyboardLanguageFlow
     override suspend fun saveKeyboardLanguage(language: KeyboardLanguage) {
         settingsDataStore.saveKeyboardLanguage(language)

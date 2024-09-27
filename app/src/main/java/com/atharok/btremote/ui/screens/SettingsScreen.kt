@@ -108,9 +108,12 @@ fun SettingsScreen(
                     )
             )
 
-            OLEDBlackColorsSwitchItem(
-                useBlackColorForDarkThemeFlow = settingsViewModel.useBlackColorForDarkTheme,
-                onUseBlackColorForDarkThemeChange = { settingsViewModel.setUseBlackColorForDarkTheme(it) },
+            StatefulSettingsSwitchItem(
+                isEnabledFlow = settingsViewModel.useBlackColorForDarkTheme,
+                onEnabledFlowChange = { settingsViewModel.setUseBlackColorForDarkTheme(it) },
+                initialValue = false,
+                primaryText = stringResource(id = R.string.theme_black),
+                secondaryText = stringResource(id = R.string.theme_black_oled_info),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -120,9 +123,12 @@ fun SettingsScreen(
             )
 
             if(isDynamicColorsAvailable()) {
-                DynamicColorsSwitchItem(
-                    useDynamicColorsFlow = settingsViewModel.useDynamicColors,
-                    onUseDynamicColorsChange = { settingsViewModel.setUseDynamicColors(it) },
+                StatefulSettingsSwitchItem(
+                    isEnabledFlow = settingsViewModel.useDynamicColors,
+                    onEnabledFlowChange = { settingsViewModel.setUseDynamicColors(it) },
+                    initialValue = true,
+                    primaryText = stringResource(id = R.string.dynamic_colors),
+                    secondaryText = null,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
@@ -163,9 +169,26 @@ fun SettingsScreen(
                     )
             )
 
-            InvertMouseScrollingDirectionSwitchItem(
-                shouldInvertMouseScrollingDirectionFlow = settingsViewModel.shouldInvertMouseScrollingDirection,
-                onShouldInvertMouseScrollingDirectionChange = { settingsViewModel.saveInvertMouseScrollingDirection(it) },
+            StatefulSettingsSwitchItem(
+                isEnabledFlow = settingsViewModel.shouldInvertMouseScrollingDirection,
+                onEnabledFlowChange = { settingsViewModel.saveInvertMouseScrollingDirection(it) },
+                initialValue = false,
+                primaryText = stringResource(id = R.string.invert_mouse_scrolling_direction),
+                secondaryText = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = horizontalPadding,
+                        vertical = verticalPadding
+                    )
+            )
+
+            StatefulSettingsSwitchItem(
+                isEnabledFlow = settingsViewModel.useGyroscope,
+                onEnabledFlowChange = { settingsViewModel.saveUseGyroscope(it) },
+                initialValue = false,
+                primaryText = stringResource(id = R.string.use_the_gyroscope_to_control_the_mouse),
+                secondaryText = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -206,9 +229,12 @@ fun SettingsScreen(
                     )
             )
 
-            MustClearedInputFieldSwitchItem(
-                mustClearInputFieldFlow = settingsViewModel.mustClearInputField,
-                onMustClearInputFieldChange = { settingsViewModel.saveMustClearInputField(it) },
+            StatefulSettingsSwitchItem(
+                isEnabledFlow = settingsViewModel.mustClearInputField,
+                onEnabledFlowChange = { settingsViewModel.saveMustClearInputField(it) },
+                initialValue = true,
+                primaryText = stringResource(id = R.string.clear_input_field),
+                secondaryText = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -217,9 +243,12 @@ fun SettingsScreen(
                     )
             )
 
-            AdvancedKeyboardSwitchItem(
-                useAdvancedKeyboardFlow = settingsViewModel.useAdvancedKeyboard,
-                onUseAdvancedKeyboardChange = { settingsViewModel.saveUseAdvancedKeyboard(it) },
+            StatefulSettingsSwitchItem(
+                isEnabledFlow = settingsViewModel.useAdvancedKeyboard,
+                onEnabledFlowChange = { settingsViewModel.saveUseAdvancedKeyboard(it) },
+                initialValue = false,
+                primaryText = stringResource(id = R.string.advanced_keyboard),
+                secondaryText = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
@@ -335,41 +364,6 @@ private fun ThemeItem(
         modifier = modifier
     )
 }
-@Composable
-private fun OLEDBlackColorsSwitchItem(
-    useBlackColorForDarkThemeFlow: Flow<Boolean>,
-    onUseBlackColorForDarkThemeChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val useBlackColorForDarkTheme: Boolean by useBlackColorForDarkThemeFlow
-        .collectAsStateWithLifecycle(initialValue = false)
-
-    SettingsSwitchItem(
-        primaryText = stringResource(id = R.string.theme_black),
-        secondaryText = stringResource(id = R.string.theme_black_oled_info),
-        checked = useBlackColorForDarkTheme,
-        onCheckedChange = onUseBlackColorForDarkThemeChange,
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun DynamicColorsSwitchItem(
-    useDynamicColorsFlow: Flow<Boolean>,
-    onUseDynamicColorsChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val useDynamicColors: Boolean by useDynamicColorsFlow
-        .collectAsStateWithLifecycle(initialValue = true)
-
-    SettingsSwitchItem(
-        primaryText = stringResource(id = R.string.dynamic_colors),
-        secondaryText = null,
-        checked = useDynamicColors,
-        onCheckedChange = onUseDynamicColorsChange,
-        modifier = modifier
-    )
-}
 
 @Composable
 private fun MouseSpeedItem(
@@ -397,24 +391,6 @@ private fun MouseSpeedItem(
 }
 
 @Composable
-private fun InvertMouseScrollingDirectionSwitchItem(
-    shouldInvertMouseScrollingDirectionFlow: Flow<Boolean>,
-    onShouldInvertMouseScrollingDirectionChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val shouldInvertMouseScrollingDirection: Boolean by shouldInvertMouseScrollingDirectionFlow
-        .collectAsStateWithLifecycle(initialValue = false)
-
-    SettingsSwitchItem(
-        primaryText = stringResource(id = R.string.invert_mouse_scrolling_direction),
-        secondaryText = null,
-        checked = shouldInvertMouseScrollingDirection,
-        onCheckedChange = onShouldInvertMouseScrollingDirectionChange,
-        modifier = modifier
-    )
-}
-
-@Composable
 private fun KeyboardLanguageItem(
     languageFlow: Flow<KeyboardLanguage>,
     onLanguageChange: (KeyboardLanguage) -> Unit,
@@ -435,42 +411,6 @@ private fun KeyboardLanguageItem(
         onShowDialogChange = { isShowingDialog = it },
         title = R.string.keyboard_language,
         dialogMessage = stringResource(id = R.string.keyboard_language_info),
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun MustClearedInputFieldSwitchItem(
-    mustClearInputFieldFlow: Flow<Boolean>,
-    onMustClearInputFieldChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val mustClearInputField: Boolean by mustClearInputFieldFlow
-        .collectAsStateWithLifecycle(initialValue = true)
-
-    SettingsSwitchItem(
-        primaryText = stringResource(id = R.string.clear_input_field),
-        secondaryText = null,
-        checked = mustClearInputField,
-        onCheckedChange = onMustClearInputFieldChange,
-        modifier = modifier
-    )
-}
-
-@Composable
-private fun AdvancedKeyboardSwitchItem(
-    useAdvancedKeyboardFlow: Flow<Boolean>,
-    onUseAdvancedKeyboardChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val useAdvancedKeyboard: Boolean by useAdvancedKeyboardFlow
-        .collectAsStateWithLifecycle(initialValue = false)
-
-    SettingsSwitchItem(
-        primaryText = stringResource(id = R.string.advanced_keyboard),
-        secondaryText = null,
-        checked = useAdvancedKeyboard,
-        onCheckedChange = onUseAdvancedKeyboardChange,
         modifier = modifier
     )
 }
@@ -516,7 +456,27 @@ fun <T> SettingsListDialogItem(
 }
 
 @Composable
-private fun SettingsSwitchItem(
+private fun StatefulSettingsSwitchItem(
+    isEnabledFlow: Flow<Boolean>,
+    onEnabledFlowChange: (Boolean) -> Unit,
+    initialValue: Boolean,
+    primaryText: String,
+    secondaryText: String?,
+    modifier: Modifier = Modifier
+) {
+    val isEnabled: Boolean by isEnabledFlow.collectAsStateWithLifecycle(initialValue = initialValue)
+
+    StatelessSettingsSwitchItem(
+        primaryText = primaryText,
+        secondaryText = secondaryText,
+        checked = isEnabled,
+        onCheckedChange = onEnabledFlowChange,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun StatelessSettingsSwitchItem(
     primaryText: String,
     secondaryText: String?,
     checked: Boolean,

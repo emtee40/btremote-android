@@ -20,6 +20,9 @@ interface SettingsRepository {
     fun shouldInvertMouseScrollingDirection(): Flow<Boolean>
     suspend fun saveInvertMouseScrollingDirection(invertScrollingDirection: Boolean)
 
+    fun useGyroscope(): Flow<Boolean>
+    suspend fun saveUseGyroscope(useGyroscope: Boolean)
+
     fun getKeyboardLanguage(): Flow<KeyboardLanguage>
     suspend fun saveKeyboardLanguage(language: KeyboardLanguage)
 

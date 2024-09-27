@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothHidDevice
 import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.hardware.SensorManager
+import android.hardware.display.DisplayManager
 import com.atharok.btremote.R
 import com.atharok.btremote.common.utils.bluetoothHidDescriptor
 import com.atharok.btremote.data.bluetooth.BluetoothHidProfile
@@ -11,7 +13,9 @@ import com.atharok.btremote.data.bluetooth.BluetoothInteractions
 import com.atharok.btremote.data.dataStore.SettingsDataStore
 import com.atharok.btremote.data.repositories.BluetoothHidProfileRepositoryImpl
 import com.atharok.btremote.data.repositories.BluetoothRepositoryImpl
+import com.atharok.btremote.data.repositories.GyroscopeSensorRepositoryImpl
 import com.atharok.btremote.data.repositories.SettingsRepositoryImpl
+import com.atharok.btremote.data.sensor.GyroscopeSensor
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.BRAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.CSAdvancedKeyboardLayout
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.advancedKeyboard.DEAdvancedKeyboardLayout
@@ -38,13 +42,16 @@ import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.U
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard.USVirtualKeyboardLayout
 import com.atharok.btremote.domain.repositories.BluetoothHidProfileRepository
 import com.atharok.btremote.domain.repositories.BluetoothRepository
+import com.atharok.btremote.domain.repositories.GyroscopeSensorRepository
 import com.atharok.btremote.domain.repositories.SettingsRepository
 import com.atharok.btremote.domain.usecases.BluetoothHidServiceUseCase
 import com.atharok.btremote.domain.usecases.BluetoothHidUseCase
 import com.atharok.btremote.domain.usecases.BluetoothUseCase
+import com.atharok.btremote.domain.usecases.GyroscopeSensorUseCase
 import com.atharok.btremote.domain.usecases.SettingsUseCase
 import com.atharok.btremote.presentation.viewmodel.BluetoothHidViewModel
 import com.atharok.btremote.presentation.viewmodel.BluetoothViewModel
+import com.atharok.btremote.presentation.viewmodel.GyroscopeSensorViewModel
 import com.atharok.btremote.presentation.viewmodel.SettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -56,6 +63,14 @@ val appModules by lazy {
 }
 
 private val androidModule: Module = module {
+    single<SensorManager> {
+        androidContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+
+    single<DisplayManager> {
+        androidContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+    }
+
     single<BluetoothManager> {
         androidContext().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     }
@@ -99,6 +114,12 @@ private val androidModule: Module = module {
 
 private val viewModelModule: Module = module {
     viewModel {
+        GyroscopeSensorViewModel(
+            useCase = get<GyroscopeSensorUseCase>()
+        )
+    }
+
+    viewModel {
         BluetoothViewModel(
             useCase = get<BluetoothUseCase>()
         )
@@ -118,6 +139,12 @@ private val viewModelModule: Module = module {
 }
 
 private val useCaseModule: Module = module {
+    single {
+        GyroscopeSensorUseCase(
+            repository = get<GyroscopeSensorRepository>()
+        )
+    }
+
     single {
         BluetoothUseCase(
             bluetoothRepository = get<BluetoothRepository>()
@@ -144,6 +171,11 @@ private val useCaseModule: Module = module {
 }
 
 private val repositoryModule: Module = module {
+    single<GyroscopeSensorRepository> {
+        GyroscopeSensorRepositoryImpl(
+            sensor = get<GyroscopeSensor>()
+        )
+    }
 
     single<BluetoothRepository> {
         BluetoothRepositoryImpl(
@@ -165,6 +197,13 @@ private val repositoryModule: Module = module {
 }
 
 private val dataModule: Module = module {
+    single {
+        GyroscopeSensor(
+            sensorManager = get<SensorManager>(),
+            displayManager = get<DisplayManager>()
+        )
+    }
+
     single {
         BluetoothInteractions(
             context = androidContext(),

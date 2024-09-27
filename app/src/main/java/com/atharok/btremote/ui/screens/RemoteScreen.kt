@@ -289,7 +289,7 @@ private fun RemotePortraitView(
                         if (screenHeightDp >= screenWidthDp * 1.9f) // Si la hauteur de l'appareil est suffisamment haute par rapport à sa largeur (ratio ~ 1/2)
                             screenWidthDp.dp // On peut se permettre de prendre pour hauteur la largeur de l'écran
                         else // Sinon
-                            (screenHeightDp * 0.50).dp // On prend 45% de la hauteur de l'écran
+                            (screenHeightDp * 0.50).dp // On prend 50% de la hauteur de l'écran
                     }
                 )
                 .align(Alignment.CenterHorizontally),
@@ -407,9 +407,12 @@ private fun NavigationLayout(
                 val shouldInvertMouseScrollingDirection: Boolean by settingsViewModel.shouldInvertMouseScrollingDirection
                     .collectAsStateWithLifecycle(initialValue = false)
 
+                val useGyroscope: Boolean by settingsViewModel.useGyroscope.collectAsStateWithLifecycle(initialValue = false)
+
                 MousePadLayout(
                     mouseSpeed = mouseSpeed,
                     shouldInvertMouseScrollingDirection = shouldInvertMouseScrollingDirection,
+                    useGyroscope = useGyroscope,
                     sendMouseInput = sendMouseKeyReport,
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_standard))
                 )
