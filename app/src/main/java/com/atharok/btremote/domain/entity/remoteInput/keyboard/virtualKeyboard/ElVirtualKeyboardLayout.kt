@@ -3,7 +3,7 @@ package com.atharok.btremote.domain.entity.remoteInput.keyboard.virtualKeyboard
 import com.atharok.btremote.common.utils.REMOTE_INPUT_NONE
 import com.atharok.btremote.domain.entity.remoteInput.keyboard.KeyboardKey
 
-class GRVirtualKeyboardLayout: VirtualKeyboardLayout() {
+class ElVirtualKeyboardLayout: VirtualKeyboardLayout() {
 
     protected override val keyboardInputs: Map<Char, ByteArray> by lazy {
         mapOf(

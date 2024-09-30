@@ -44,7 +44,7 @@
 
     <!-- Bluetooth Connecting -->
     <string name="connection">Σύνδεση</string>
-    <string name="bluetooth_device_connecting_message">Προσπάθεια σύνδεσης στη \"%1$s\" συσκευή...</string>
+    <string name="bluetooth_device_connecting_message">Προσπάθεια σύνδεσης στη \"%1$s\" συσκευή…</string>
     <string name="bluetooth_device_disconnecting_message">Αποσύνδεση \"%1$s\"…</string>
     <string name="bluetooth_failed_to_register_app_message">Αποτυχία εγγραφής της εφαρμογής. Βεβαιωθείτε ότι καμία άλλη υπηρεσία Bluetooth δεν εκτελείται στο παρασκήνιο. Εάν το σφάλμα παραμένει, είναι πιθανό η διαδικασία Bluetooth να διακόπηκε απροσδόκητα. Για να διορθώσετε αυτό το πρόβλημα, απενεργοποιήστε το Bluetooth στη συσκευή σας και, στη συνέχεια, ενεργοποιήστε το ξανά.</string>
     <string name="bluetooth_failed_to_connect_to_device">Η προσπάθεια σύνδεσης με την απομακρυσμένη συσκευή απέτυχε.</string>
@@ -92,7 +92,7 @@
     <string name="keyboard_pl">Πολωνικά</string>
     <string name="keyboard_pt">Πορτογαλικά</string>
     <string name="keyboard_br">Βραζιλιάνικα</string>
-    <string name="keyboard_gr">Ελληνικά</string>
+    <string name="keyboard_el">Ελληνικά</string>
     <string name="keyboard_tr">Τουρκικά</string>
     <string name="send">Αποστολή</string>
     <string name="enter">Enter</string>
@@ -125,7 +125,7 @@
     <string name="back">Πίσω</string>
     <string name="standby">Αναμονή</string>
     <string name="next_channel">Επόμενο κανάλι</string>
-    <string name="previous_channel">Προηγούμενο κανάλι/string>
+    <string name="previous_channel">Προηγούμενο κανάλι</string>
     <string name="power">Ισχύς</string>
     <string name="menu">Μενού</string>
     <string name="closed_captions">Υπότιτλοι</string>
@@ -161,15 +161,12 @@
     <string name="help_device_failed_connection_message_3">Εάν το πρόβλημα παραμένει, βεβαιωθείτε ότι ο αισθητήρας Bluetooth των συσκευών σας δεν είναι ελαττωματικός.</string>
     <string name="help_paring_select_device_from_list">Επιλέξτε τη συσκευή με την οποία θέλετε να πραγματοποιήσετε σύζευξη από τη λίστα των διαθέσιμων συσκευών.</string>
     <string name="help_pairing_missing_device_message_1">Εάν η συσκευή με την οποία θέλετε να πραγματοποιήσετε σύζευξη δεν εμφανίζεται, ακολουθήστε τις παρακάτω οδηγίες:</string>
-    <string name="help_pairing_missing_device_check_1" translatable="false">@string/help_device_failed_connection_check_2</string>
     <string name="help_pairing_missing_device_check_2">• Βεβαιωθείτε ότι η ορατότητα Bluetooth είναι ενεργοποιημένη στην απομακρυσμένη συσκευή.</string>
-    <string name="help_pairing_missing_device_check_3" translatable="false">@string/help_device_failed_connection_check_3</string>
     <string name="help_pairing_missing_device_check_location_for_android_11_or_less">• Βεβαιωθείτε ότι οι υπηρεσίες τοποθεσίας είναι ενεργοποιημένες στη συσκευή σας.</string>
     <string name="help_pairing_connection_initialization_error_message_1">Εάν έχετε αντιστοιχίσει επιτυχώς και τις δύο συσκευές αλλά αντιμετωπίζετε σφάλματα \"%1$s\" ή \"%2$s\":</string>
     <string name="help_pairing_device_failed_connection_message_1">Εάν έχετε αντιστοιχίσει επιτυχώς και τις δύο συσκευές, αλλά δεν μπορείτε να συνδεθείτε στην απομακρυσμένη συσκευή, φροντίστε να ακολουθήσετε τις παρακάτω οδηγίες:</string>
     <string name="help_remote_control_buttons_are_not_working_title">Κουμπιά τηλεχειριστηρίου</string>
     <string name="help_remote_control_buttons_are_not_working_message">Εάν το πληκτρολόγιο, το ποντίκι ή ορισμένα κουμπιά δεν λειτουργούν, ακολουθήστε τις παρακάτω οδηγίες:</string>
-    <string name="help_remote_control_buttons_are_not_working_check_1" translatable="false">@string/help_device_failed_connection_check_1</string>
     <string name="help_remote_control_buttons_are_not_working_check_2">• Αποσυνδεθείτε από την απομακρυσμένη συσκευή.</string>
     <string name="help_remote_control_buttons_are_not_working_check_3">• Καταργήστε τη σύζευξη των συσκευών, τόσο σε αυτήν τη συσκευή όσο και στην απομακρυσμένη συσκευή.</string>
     <string name="help_remote_control_buttons_are_not_working_check_4">• Στη συνέχεια, αντιστοιχίστε ξανά τις δύο συσκευές χρησιμοποιώντας αυτήν την εφαρμογή.</string>
