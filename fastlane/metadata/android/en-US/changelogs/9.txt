@@ -1,0 +1,8 @@
+1.4.0
+
+- Added Greek translation (thanks to Vasilis Kos).
+- Added Turkish translation (thanks to FurkanÇ).
+- Added Turkish and Greek keyboard layouts.
+- Added mouse control with the gyroscope.
+- Improved mouse implementation.
+- Updated dependencies.

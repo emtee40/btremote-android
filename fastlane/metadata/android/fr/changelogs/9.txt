@@ -1,0 +1,8 @@
+1.4.0
+
+- Ajout de la traduction en grec (merci à Vasilis Kos).
+- Ajout de la traduction en turc (merci à FurkanÇ).
+- Ajout des dispositions de clavier turc et grec.
+- Ajout du contrôle de la souris avec le gyroscope.
+- Amélioration de l'implémentation de la souris.
+- Mise à jour des dépendances.
