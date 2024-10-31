@@ -94,6 +94,7 @@
     <string name="keyboard_br">Brazilian</string>
     <string name="keyboard_el">Greek</string>
     <string name="keyboard_tr">Turkish</string>
+    <string name="keyboard_he">Hebrew</string>
     <string name="send">Send</string>
     <string name="enter">Enter</string>
     <string name="escape">Esc</string>
