@@ -1,11 +1,11 @@
 package com.atharok.btremote.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.HelpOutline
 import androidx.compose.material.icons.automirrored.rounded.List
 import androidx.compose.material.icons.rounded.BrightnessHigh
 import androidx.compose.material.icons.rounded.BrightnessLow
 import androidx.compose.material.icons.rounded.ClosedCaption
+import androidx.compose.material.icons.rounded.HelpOutline
 import androidx.compose.material.icons.rounded.LinkOff
 import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.Settings
@@ -210,7 +210,7 @@ fun HelpDropdownMenuItem(
 ) {
     DefaultDropdownMenuItem(
         onClick = showHelp,
-        image = Icons.AutoMirrored.Rounded.HelpOutline,
+        image = Icons.Rounded.HelpOutline,
         title = stringResource(id = R.string.help),
         modifier = modifier
     )

@@ -3,8 +3,8 @@ package com.atharok.btremote.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.BluetoothSearching
-import androidx.compose.material.icons.automirrored.rounded.HelpOutline
 import androidx.compose.material.icons.rounded.ControlCamera
+import androidx.compose.material.icons.rounded.HelpOutline
 import androidx.compose.material.icons.rounded.Keyboard
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Mouse
@@ -84,7 +84,7 @@ fun HelpAction(
 ) {
     TopAppBarAction(
         onClick = showHelp,
-        image = Icons.AutoMirrored.Rounded.HelpOutline,
+        image = Icons.Rounded.HelpOutline,
         contentDescription = stringResource(id = R.string.help),
         modifier = modifier
     )

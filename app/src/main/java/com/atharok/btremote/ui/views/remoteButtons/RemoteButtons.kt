@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.automirrored.rounded.VolumeDown
-import androidx.compose.material.icons.automirrored.rounded.VolumeMute
-import androidx.compose.material.icons.automirrored.rounded.VolumeUp
+import androidx.compose.material.icons.rounded.VolumeDown
+import androidx.compose.material.icons.rounded.VolumeMute
+import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Remove
@@ -134,7 +134,7 @@ fun MuteRemoteButton(
     SingleRemoteButton(
         bytes = RemoteInput.REMOTE_INPUT_VOLUME_MUTE,
         sendReport = sendReport,
-        image = Icons.AutoMirrored.Rounded.VolumeMute,
+        image = Icons.Rounded.VolumeMute,
         contentDescription = stringResource(id = R.string.mute),
         modifier = modifier
     )
@@ -210,7 +210,7 @@ fun VolumeVerticalRemoteButtons(
             RemoteButton(
                 bytes = RemoteInput.REMOTE_INPUT_VOLUME_INC,
                 sendReport = sendReport,
-                image = Icons.AutoMirrored.Rounded.VolumeUp,
+                image = Icons.Rounded.VolumeUp,
                 contentDescription = stringResource(id = R.string.volume_increase)
             )
         },
@@ -218,7 +218,7 @@ fun VolumeVerticalRemoteButtons(
             RemoteButton(
                 bytes = RemoteInput.REMOTE_INPUT_VOLUME_DEC,
                 sendReport = sendReport,
-                image = Icons.AutoMirrored.Rounded.VolumeDown,
+                image = Icons.Rounded.VolumeDown,
                 contentDescription = stringResource(id = R.string.volume_decrease)
             )
         },
