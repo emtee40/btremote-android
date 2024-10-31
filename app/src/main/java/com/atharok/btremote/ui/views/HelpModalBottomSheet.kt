@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.HelpOutline
+import androidx.compose.material.icons.rounded.HelpOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -23,7 +23,7 @@ private fun HelpModalBottomSheet(
 ) {
     TemplateModalBottomSheet(
         title = stringResource(id = R.string.help),
-        icon = Icons.AutoMirrored.Rounded.HelpOutline,
+        icon = Icons.Rounded.HelpOutline,
         iconDescription = stringResource(id = R.string.help),
         onDismissRequest = onDismissRequest,
         modifier = modifier,
