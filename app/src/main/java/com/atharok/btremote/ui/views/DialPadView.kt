@@ -21,7 +21,7 @@ fun DialPadLayout(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.Absolute.SpaceBetween
     ) {
         Column(
             modifier = Modifier.weight(1f),

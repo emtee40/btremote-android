@@ -96,7 +96,7 @@ private fun AdvancedKeyboardLayoutView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.Absolute.SpaceBetween
                 ) {
                     keyboardRow.forEach { keyboardKey ->
                         keyboardKey.keyView(

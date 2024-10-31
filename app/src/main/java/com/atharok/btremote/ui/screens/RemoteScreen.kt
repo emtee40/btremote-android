@@ -326,7 +326,7 @@ fun RemoteLayout(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(3f),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.Absolute.SpaceBetween
         ) {
 
             // Volume

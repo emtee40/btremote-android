@@ -34,7 +34,7 @@ fun MultimediaButtons(
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.SpaceAround,
+            horizontalArrangement = Arrangement.Absolute.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
             MultimediaButton(
